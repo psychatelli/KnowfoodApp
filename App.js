@@ -5,7 +5,6 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 // import Store from './store';
 import { Provider } from 'react-redux';
 // import Setup from "./boot/setup";
-import './styles';
 import Styles from "./styles/styles";
 // import Tutorial from './tutorial';
  import NativeBase from './components/Component1/Nativebase1';

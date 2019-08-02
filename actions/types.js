@@ -1,0 +1,44 @@
+
+
+export const GET_ERRORS = 'GET_ERRORS'
+
+export const DELETE_RECIPES = 'DELETE_RECIPES'
+export const UPDATE_RECIPE = 'UPDATE_RECIPE'
+
+export const ADD_RECIPE = 'ADD_RECIPE'
+export const GET_RECIPE = 'GET_RECIPE'
+export const GET_RECIPES = 'GET_RECIPES'
+export const GET_USERS_RECIPES = 'GET_USERS_RECIPES'
+export const DELETE_RECIPE = 'DELETE_RECIPE'
+
+export const POST_STEP = 'POST_STEP'
+export const DELETE_STEP = 'DELETE_STEP'
+export const SELECTED_RECIPE = 'SELECTED_RECIPE'
+export const RECIPE_LOADING = 'RECIPE_LOADING'
+
+export const SET_ALERT = 'SET_ALERT'
+export const REMOVE_ALERT = 'REMOVE_ALERT'
+
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
+export const REGISTER_FAIL = 'REGISTER_FAIL'
+export const RECIPE_ERROR = 'RECIPE_ERROR'
+
+export const USER_LOADED = 'USER_LOADED' //RUN WHEN THE USER IS LOADED
+export const AUTH_ERROR = 'AUTH_ERROR' //IF THE TOKEN DOES NOT MATCH
+
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS' 
+export const LOGIN_FAIL = 'LOGIN_FAIL' 
+
+export const GET_PROFILES = 'GET_PROFILES'
+export const GET_PROFILE = 'GET_PROFILE'
+export const PROFILE_LOADING = 'PROFILE_LOADING'
+export const PROFILE_ERROR = 'PROFILE_ERROR'
+export const LOGOUT = 'LOGOUT' 
+
+
+export const ADD_COMMENT = 'ADD_COMMENT'
+export const DELETE_COMMENT = 'DELETE_COMMENT'
+
+export const UPDATE_LIKES = 'UPDATE_LIKES'
+
+

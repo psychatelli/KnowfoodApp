@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import {  View, Button, Text, AppRegistry } from 'react-native';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
-import { Container } from 'native-base';
-import Head from '../components/Header/header';
+import {  View, Button, Text } from 'react-native';
+import RecipeComponent from '../components/RecipeComponent/recipeComponent';
+// import Head from '../components/Header/header';
 
 
 export default class Recipes extends Component {
@@ -37,7 +36,7 @@ export default class Recipes extends Component {
 
     return (
         <View> 
-          <Head/>
+          {/* <Head/> */}
         
           <Button
           title="Go to Details"
@@ -62,9 +61,10 @@ export default class Recipes extends Component {
           }}
         />
 
+        <RecipeComponent/>
+
         </View>
     )
   }
 }
 
-AppRegistry.registerComponent('Recipes', () => Recipes);

@@ -11,14 +11,19 @@ import Styles from "./styles/styles";
  import Recipes from './pages/recipes';
 // import Head from './components/Header/header'
   import HomeScreen from './pages/Testing';
+  import Shipment from './pages/Shipment/shipment';
+  import RecipeComponent from './components/RecipeComponent/recipeComponent';
 // import { useScreens } from 'react-native-screens';
 
 // useScreens();
 
 const RootStack = createStackNavigator(
   {
-     Recipes: Recipes,
+    Recipes: Recipes,
+    RecipeComponent: RecipeComponent,
+    Shipment: Shipment,
     HomeScreen: HomeScreen,
+    
     
     // Tutorial: Tutorial,
     NativeBase: {

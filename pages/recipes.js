@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {  View, Button, Text } from 'react-native';
+import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body,  } from 'native-base';
+
 import RecipeComponent from '../components/RecipeComponent/recipeComponent';
 // import Head from '../components/Header/header';
-
+import HomeScreen from './Testing';
 
 export default class Recipes extends Component {
 
@@ -33,37 +34,14 @@ export default class Recipes extends Component {
   render(){
     console.log('Hi')
     let name = this.state.showName ? this.state.name : 'No Name';
-
+    const { navigate } = this.props.navigation;
     return (
-        <View> 
+        <Container> 
           {/* <Head/> */}
         
-          <Button
-          title="Go to Details"
-          onPress={() => {
-            /* 1. Navigate to the Details route with params */
-            this.props.navigation.navigate('Tutorial', {
-              itemId: 86,
-              otherParam: 'anything you want here',
-              name: 'Bob'
-            });
-          }}
-        />
+        <RecipeComponent Navigation={navigate}/>
 
-
-        <Button
-          title="Go to NativeBase"
-          onPress={() => {
-            /* 1. Navigate to the Details route with params */
-            this.props.navigation.navigate('NativeBase', {
-              name: 'Bob'
-            });
-          }}
-        />
-
-        <RecipeComponent/>
-
-        </View>
+        </Container>
     )
   }
 }

@@ -5,35 +5,29 @@
 import { StyleSheet, Platform } from 'react-native';
 
 
+
 let opacityBackground = 'rgba(40,44,42,0.5)'; 
 let borderGray = '#d6d7da';
 let lightGrayBG = '#F1F1F3';
 
 let lightText = 'white';
 let darkText = '#d6d7da';
-let wittwerBlue = '#00aeef';
+export let wittwerBlue = '#00aeef';
 let darkgray = '#515A5A';
 let test = Platform.OS === 'ios' ? 'yellow'  : 'blue';
 let MainObjectsColor = Platform.OS === 'ios' ? '#F8F8F8' : '#2c3d43';
 
 
-export default StyleSheet.create({
-
-  MainContainer: {
-    //backgroundColor: MainObjectsColor,
-    //backgroundColor: '#007aff',
-    backgroundColor: opacityBackground, 
+const GlobalStyles = StyleSheet.create({
+  
+  wittwerBlueFont : {
+    color: '#00aeef',
+  },
+  Card: {
+    backgroundColor: lightGrayBG
   },
 
-  header_2: {
-    fontSize: 20,
-    color: '#515A5A',
-    fontWeight: 'bold',
-    marginTop: 10,
-    marginBottom: 10,
-
-  },
-    // START FLEX STYLES
+ 
 
 // START STYLING INFORMATION SECTIONS    
   
@@ -107,23 +101,9 @@ export default StyleSheet.create({
         // shadowOpacity: 1.0, 
     },
 
-    container_white: {
-      backgroundColor: "#FFF"
-    },
+   
 
-    container: {
-      backgroundColor: '#00aeef',
-    },
-
-    mb10: {
-      marginBottom: 10
-    },
-
-    imageContainer: {
-      flex: 1,
-      width: null,
-      height: null
-    },
+ 
 
     inputStyle: {
       flex: 1,
@@ -134,13 +114,7 @@ export default StyleSheet.create({
       margin: 5,
     },
 
-    cardStyle: {
-      backgroundColor: '#20a7db',
-    },
-
-    MycardStyle: {
-      backgroundColor: 'rgba(40,44,42,0.4)',
-    },
+   
 
     TextLight: {
       color: lightText,
@@ -154,22 +128,13 @@ export default StyleSheet.create({
      
     },
 
-    Nav_items: {
-      color: lightGrayBG,    
-    }, 
+  
 
-    Home_btns: {
-      backgroundColor: 'rgba(40,44,42,0.8)', 
-      marginBottom: 10,
-      borderWidth: 1,
-      borderColor:  borderGray, 
-    }
+});
 
-  });
+
+export default GlobalStyles;
 
 
 
-
-
-   
-   
+  

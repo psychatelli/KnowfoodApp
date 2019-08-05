@@ -1,9 +1,33 @@
 import React, {Component} from 'react';
-import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body,  } from 'native-base';
+import { Container, View, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body,  } from 'native-base';
 
 import RecipeComponent from '../components/RecipeComponent/recipeComponent';
-// import Head from '../components/Header/header';
-import HomeScreen from './Testing';
+
+
+const RecipeObj = [
+  {
+    thumbnail: 'https://photos.smugmug.com/Test/i-W5SXVkM/0/1d663a9e/S/fettuccine-S.jpg',
+    title: 'Fettuccine',
+    username: 'Adam D',
+    avatar: 'https://www.gravatar.com/avatar/2675069ec8b9eb8c141e97cf92775f36?s=200&r=pg&d=mm',
+    date: 'Jan 3, 2019'
+  },
+  {
+    thumbnail: 'https://photos.smugmug.com/Test/i-n2csRzx/0/1d20a7a3/S/taco1-S.jpg',
+    title: 'Tacos',
+    username: 'Adam D',
+    avatar: 'https://www.gravatar.com/avatar/2675069ec8b9eb8c141e97cf92775f36?s=200&r=pg&d=mm',
+    date: 'Jan 3, 2019'
+  },
+  {
+    thumbnail: 'https://photos.smugmug.com/Test/i-7fksTb3/0/cafb1120/M/Enchiladas-M.jpg',
+    title: 'Salad',
+    username: 'Adam D',
+    avatar: 'https://www.gravatar.com/avatar/2675069ec8b9eb8c141e97cf92775f36?s=200&r=pg&d=mm',
+    date: 'Jan 3, 2019'
+  },
+]
+
 
 export default class Recipes extends Component {
 
@@ -32,16 +56,20 @@ export default class Recipes extends Component {
     }
 
   render(){
-    console.log('Hi')
+    
     let name = this.state.showName ? this.state.name : 'No Name';
     const { navigate } = this.props.navigation;
+
+    
+
+
     return (
-        <Container> 
+        <Container>  
           {/* <Head/> */}
         
-        <RecipeComponent Navigation={navigate}/>
+        <RecipeComponent Navigation={navigate} RecipeObj={RecipeObj}/>
 
-        </Container>
+        </Container> 
     )
   }
 }

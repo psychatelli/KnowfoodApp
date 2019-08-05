@@ -9,6 +9,7 @@ import { StyleSheet, Platform } from 'react-native';
 let opacityBackground = 'rgba(40,44,42,0.5)'; 
 let borderGray = '#d6d7da';
 let lightGrayBG = '#F1F1F3';
+let lightGray = '#F1F1F3';
 
 let lightText = 'white';
 let darkText = '#d6d7da';

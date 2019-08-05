@@ -5,12 +5,11 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 // import Store from './store';
 import { Provider } from 'react-redux';
 // import Setup from "./boot/setup";
-import Styles from "./styles/styles";
 // import Tutorial from './tutorial';
  import NativeBase from './components/Component1/Nativebase1';
  import Recipes from './pages/recipes';
 // import Head from './components/Header/header'
-  import HomeScreen from './pages/Testing';
+  import Recipe from './pages/Recipe/recipe';
   import Shipment from './pages/Shipment/shipment';
   import RecipeComponent from './components/RecipeComponent/recipeComponent';
 // import { useScreens } from 'react-native-screens';
@@ -22,7 +21,7 @@ const RootStack = createStackNavigator(
     Recipes: Recipes,
     RecipeComponent: RecipeComponent,
     Shipment: Shipment,
-    HomeScreen: HomeScreen,
+    Recipe: Recipe,
     
     
     // Tutorial: Tutorial,
@@ -39,10 +38,17 @@ const RootStack = createStackNavigator(
     defaultNavigationOptions: {
       gesturesEnabled: false,
       header: null,
+
       // headerMode: 'none',
       // mode: 'modal',
 
     },
+
+  },
+  {
+    headerMode: 'screen',
+      cardStyle: {backgroundColor: 'red'},
+
   }
   
 )

@@ -5,85 +5,48 @@ import stylesRC from '../../styles/StylesRecipeComponent';
 
 export default class RecipeComponent extends Component {
   render() {
-    const {Navigation} = this.props;
+    const {Navigation, RecipeObj } = this.props;
 
     return (
-      <Container>
+      <Container style={stylesRC.MainBackground}>
         <Header />
         <Content>
-          
-    <View style={stylesRC.RecipeCardWrapper}>
-      <View style={stylesRC.CardHeaderWrapper}>
-        <View>  
 
-          <View style={stylesRC.HeaderInfo}>
-            <View style={stylesRC.ThumbnailWrapper}> 
-              <Thumbnail style={stylesRC.ThumbnailImage}   source={{uri: 'https://photos.smugmug.com/Test/i-W5SXVkM/0/1d663a9e/S/fettuccine-S.jpg'}} />
-            </View>
-
-            <View style={stylesRC.UserNameWrapper}> 
-            <Text style={stylesRC.Title}>Inchiladas</Text>
-
-            <Text style={stylesRC.UserName}>Psychatetelli</Text>
-            </View>
-          </View> 
-                
-        </View>
-
-            <View style={stylesRC.MenuWrapper}> 
-              <Text style={stylesRC.Menu}> ...</Text>
-            </View>
-
-        </View>
-
-            <View style={stylesRC.PostImageWrapper}>
-              <TouchableWithoutFeedback onPress={() => Navigation('HomeScreen')}> 
-              <Image style={stylesRC.PostImage} source={{uri: 'https://photos.smugmug.com/Test/i-W5SXVkM/0/1d663a9e/S/fettuccine-S.jpg'}}/>
-            </TouchableWithoutFeedback>
-            </View>
-
-      </View>
-
-      
-
-
-
-
-      
-      <View style={stylesRC.RecipeCardWrapper}>
-      <View style={stylesRC.CardHeaderWrapper}>
-        <View>  
-
-          <View style={stylesRC.HeaderInfo}>
-            <View style={stylesRC.ThumbnailWrapper}> 
-              <Thumbnail style={stylesRC.ThumbnailImage}   source={{uri: 'https://photos.smugmug.com/Test/i-7fksTb3/0/cafb1120/M/Enchiladas-M.jpg'}} />
-            </View>
-
-            <View style={stylesRC.UserNameWrapper}> 
-            <Text style={stylesRC.Title}>Inchiladas</Text>
-
-            <Text style={stylesRC.UserName}>Psychatetelli</Text>
-            </View>
-          </View> 
-                
-        </View>
-
-            <View style={stylesRC.MenuWrapper}> 
-              <Text style={stylesRC.Menu}> ...</Text>
-            </View>
-
-        </View>
-
-            <View style={stylesRC.PostImageWrapper}>
-              <TouchableWithoutFeedback onPress={() => Navigation('HomeScreen')}> 
-              <Image style={stylesRC.PostImage} source={{uri: 'https://photos.smugmug.com/Test/i-7fksTb3/0/cafb1120/M/Enchiladas-M.jpg'}}/>
-            </TouchableWithoutFeedback>
-            </View>
-
-      </View>
-
-
-
+          {
+            RecipeObj.map(item=> (
+            <View key={item._id} style={stylesRC.RecipeCardWrapper}>
+              <View style={stylesRC.CardHeaderWrapper}>
+                <View>  
+        
+                  <View style={stylesRC.HeaderInfo}>
+                    <View style={stylesRC.ThumbnailWrapper}> 
+                      <Thumbnail style={stylesRC.ThumbnailImage}   source={{uri: item.avatar}} />
+                    </View>
+        
+                    <View style={stylesRC.UserNameWrapper}> 
+                    <Text style={stylesRC.Title}>{item.title}</Text>
+        
+                    <Text style={stylesRC.UserName}>{item.username}</Text>
+                    </View>
+                  </View> 
+                        
+                </View>
+        
+                    <View style={stylesRC.MenuWrapper}> 
+                      <Text style={stylesRC.Menu}> ...</Text>
+                    </View>
+        
+                </View>
+        
+                    <View style={stylesRC.PostImageWrapper}>
+                      <TouchableWithoutFeedback onPress={() => Navigation('Recipe')}> 
+                      <Image style={stylesRC.PostImage} source={{uri: item.thumbnail}}/>
+                    </TouchableWithoutFeedback>
+                    </View>
+              </View>
+            ))
+          }
+  
         </Content>
       </Container>
     );

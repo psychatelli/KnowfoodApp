@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
+
 import { Container, View, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body,  } from 'native-base';
-
+import { getRecipes } from '../actions/recipesAction';
 import RecipeComponent from '../components/RecipeComponent/recipeComponent';
+// import console = require('console');
 
-
+ 
 const RecipeObj = [
   {
     thumbnail: 'https://photos.smugmug.com/Test/i-W5SXVkM/0/1d663a9e/S/fettuccine-S.jpg',
@@ -29,18 +32,16 @@ const RecipeObj = [
 ]
 
 
-export default class Recipes extends Component {
+class Recipes extends Component {
 
-  // One example
-  // static navigationOptions = ({ navigation }) => ({
-  //   header: null,
-  // })
+          // One example
+          // static navigationOptions = ({ navigation }) => ({
+          //   header: null,
+          // })
 
-  static navigationOptions =  ({
-    title: 'Recipes',
-  })
-
-
+          // static navigationOptions =  ({
+          //   title: 'Recipes',
+          // })
 
     constructor(props){
         super(props);
@@ -51,6 +52,11 @@ export default class Recipes extends Component {
         }
     }
 
+
+    componentWillMount() {
+      this.props.getRecipes();
+    }
+
     static defaultProps = {
         message: 'Hi There'
     }
@@ -59,18 +65,26 @@ export default class Recipes extends Component {
     
     let name = this.state.showName ? this.state.name : 'No Name';
     const { navigate } = this.props.navigation;
+    const { recipes } = this.props;
 
     
-
+    console.log(JSON.stringify(recipes))
 
     return (
-        <Container>  
-          {/* <Head/> */}
+      <Container>
         
-        <RecipeComponent Navigation={navigate} RecipeObj={RecipeObj}/>
+        <RecipeComponent Navigation={navigate} RecipeObj={recipes}/>
 
         </Container> 
     )
   }
 }
 
+const mapStateToProps = state => ({
+  recipes: state.recipes.items,
+  // auth: state.auth
+  
+})
+
+
+export default connect(mapStateToProps, {getRecipes })(Recipes);

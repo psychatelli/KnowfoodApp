@@ -4,9 +4,12 @@ import { Container, Header, Title, View, Content, Footer, FooterTab, Button, Lef
 
 class NativeBase extends Component {
 
-  // static navigationOptions =  ({
+  static navigationOptions =  ({ navigation }) =>{
+    let headerTitle = 'Title in Component';
+    let headerRight = (<Button><Text>Yay</Text></Button>)
+    return { headerTitle, headerRight }
 
-  // })
+  }
 
   render() {
 
@@ -22,7 +25,7 @@ class NativeBase extends Component {
           <Body>
             <Title>Header</Title>
           </Body>
-          <Right />
+          <Right><Button><Text>Yo</Text></Button></Right>
         </Header>
 
         <Content>

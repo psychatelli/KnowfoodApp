@@ -57,7 +57,6 @@ const initialState = {
           items: state.items.filter(recipe => recipe._id !== action.payload)
         };
         case RECIPE_ERROR:
-            console.log(`DELETE RECIPE REDUCER ${action.payload}`)
           return{
             ...state,
             errors: action.payload,

@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import { Image, TouchableWithoutFeedback } from 'react-native';
 import { Container, Header, Content, View, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body,  } from 'native-base';
 import stylesRC from '../../styles/StylesRecipeComponent';
-
+import styles from '../../styles/styles';
 export default class RecipeComponent extends Component {
   render() {
     const {Navigation, RecipeObj } = this.props;
 
     return (
-      <Container style={stylesRC.MainBackground}>
-        <Header />
+      <Container  style={{backgroundColor: '#282828'}}>
         <Content>
 
           {
@@ -17,19 +16,16 @@ export default class RecipeComponent extends Component {
             <View key={item._id} style={stylesRC.RecipeCardWrapper}>
               <View style={stylesRC.CardHeaderWrapper}>
                 <View>  
-        
-                  <View style={stylesRC.HeaderInfo}>
+                   <View style={stylesRC.HeaderInfo}>
                     <View style={stylesRC.ThumbnailWrapper}> 
                       <Thumbnail style={stylesRC.ThumbnailImage}   source={{uri: item.avatar}} />
                     </View>
         
                     <View style={stylesRC.UserNameWrapper}> 
-                    <Text style={stylesRC.Title}>{item.title}</Text>
-        
-                    <Text style={stylesRC.UserName}>{item.username}</Text>
+                      <Text style={stylesRC.Title}>{item.title}</Text>
+                      <Text style={stylesRC.UserName}>{item.username}</Text>
                     </View>
                   </View> 
-                        
                 </View>
         
                     <View style={stylesRC.MenuWrapper}> 

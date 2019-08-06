@@ -5,19 +5,21 @@ import {GET_RECIPES, DELETE_RECIPES, UPDATE_LIKES, ADD_RECIPE ,GET_RECIPE,DELETE
 
 
 
-
 export const getRecipes = () => async dispatch => {
 
-    try {
-      const res = await axios.get('/api/recipe');
+     try {
+      const res = await axios.get('http://10.0.0.85:5000/api/recipe');
       dispatch({
         type: GET_RECIPES,
         payload: res.data
       })
+      console.log(res.data)
     } catch(err) {
+      console.log('ERRRORRRRR')
       dispatch({
         type: RECIPE_ERROR,
-        payload: {msg: err.response.statusText, status: err.response.status },
+        // payload: {msg: err.response.statusText, status: err.response.status },
+        payload: {msg: 'not good'}
       })
     }
   }
@@ -196,7 +198,7 @@ export const updateRecipe = (recipeId, recipeData) => dispatch => {
         type: UPDATE_RECIPE,
         payload: res.data
       })
-    )
+    ) 
     // .catch(err =>
     //   dispatch({
     //     type: GET_ERRORS,
@@ -259,7 +261,6 @@ export const deleteComment = (recipeId, commentId) => async dispatch => {
 
 //ADD like 
 export const addLike = (recipeId) => async dispatch => {
-
   try {
     const res = await axios.put(`/api/recipe/like/${recipeId}`);
     dispatch({

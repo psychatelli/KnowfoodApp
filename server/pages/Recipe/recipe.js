@@ -57,13 +57,13 @@ const RecipeItem =  {
 
 
 
-export default class Recipe extends React.Component {
-  static navigationOptions =  ({ navigation }) =>{
-    let headerTitle = 'Title in Component';
-    let headerRight = (<Button><Text>Yay</Text></Button>)
-    return { headerTitle, headerRight  }
+export default class Recipe extends React.Component  {
+      static navigationOptions =  ({ navigation }) =>{
+        let headerTitle = 'Title in Component';
+        let headerRight = (<Button><Text>Yay</Text></Button>)
+        return { headerTitle, headerRight  }
 
-  }
+        }
 
   render() {
 

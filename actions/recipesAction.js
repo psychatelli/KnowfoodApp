@@ -13,13 +13,10 @@ export const getRecipes = () => async dispatch => {
         type: GET_RECIPES,
         payload: res.data
       })
-      console.log(res.data)
     } catch(err) {
-      console.log('ERRRORRRRR')
       dispatch({
         type: RECIPE_ERROR,
-        // payload: {msg: err.response.statusText, status: err.response.status },
-        payload: {msg: 'not good'}
+        payload: {msg: err.response.statusText, status: err.response.status },
       })
     }
   }
@@ -27,13 +24,14 @@ export const getRecipes = () => async dispatch => {
 
 
   export const getRecipe = id => dispatch => {
+
     dispatch(setRecipeLoading());
     axios
-      .get(`/api/recipe/${id}`)
+      .get(`http://10.0.0.85:5000/api/recipe/${id}`)
       .then(res =>
         dispatch({
           type: GET_RECIPE,
-          payload: res.data
+          payload: res.data,
         })
       )
       .catch(err =>
@@ -279,7 +277,6 @@ export const addLike = (recipeId) => async dispatch => {
 
 //Remove like 
 export const removeLike = (recipeId) => async dispatch => {
-  console.log(recipeId)
   try {
     const res = await axios.put(`/api/recipe/unlike/${recipeId}`);
     dispatch({

@@ -1,25 +1,23 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import Store from './store';
-
+import styles from './styles/styles';
 import {  View, Button } from 'react-native';
-// import Footer_Nav from './components/common/footer_nav';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-// import Setup from "./boot/setup";
-// import Tutorial from './tutorial';
+import Login from './pages/auth/Login';
+
  import NativeBase from './components/Component1/Nativebase1';
  import Recipes from './pages/recipes';
-// import Head from './components/Header/header'
   import Recipe from './pages/Recipe/recipe';
   import Shipment from './pages/Shipment/shipment';
   import RecipeComponent from './components/RecipeComponent/recipeComponent';
-// import { useScreens } from 'react-native-screens';
 
 // useScreens();
 const storeInstance = Store()
 
 const RootStack = createStackNavigator(
   {
+    Login: Login,
     Recipes: Recipes,
     RecipeComponent: RecipeComponent,
     Shipment: Shipment,
@@ -37,12 +35,14 @@ const RootStack = createStackNavigator(
   {
     
     defaultNavigationOptions: {
-      // headerStyle: {
-      //   backgroundColor: '#28F1A6',
-      //   elevation: 0,
-      //   shadowOpacity: 0
-      // },
-      // headerTintColor: '#333333',
+      headerStyle: {
+        backgroundColor: '#303451',
+      },
+      headerTintColor: '#2AE7AA',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+      
       // headerTitleStyle: {
       //     fontWeight: 'bold',
       //     color: '#ffffff'
@@ -50,7 +50,9 @@ const RootStack = createStackNavigator(
       // mode: 'modal',
 
     },
-
+    containerStyle: {
+      backgroundColor: 'blue'
+    }
   },
   // {
   //   headerMode: 'screen',

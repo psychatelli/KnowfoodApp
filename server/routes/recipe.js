@@ -18,7 +18,6 @@ const validateRecipeInput = require('../validation/recipe');
 // @route Private
         
   router.get('/', async (req, res) => {
-    console.log('Tried to reach me')
     try {
       let Allrecipes = await Recipe.find().sort( { date: -1} );
       res.json(Allrecipes)
@@ -41,7 +40,7 @@ const validateRecipeInput = require('../validation/recipe');
 //     .then(recipe => res.json(recipe))
 //     .catch(err => res.status(404).json( {nopostfound: 'No recipe found with that id'} ));
 // })
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id',  async (req, res) => {
   try {
     const recipe = await Recipe.findById(req.params.id);
 

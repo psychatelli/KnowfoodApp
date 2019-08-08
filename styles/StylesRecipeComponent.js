@@ -3,8 +3,7 @@
 //import { primaryColor } from “../styles/common.js”;
 
 import { StyleSheet, Platform } from 'react-native';
- import GlobalStyles from './styles';
- 
+import {MidOpacity, CardBackground, DarkOpacity, LightOpacity, PrimaryTextColor, SecondaryTextColor, AccentColor1, AccentColor2} from './styles';
 let opacityBackground = 'rgba(40,44,42,0.5)'; 
 let borderGray = '#d6d7da';
 let lightGray = '#F1F1F3';
@@ -20,8 +19,9 @@ let MainObjectsColor = Platform.OS === 'ios' ? '#F8F8F8' : '#2c3d43';
 const stylesRC = StyleSheet.create({
 
   RecipeCardWrapper: {
-    backgroundColor: lightGray,
-    marginTop: 10,
+    backgroundColor: DarkOpacity,
+    paddingBottom: 10,
+    marginBottom: 10
   },
 
   CardHeaderWrapper: {
@@ -29,7 +29,7 @@ const stylesRC = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderWidth: 0.5,
-    borderColor: lightGray,
+    // borderColor: lightGray,
     padding: 10
 
   },
@@ -42,7 +42,8 @@ const stylesRC = StyleSheet.create({
   },
 
 Title: {
-  fontWeight: 'bold'
+  fontWeight: 'bold',
+  color: PrimaryTextColor
   },
 
 ThumbnailWrapper: {
@@ -55,7 +56,7 @@ UserNameWrapper: {
 
 },
 UserName: {
-  color: lightGrayFont
+  color: SecondaryTextColor
  
 },
 MenuWrapper: {
@@ -66,7 +67,8 @@ Menu: {
 },
 PostImageWrapper: {
   flex: 1,
-  height: 400
+  height: 400,
+ 
 
 },
 PostImage: {
@@ -82,13 +84,15 @@ RecipeStep: {
   margin: 5,
   borderRadius: 10,
   padding: 10,
-  backgroundColor: darkgray
+  backgroundColor: LightOpacity
 },
 StepNumber: {
- fontSize: 15
+ fontSize: 15,
+ color: SecondaryTextColor
 },
 StepInstructions: {
-  marginBottom: 10
+  marginBottom: 10,
+  color: PrimaryTextColor
 }
 
 

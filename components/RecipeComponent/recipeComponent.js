@@ -3,12 +3,23 @@ import { Image, TouchableWithoutFeedback } from 'react-native';
 import { Container, Header, Content, View, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body,  } from 'native-base';
 import stylesRC from '../../styles/StylesRecipeComponent';
 import styles from '../../styles/styles';
-export default class RecipeComponent extends Component {
+import { getRecipe } from '../../actions/recipesAction';
+import { connect } from 'react-redux';
+// import console = require('console');
+
+ class RecipeComponent extends Component {
   render() {
     const {Navigation, RecipeObj } = this.props;
 
+
+    getRecipeID = (id) => {
+      this.props.getRecipe(id);
+      this.props.Navigation('Recipe')
+      
+    }
+
     return (
-      <Container  style={{backgroundColor: '#282828'}}>
+      <Container style={styles.CardBackground}>
         <Content>
 
           {
@@ -18,7 +29,7 @@ export default class RecipeComponent extends Component {
                 <View>  
                    <View style={stylesRC.HeaderInfo}>
                     <View style={stylesRC.ThumbnailWrapper}> 
-                      <Thumbnail style={stylesRC.ThumbnailImage}   source={{uri: item.avatar}} />
+                      <Thumbnail style={stylesRC.ThumbnailImage}   source={{uri: `https:${item.avatar}`}} />
                     </View>
         
                     <View style={stylesRC.UserNameWrapper}> 
@@ -32,10 +43,10 @@ export default class RecipeComponent extends Component {
                       <Text style={stylesRC.Menu}> ...</Text>
                     </View>
         
-                </View>
+              </View>
         
                     <View style={stylesRC.PostImageWrapper}>
-                      <TouchableWithoutFeedback onPress={() => Navigation('Recipe')}> 
+                      <TouchableWithoutFeedback onPress={() => getRecipeID(item._id)}> 
                       <Image style={stylesRC.PostImage} source={{uri: item.thumbnail}}/>
                     </TouchableWithoutFeedback>
                     </View>
@@ -48,3 +59,12 @@ export default class RecipeComponent extends Component {
     );
   }
 }
+
+
+const mapStateToProps = state => ({
+  // auth: state.auth
+  
+})
+
+
+export default connect(mapStateToProps, {getRecipe })(RecipeComponent);

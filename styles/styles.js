@@ -6,40 +6,62 @@ import { StyleSheet, Platform } from 'react-native';
 
 
 
-let opacityBackground = 'rgba(40,44,42,0.5)'; 
-let borderGray = '#d6d7da';
-let lightGrayBG = '#F1F1F3';
-let lightGray = '#F1F1F3';
+export let DarkOpacity =  'rgba(40, 40, 40, 0.482)';
+export let MidOpacity =  'rgba(87, 86, 86, 0.482)';
+export let LightOpacity =  'rgba(188, 186, 186, 0.222)';
 
-let lightText = 'white';
-let darkText = '#d6d7da';
-export let wittwerBlue = '#00aeef';
-let darkgray = '#515A5A';
-let test = Platform.OS === 'ios' ? 'yellow'  : 'blue';
-let MainObjectsColor = Platform.OS === 'ios' ? '#F8F8F8' : '#2c3d43';
+
+export let PrimaryTextColor = 'white';
+export let SecondaryTextColor = 'rgba(42, 231, 171, 0.564)';
+
+
+export let CardBackground = '#20204A';
+export let AccentColor1 = '#2AE7AA';
+export let AccentColor2 = '#1D1D8D';
+
+
+
+// let test = Platform.OS === 'ios' ? 'yellow'  : 'blue';
+// let MainObjectsColor = Platform.OS === 'ios' ? '#F8F8F8' : '#2c3d43';
 
 
 const GlobalStyles = StyleSheet.create({
-  
-  wittwerBlueFont : {
-    color: '#00aeef',
-  },
-  Card: {
-    backgroundColor: lightGrayBG
-  },
-
  
-
-// START STYLING INFORMATION SECTIONS    
   
+  PrimaryButton: {
+    backgroundColor: AccentColor1,
+    margin: 10,
+  },
+
+// START STYLING INFORMATION SECTIONS 
+    CardBackground: {
+      backgroundColor: CardBackground
+    },
+    loginWrapper: {
+      // backgroundColor: '#202649',
+      backgroundColor: CardBackground,
+
+      color: PrimaryTextColor,
+      paddingRight: 20,
+      paddingLeft: 20,
+      justifyContent: 'center',      
+    },
+    LoginContainer: {
+      backgroundColor: LightOpacity,
+    },
+    LoginTitle: {
+      alignSelf: 'center',
+      fontSize: 40,
+      color: PrimaryTextColor
+    },
+
     custom_wrapper: {
-      //backgroundColor: opacityBackground,
       padding: 10,
       borderRadius: 10,
       borderWidth: 1,
       borderColor: '#d6d7da',
       marginBottom: 10,
-      backgroundColor: lightGrayBG,
+      // backgroundColor: lightGrayBG,
     },
 
     title_font: {
@@ -51,19 +73,18 @@ const GlobalStyles = StyleSheet.create({
       padding: 10,
       marginBottom: 5,
       borderLeftWidth: 1,
-      borderColor: wittwerBlue,
-      color: 'gray',
+      color: SecondaryTextColor,
       fontSize: 20,
     },
 
     custom_label_text: {
-      color: 'gray',
+      color: SecondaryTextColor,
       fontSize: 20,
       //fontWeight: '500', 
     },
 
     custom_text: {
-      color: 'gray',
+      color: SecondaryTextColor,
       marginLeft: 5,
     },
 
@@ -94,8 +115,6 @@ const GlobalStyles = StyleSheet.create({
         justifyContent: 'space-between', 
         marginBottom: 5,
         borderLeftWidth: 2, 
-        borderColor: wittwerBlue,
-        backgroundColor: opacityBackground,
 
         // shadowOffset:{  width: 5,  height: 5,  },
         // shadowColor: 'gray',
@@ -116,18 +135,6 @@ const GlobalStyles = StyleSheet.create({
     },
 
    
-
-    TextLight: {
-      color: lightText,
-      padding: 2,
-      
-    },
-
-    TextDark: {
-      color: darkText,
-      padding: 2,
-     
-    },
 
   
 

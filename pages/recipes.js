@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
-import { Container, View, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body,  } from 'native-base';
+import { Container, View,  Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body,  } from 'native-base';
+import { Header } from 'react-native';
 import { getRecipes } from '../actions/recipesAction';
 import RecipeComponent from '../components/RecipeComponent/recipeComponent';
-// import console = require('console');
+import stylesRC from '../styles/StylesRecipeComponent';
+// import styles from '../styles/styles';
 
  
 const RecipeObj = [
@@ -34,14 +36,26 @@ const RecipeObj = [
 
 class Recipes extends Component {
 
+
+  // static navigationOptions = {
+  //   title: 'Home',
+  //   headerStyle: {
+  //     backgroundColor: '#f4511e',
+  //   },
+  //   headerTintColor: '#fff',
+  //   headerTitleStyle: {
+  //     fontWeight: 'bold',
+  //   },
+  // };
+
           // One example
           // static navigationOptions = ({ navigation }) => ({
-          //   header: null,
+          //   backgroundColor: 'rgba(40, 40, 40, 0.482)',
           // })
 
-          // static navigationOptions =  ({
-          //   title: 'Recipes',
-          // })
+        //   static navigationOptions =  ({
+        //      backgroundColor: 'rgba(40, 40, 40, 0.482)',
+        // })
 
     constructor(props){
         super(props);
@@ -62,19 +76,17 @@ class Recipes extends Component {
     }
 
   render(){
-    
+     
     let name = this.state.showName ? this.state.name : 'No Name';
     const { navigate } = this.props.navigation;
     const { recipes } = this.props;
 
     
-    console.log(JSON.stringify(recipes))
 
     return (
-      <Container>
+       <Container>
         
-        <RecipeComponent Navigation={navigate} RecipeObj={recipes}/>
-
+        <RecipeComponent Navigation={navigate} RecipeObj={recipes} />
         </Container> 
     )
   }

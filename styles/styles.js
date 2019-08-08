@@ -27,10 +27,17 @@ export let AccentColor2 = '#1D1D8D';
 
 const GlobalStyles = StyleSheet.create({
  
-  
+  LoginInput: {
+    // flex: 1,
+    backgroundColor: 'white',
+    // height: 40,
+    marginBottom: 10,
+  },
+
   PrimaryButton: {
     backgroundColor: AccentColor1,
-    margin: 10,
+    marginTop: 10,
+    marginBottom: 10,
   },
 
 // START STYLING INFORMATION SECTIONS 
@@ -40,19 +47,20 @@ const GlobalStyles = StyleSheet.create({
     loginWrapper: {
       // backgroundColor: '#202649',
       backgroundColor: CardBackground,
-
       color: PrimaryTextColor,
       paddingRight: 20,
       paddingLeft: 20,
       justifyContent: 'center',      
     },
     LoginContainer: {
-      backgroundColor: LightOpacity,
+      // backgroundColor: LightOpacity,
+      padding: 10
     },
     LoginTitle: {
       alignSelf: 'center',
-      fontSize: 40,
-      color: PrimaryTextColor
+      fontSize: 30,
+      color: PrimaryTextColor,
+      marginBottom: 20
     },
 
     custom_wrapper: {

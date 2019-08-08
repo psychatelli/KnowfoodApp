@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 // import { login } from '../../actions/auth';
 // import Alert from '../../components/common/alert';
 import { Container, View, Header, Content, Card, CardRecipeItem, Thumbnail, Text, Button, Icon, Left, Body, Form, Item, Label, Input  } from 'native-base';
+import { KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native';
 import styles from '../../styles/styles';
 
 
@@ -38,19 +39,28 @@ class Login extends Component {
             // }
         }
 
-    onChange(e) {
-        this.setState({ [e.target.name]: e.target.value })
-    }
+    // onChange(e) {
+    //     this.setState({ [e.target.name]: e.target.value })
+
+    //     console.log(this.state.email)
+    // }
+
+    onChange(text, name){
+        if(name=='email'){
+            this.setState({
+                name: text
+            })
+        }
+        // this.setState({[name]: input})
+        console.log(this.state.email)
+    } 
 
     onSubmit(e) {
-        e.preventDefault();
-        const userData = {
-            email: this.state.email,
-            password: this.state.password,
-        }
-        this.props.login(userData);
+       let collection= {}
+       collection.name= this.state.name,
+       collection.email= this.state.email
     }
-
+  
  
     render() {
         const { errors } = this.state;
@@ -59,38 +69,45 @@ class Login extends Component {
 
         return(
             <Container style={styles.loginWrapper}>
+                <View> 
+                  <KeyboardAvoidingView behavior='padding'> 
+
                 <View style={styles.LoginContainer}>
                     <Text style={styles.LoginTitle}>Log In</Text>
                     {/* <Alert /> */}
 
-                    <Form onSubmit={this.onSubmit}>
-                        <Item inlineLabel>
-                            <Label>Email</Label>
-                            <Input 
-                            // name="email"
-                            // type="email"
+                       
+                            {/* <Label>Email</Label> */}
+                            <Item regular style={styles.LoginInput}> 
+                            <Input
+                            name="email"
+                            placeholder='Email'
                             // value={this.state.email}
-                            // onChange={this.onChange}
+                            onChange={(text) => this.onChange(text, 'email')}
                             // error={errors.email}
                             />
-                        </Item>
+                            </Item>
+                       
                         
 
                             
-                        <Item inlineLabel>
-                        <Label>Email</Label>      
-                        <Input type="password" 
-                        // style={styles('form-control form-control-lg', { 'is-invalid' : errors.password } )}  
-                            // name="password" 
-                            // value={this.state.password}
-                            // onChange={this.onChange}
-                        />
-                        {/* {errors.password && (<View style="invalid-feedback"> {errors.password} </View> )} */}
+                        
+                        {/* <Label>Password</Label>       */}
+                        <Item regular style={styles.LoginInput}> 
+                        <Input 
+                            name="email"
+                            placeholder='password'
+                            // value={this.state.email}
+                            onChange={(text) => this.onChange(text, 'password')}
+                            // error={errors.email}
+                            />
                         </Item>
+                        {/* {errors.password && (<View style="invalid-feedback"> {errors.password} </View> )} */}
+                        
                        
 
-                        <Button style={styles.PrimaryButton} onPress={() => this.props.navigation.navigate('Recipes')} type="submit"><Text>Submit</Text></Button>
-                    </Form>
+                        <Button full style={styles.PrimaryButton} onPress={() => this.onSubmit()} ><Text>Sibmit</Text></Button>
+                        <Button full style={styles.PrimaryButton} onPress={() => this.props.navigation.navigate('Recipes')}><Text>Register</Text></Button>
 
                     <View>
                         <Text>If you don't have an account</Text>
@@ -98,6 +115,8 @@ class Login extends Component {
                         <Text>Sign Up</Text>
                         </Link> */}
                     </View>
+                </View>
+                </KeyboardAvoidingView>
                 </View>
             </Container>
         )

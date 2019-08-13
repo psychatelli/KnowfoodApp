@@ -7,15 +7,20 @@ const { check, validationResult } = require('express-validator/check');
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const config = require('../config/config');
-
+ 
 
 //@route POST api/auth
-//@desc Test
+//@desc 
 //@access Public
-router.get('/', auth, async (req, res) => {
+router.get('/', auth,  async (req, res) => {
+  console.log(`fired api/auth route in server routes`)
+
     try{
+      console.log(`tried to get user. heres value: ${req.user.id}`)
+
       const user = await User.findById(req.user.id).select('-pssword');
       res.json(user);
+
     }catch(err) {
       console.error(err.message);
       res.status(500).send('Server Error 1')
@@ -33,6 +38,7 @@ router.post('/', [
   ], 
   async (req, res) => {
   const errors = validationResult(req);
+
   if(!errors.isEmpty()){
     return res.status(400).json({errors: errors.array() })
   }

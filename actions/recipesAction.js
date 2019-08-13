@@ -1,14 +1,61 @@
 import axios from 'axios';
 import { setAlert } from './alert';
-import {GET_RECIPES, DELETE_RECIPES, UPDATE_LIKES, ADD_RECIPE ,GET_RECIPE,DELETE_RECIPE,POST_STEP,DELETE_STEP, UPDATE_RECIPE, SELECTED_RECIPE, RECIPE_LOADING, GET_ERRORS, RECIPE_ERROR, GET_USERS_RECIPES, ADD_COMMENT } from './types';
+import {GET_RECIPES, MYTOKEN, DELETE_RECIPES, UPDATE_LIKES, ADD_RECIPE ,GET_RECIPE,DELETE_RECIPE,POST_STEP,DELETE_STEP, UPDATE_RECIPE, SELECTED_RECIPE, RECIPE_LOADING, GET_ERRORS, RECIPE_ERROR, GET_USERS_RECIPES, ADD_COMMENT } from './types';
+import {AsyncStorage} from 'react-native';
 
 
+
+// export const SaveAccessToken = () => async dispatch => {
+//   try {
+//     const token = await AsyncStorage.getItem('token');
+//     console.log(`reducer token ${token}`)
+//     dispatch({
+//       type: MYTOKEN,
+//       payload: token
+//     })
+//   } catch (error) {
+//     dispatch({
+//       type: RECIPE_ERROR,
+//       payload: {msg: err.response.statusText, status: err.response.status },
+//     })
+//   }
+// };
+
+
+export const myAccessToken = () => async dispatch => {
+  try {
+      const token = AsyncStorage.getItem('token');
+    dispatch({
+      type: MYTOKEN,
+      payload: token
+    })
+  } catch (error) {
+    dispatch({
+      type: RECIPE_ERROR,
+      payload: {msg: err.response.statusText, status: err.response.status },
+    })
+  }
+};
+
+
+// export const myAccessToken = async () => {
+//   try {
+//     const value = await AsyncStorage.getItem('token');
+//     if (value !== null) {
+//       // We have data!!
+//       console.log(value);
+//     }
+//   } catch (error) {
+//     // Error retrieving data
+//   }
+// };
 
 
 export const getRecipes = () => async dispatch => {
-
      try {
       const res = await axios.get('http://10.0.0.85:5000/api/recipe');
+      
+       
       dispatch({
         type: GET_RECIPES,
         payload: res.data
@@ -131,11 +178,7 @@ export const addRecipe = recipeData => dispatch => {
       })
     } catch(err) {
       
-      // const errors = err.response.data.errors;
-
-      //   if(errors) {
-      //       errors.forEach(error => dispatch(setAlert(error.msg, 'danger') ))
-      //   }
+     
 
       dispatch({
         type: RECIPE_ERROR,
@@ -144,27 +187,6 @@ export const addRecipe = recipeData => dispatch => {
     }
   }
 
-
-
-// Delete Recipe
-// export const deleteRecipe = id => dispatch => {
- 
-//   axios
-//     .delete(`/api/recipe/${id}`)
-//     .then(res =>
-//       dispatch({
-//         type: DELETE_RECIPE,
-//         payload: res.data
-//       })
-//     )
-//     // .catch(err =>
-//     //   dispatch({
-//     //     type: GET_ERRORS,
-//     //     payload: err.response.data
-//     //   })
-//     // );
-
-// };
 
 
 export const deleteRecipe = (id) => async dispatch => {
@@ -197,12 +219,7 @@ export const updateRecipe = (recipeId, recipeData) => dispatch => {
         payload: res.data
       })
     ) 
-    // .catch(err =>
-    //   dispatch({
-    //     type: GET_ERRORS,
-    //     payload: err.response.data
-    //   })
-    // );
+   
 };
 
 

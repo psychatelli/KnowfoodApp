@@ -41,4 +41,4 @@ export const DELETE_COMMENT = 'DELETE_COMMENT'
 
 export const UPDATE_LIKES = 'UPDATE_LIKES'
 
-
+export const MYTOKEN = 'MYTOKEN'

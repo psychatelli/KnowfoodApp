@@ -2,42 +2,37 @@ import React, {useEffect} from 'react';
 import { Provider } from 'react-redux';
 import store from './store';
 import styles from './styles/styles';
-import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
+import {  View, Button } from 'react-native';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Login from './pages/auth/Login';
-import { loadUser, removeToken  } from './actions/auth';
-import {setAuthToken, getToken} from './utils/setAuthToken';
-// import  from './utils/setAuthToken';
+import { loadUser } from './actions/auth';
 
-import {AsyncStorage, ActiveIndicator, StatusBar} from 'react-native';
+import setAuthToken from './utils/setAuthToken';
+import {AsyncStorage} from 'react-native';
 
  import NativeBase from './components/Component1/Nativebase1';
  import Recipes from './pages/recipes';
   import Recipe from './pages/Recipe/recipe';
   import Shipment from './pages/Shipment/shipment';
   import RecipeComponent from './components/RecipeComponent/recipeComponent';
-  import { Container, View,   } from 'native-base';
- 
- 
-  if(AsyncStorage.getItem('Usertoken')){
-    // getToken()
-   const token = AsyncStorage.getItem('Usertoken')
-      
-    // setAuthToken(token)
-    console.log(`App.js token: ${JSON.stringify(token)}`)
-    // loadUser()
-  }   
- 
-  
+
+
+  // if(AsyncStorage.token){
+  //   setAuthToken(AsyncStorage.token)
+  //   console.log('App.js token in AsyncStorage')
+  // }
+
+
 // useScreens();
 const storeInstance = store()
 
 const RootStack = createStackNavigator(
   {
     Login: Login,
-    
+    Recipes: Recipes,
     RecipeComponent: RecipeComponent,
     Shipment: Shipment,
-   
+    Recipe: Recipe,
     NativeBase: {
       screen: NativeBase,
       navigationOptions: ({ navigation}) => ({
@@ -70,49 +65,10 @@ const RootStack = createStackNavigator(
   
 )
 
-const AuthStack = createStackNavigator({ 
-  Recipes: Recipes,
-  Recipe: Recipe,
-})
+
+const AppContainer = createAppContainer(RootStack);
 
 
-
-const AppContainer = createAppContainer(createSwitchNavigator(
-
-  {
-    RootStack: RootStack,
-    AuthStack: AuthStack,
-  },
-  {
-  }
-));
-
-
- export default class AuthLoadingScreen extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-
-    render(){
-      return(
-        <Provider store={storeInstance}>
-        <Container>
-            <AppContainer/>
-            <StatusBar barStyle='default'/>
-        </Container>
-        </Provider>
-      )
-    }
-
-    
-}
- 
-
-
-
-
-// const AppContainer = createAppContainer(RootStack);
 // export default class App extends React.Component {
 
 //   render() {
@@ -124,9 +80,17 @@ const AppContainer = createAppContainer(createSwitchNavigator(
 //   }
 // }
 
+const App = () => {
 
+ 
 
-
+  return(
+    <Provider store={storeInstance}>
+    <AppContainer />
+    </Provider>
+  )
+}
+export default App;
 
 
 

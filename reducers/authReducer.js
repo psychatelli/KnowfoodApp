@@ -1,20 +1,29 @@
-import { REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT} from '../actions/types';
+import { REGISTER_SUCCESS, MYTOKEN, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT} from '../actions/types';
+import {AsyncStorage} from 'react-native';
 
+ 
 
 
  
 const initialState = {
-    token: localStorage.getItem('token'),
+    token: '',
     isAuthenticated: null,
     loading: true,
     user: null
 };
-
-
+    
+ 
 export default function(state = initialState, action) {
 
     switch(action.type) {
+        case MYTOKEN:
+            console.log(`AUTH TOKEN REDUCER ${action.payload}`)
+            return{
+                ...state,
+                token: action.payload
+            }
         case USER_LOADED:
+            console.log(`USER_LOADED REDUCER FIRED: ${JSON.stringify(action.payload)}`)
         return({
             ...state,
             isAuthenticated: true,
@@ -22,28 +31,28 @@ export default function(state = initialState, action) {
             user: action.payload
         })
         case REGISTER_SUCCESS:
-        case LOGIN_SUCCESS:
-            localStorage.setItem('token', action.payload.token);
-            return {
+        case LOGIN_SUCCESS:  
+             console.log('LOGIN_SUCCESS RECUDER..WHATS NEXT?')
+
+            return { 
                 ...state,
                 ...action.payload,
+                token: action.payload,
                 isAuthenticated: true,
                 loading: false
-            }
-
+            }      
         case REGISTER_FAIL:
         case AUTH_ERROR:
         case LOGIN_FAIL:
         case LOGOUT:
-
-            localStorage.removeItem('token');
+            AsyncStorage.removeItem('token');
             return {
                 ...state,
                 token: null,
                 isAuthenticated: false,
                 loading: false
-            }
+            }  
         default:
          return state;
-    }
-}
+    }   
+}    

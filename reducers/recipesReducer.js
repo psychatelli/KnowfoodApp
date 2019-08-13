@@ -1,5 +1,6 @@
 import { GET_RECIPES,DELETE_RECIPES, UPDATE_LIKES, ADD_RECIPE,GET_RECIPE,DELETE_RECIPE,POST_STEP,DELETE_STEP, UPDATE_RECIPE, RECIPE_LOADING, RECIPE_ERROR, GET_USERS_RECIPES, DELETE_COMMENT
 } from '../actions/types';
+import {AsyncStorage} from 'react-native';
 
 
 const initialState = {
@@ -8,7 +9,7 @@ const initialState = {
     item: {},
     itemSelected: {},
     loading: true,
-    errors: {}
+    errors: {},
   };
 
   
@@ -24,12 +25,14 @@ const initialState = {
         };
 
         case GET_RECIPES:
-        case GET_USERS_RECIPES:  
+        case GET_USERS_RECIPES: 
+        // console.log(`YOUR TOKEN ${AsyncStorage.getItem('token')}`)
+
         return{
             ...state,
             items: action.payload,
         };
-  
+       
         case GET_RECIPE:
         return{
             ...state,

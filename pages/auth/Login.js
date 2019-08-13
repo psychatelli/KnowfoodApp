@@ -1,113 +1,126 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-// import { login } from '../../actions/auth';
-// import Alert from '../../components/common/alert';
+import { login, loadUser, logout } from '../../actions/auth';
+import Alert from '../../components/common/alert';
 import { Container, View, Header, Content, Card, CardRecipeItem, Thumbnail, Text, Button, Icon, Left, Body, Form, Item, Label, Input  } from 'native-base';
 import { KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native';
 import styles from '../../styles/styles';
-
+import {setToken, getAsyncStorage} from '../../utils/setAuthToken';
+import {AsyncStorage} from 'react-native';
 
 class Login extends Component {
-          example
-          static navigationOptions = ({ navigation }) => ({
-            header: null,
-          })
+         
 
       
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             email: '',
             password: '',
             errors: {},
+            User: this.props.user
         }
-        this.onChange = this.onChange.bind(this)
-        this.onSubmit = this.onSubmit.bind(this)
+      
     }
  
-        componentDidMount() {
-            // if(this.props.isAuthenticated){
-            //     // this.props.history.push('/recipies');
-            //     window.location.href = '/recipies';
-            // }
+    componentDidMount() {
+        getAsyncStorage() 
+
+        if(this.props.token){
+            // this.props.loadUser()
+            // this.props.navigation.navigate('Recipes')
+
         }
-
-        componentWillReceiveProps(nextProps) {
-            // if(nextProps.isAuthenticated) {
-            //     // this.props.history.push('/recipies');
-            //     window.location.href = '/recipies';
-            // }
-        }
-
-    // onChange(e) {
-    //     this.setState({ [e.target.name]: e.target.value })
-
-    //     console.log(this.state.email)
-    // }
-
-    onChange(text, name){
-        if(name=='email'){
-            this.setState({
-                name: text
-            })
-        }
-        // this.setState({[name]: input})
-        console.log(this.state.email)
-    } 
-
-    onSubmit(e) {
-       let collection= {}
-       collection.name= this.state.name,
-       collection.email= this.state.email
     }
+
+     
+    componentWillReceiveProps(nextProps) {
+        getAsyncStorage() 
+
+
+        if(nextProps.isAuthenticated) {
+
+            console.log('IS AUTHETICATED')
+            //  async () => {
+            //     try {
+            //       await AsyncStorage.setItem('Usertoken', 'Adam');
+            //     } catch (error) { 
+            //       // Error saving data
+            //     }
+            //   };
+            // this.props.navigation.navigate('Recipes')
+        }
+
+    }
+
+    // if(AsyncStorage.getItem('token')){
+    //     setAuthToken(AsyncStorage.token)
+    //     console.log('App.js token in AsyncStorage')
+    //   }
+
+    
   
- 
-    render() {
-        const { errors } = this.state;
-
+    onSubmit() {
+    const userData = {
+        email: this.state.email,
+        password: this.state.password
+    }
+    //    console.log(this.state.password)
+   
+        
+        this.props.login(userData);
        
+    }
+    LogOut() {
+            this.props.logout();  
+        }
+   
+   
+     render() {
+        const { errors } = this.state;
+        const { user, token } = this.props;
+
+    //    console.log(`YOUR ERRORS: ${errors}`)
 
         return(
             <Container style={styles.loginWrapper}>
+
+                    <KeyboardAvoidingView behavior='padding'> 
+
                 <View> 
-                  <KeyboardAvoidingView behavior='padding'> 
 
                 <View style={styles.LoginContainer}>
-                    <Text style={styles.LoginTitle}>Log In</Text>
-                    {/* <Alert /> */}
+                <Text style={{fontSize: 30}}>{token}</Text>
 
-                       
-                            {/* <Label>Email</Label> */}
+                    <Text style={styles.LoginTitle}>LOGIN</Text>
+                    <Alert />
+                  
+
                             <Item regular style={styles.LoginInput}> 
                             <Input
-                            name="email"
                             placeholder='Email'
-                            // value={this.state.email}
-                            onChange={(text) => this.onChange(text, 'email')}
-                            // error={errors.email}
+                            autoCapitalize='none'
+                            onChangeText={(email) => this.setState({email: email})}
                             />
+                            {/* {errors.email && (<View> {errors.email} </View> )} */}
+
                             </Item>
                        
-                        
-
-                            
-                        
-                        {/* <Label>Password</Label>       */}
+                                                
                         <Item regular style={styles.LoginInput}> 
                         <Input 
-                            name="email"
                             placeholder='password'
-                            // value={this.state.email}
-                            onChange={(text) => this.onChange(text, 'password')}
-                            // error={errors.email}
+                            onChangeText={(password) => this.setState({password})}
+                            secureTextEntry 
                             />
                         </Item>
-                        {/* {errors.password && (<View style="invalid-feedback"> {errors.password} </View> )} */}
+                        {/* {errors.password && (<View> {errors.password} </View> )} */}
                         
                        
 
-                        <Button full style={styles.PrimaryButton} onPress={() => this.onSubmit()} ><Text>Sibmit</Text></Button>
+                        <Button full style={styles.PrimaryButton} onPress={() => this.onSubmit()} ><Text>Submit</Text></Button>
                         <Button full style={styles.PrimaryButton} onPress={() => this.props.navigation.navigate('Recipes')}><Text>Register</Text></Button>
+                        <Button full style={styles.PrimaryButton} onPress={() => this.LogOut()} ><Text>Logout</Text></Button>
 
                     <View>
                         <Text>If you don't have an account</Text>
@@ -116,8 +129,9 @@ class Login extends Component {
                         </Link> */}
                     </View>
                 </View>
-                </KeyboardAvoidingView>
                 </View>
+                </KeyboardAvoidingView>
+
             </Container>
         )
     }
@@ -128,10 +142,13 @@ class Login extends Component {
 //     isAuthenticated: PropTypes.bool,
 
 // }
+   
+const mapStateToProps = (state) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+    user: state.auth.user,
+    token: state.auth.token
 
-// const mapStateToProps = (state) => ({
-//     isAuthenticated: state.auth.isAuthenticated
-// })
-
-// export default connect(mapStateToProps, { login })(Login); 
-export default Login;
+})
+ 
+export default connect(mapStateToProps, { login, loadUser, logout })(Login); 
+// export default Login;

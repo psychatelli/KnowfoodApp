@@ -12,12 +12,12 @@ const User = require('../models/user');
 
 const validateRecipeInput = require('../validation/recipe');
 
-
+ 
 // @route GET api/recipe
 // @route Get all recipe
 // @route Private
         
-  router.get('/', async (req, res) => {
+  router.get('/', auth, async (req, res) => {
     try {
       let Allrecipes = await Recipe.find().sort( { date: -1} );
       res.json(Allrecipes)

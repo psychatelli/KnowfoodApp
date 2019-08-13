@@ -3,6 +3,7 @@
 //import { primaryColor } from “../styles/common.js”;
 
 import { StyleSheet, Platform } from 'react-native';
+import { whileStatement } from '@babel/types';
 
 
 
@@ -60,7 +61,7 @@ const GlobalStyles = StyleSheet.create({
       alignSelf: 'center',
       fontSize: 30,
       color: PrimaryTextColor,
-      marginBottom: 20
+      marginBottom: 40
     },
 
     custom_wrapper: {
@@ -130,7 +131,13 @@ const GlobalStyles = StyleSheet.create({
     },
 
    
-
+    danger: {
+      backgroundColor: '#F37463',
+      padding: 10,
+      marginTop: 10,
+      marginBottom: 10,
+      color: 'white',
+    },  
  
 
     inputStyle: {

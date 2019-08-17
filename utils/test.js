@@ -1,0 +1,27 @@
+headers:
+   { host: '192.168.254.10:5000',
+     'x-auth-token':
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWNlZDhmZDkwYzUwZWFmOTZjNzJjOTFlIn0sImlhdCI6MTU2NTk4NDUyOCwiZXhwIjoxNTY2MDIwNTI4fQ.mnaTBYdqmNusTpjJa5LA3OKYGxn5ezspf7pIXY64OjQ',
+     'if-none-match': 'W/"c3-OlkK1D16pYz21X8TM6MPpMlFLmM"',
+     accept: 'application/json, text/plain, */*',
+     'user-agent': 'Expo/2.12.3.106566 CFNetwork/978.0.7 Darwin/18.6.0',
+     'accept-language': 'en-us',
+     'accept-encoding': 'gzip, deflate',
+     connection: 'keep-alive' },
+  rawHeaders:
+   [ 'Host',
+     '192.168.254.10:5000',
+     'x-auth-token',
+     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWNlZDhmZDkwYzUwZWFmOTZjNzJjOTFlIn0sImlhdCI6MTU2NTk4NDUyOCwiZXhwIjoxNTY2MDIwNTI4fQ.mnaTBYdqmNusTpjJa5LA3OKYGxn5ezspf7pIXY64OjQ',
+     'If-None-Match',
+     'W/"c3-OlkK1D16pYz21X8TM6MPpMlFLmM"',
+     'Accept',
+     'application/json, text/plain, */*',
+     'User-Agent',
+     'Expo/2.12.3.106566 CFNetwork/978.0.7 Darwin/18.6.0',
+     'Accept-Language',
+     'en-us',
+     'Accept-Encoding',
+     'gzip, deflate',
+     'Connection',
+     'keep-alive' ]

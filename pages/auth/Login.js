@@ -5,7 +5,7 @@ import Alert from '../../components/common/alert';
 import { Container, View, Header, Content, Card, CardRecipeItem, Thumbnail, Text, Button, Icon, Left, Body, Form, Item, Label, Input  } from 'native-base';
 import { KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native';
 import styles from '../../styles/styles';
-import {setToken, getAsyncStorage} from '../../utils/setAuthToken';
+import {setToken, getAsyncStorage, deleteAsyncStorage} from '../../utils/setAuthToken';
 import {AsyncStorage} from 'react-native';
 
 class Login extends Component {
@@ -14,28 +14,24 @@ class Login extends Component {
       
     constructor(props) {
         super(props);
+        // this._loadData();
+
         this.state = {
             email: '',
             password: '',
             errors: {},
             User: this.props.user
         }
-      
+
     }
  
     componentDidMount() {
-        getAsyncStorage() 
-
-        if(this.props.token){
-            // this.props.loadUser()
-            // this.props.navigation.navigate('Recipes')
-
+        // getAsyncStorage()
         }
-    }
 
+       
      
     componentWillReceiveProps(nextProps) {
-        getAsyncStorage() 
 
 
         if(nextProps.isAuthenticated) {
@@ -72,7 +68,7 @@ class Login extends Component {
        
     }
     LogOut() {
-            this.props.logout();  
+        this.props.logout();  
         }
    
    

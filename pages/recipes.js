@@ -6,13 +6,14 @@ import { Container, View,  Content, Card, CardItem, Thumbnail, Text, Button, Ico
 import { Header } from 'react-native';
 import { getRecipes, myAccessToken } from '../actions/recipesAction';
 import { logout} from '../actions/auth';
-// import { loadUser } from '../actions/auth';
+ import { loadUser } from '../actions/auth';
 import RecipeComponent from '../components/RecipeComponent/recipeComponent';
 import stylesRC from '../styles/StylesRecipeComponent';
 // import styles from '../styles/styles';
+import {setToken, getAsyncStorage, deleteAsyncStorage} from '../utils/setAuthToken';
 
 
-
+ 
 
 class Recipes extends Component {
 
@@ -46,24 +47,24 @@ class Recipes extends Component {
             message: this.props.message
         }
     }
-
-
-    componentWillMount() {
+ 
+              
+    componentDidMount() {
+      
+    // deleteAsyncStorage()  
       this.props.getRecipes();
       // this.props.myAccessToken()
-      // this.props.loadUser();
       // this.props.logout()
 
       if(this.props.user){
         console.log(`YOU HAVE A USER`)
       }
- 
     }
 
   // componentDidUpdate() {
   //   // store.dispatch(loadUser());  
   // }
-
+ 
    Logout = () => {
      this.props.logout()
    }
@@ -82,8 +83,9 @@ class Recipes extends Component {
  
     return (
        <Container>
-        <RecipeComponent Navigation={navigate} RecipeObj={recipes} />
-        <Text style={{fontSize: 30}}>{user.username}</Text>
+         <Text style={{fontSize: 30}}>{user.username}</Text>
+
+          <RecipeComponent Navigation={navigate} RecipeObj={recipes} />
           <Button onPress={() => Logout()}><Text style={{fontSize: 30}}>LOGOUT</Text></Button>
         </Container> 
     )
@@ -92,10 +94,8 @@ class Recipes extends Component {
 
 const mapStateToProps = state => ({
   recipes: state.recipes.items,
-  user: state.auth.user,
-  
-  
+  user: state.auth.user,  
 })
 
 
-export default connect(mapStateToProps, {getRecipes, myAccessToken, logout })(Recipes);
+export default connect(mapStateToProps, {getRecipes, logout, loadUser })(Recipes);

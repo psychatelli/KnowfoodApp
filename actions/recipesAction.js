@@ -22,38 +22,11 @@ import {AsyncStorage} from 'react-native';
 // };
 
 
-export const myAccessToken = () => async dispatch => {
-  try {
-      const token = AsyncStorage.getItem('token');
-    dispatch({
-      type: MYTOKEN,
-      payload: token
-    })
-  } catch (error) {
-    dispatch({
-      type: RECIPE_ERROR,
-      payload: {msg: err.response.statusText, status: err.response.status },
-    })
-  }
-};
-
-
-// export const myAccessToken = async () => {
-//   try {
-//     const value = await AsyncStorage.getItem('token');
-//     if (value !== null) {
-//       // We have data!!
-//       console.log(value);
-//     }
-//   } catch (error) {
-//     // Error retrieving data
-//   }
-// };
 
 
 export const getRecipes = () => async dispatch => {
      try {
-      const res = await axios.get('http://10.0.0.85:5000/api/recipe');
+      const res = await axios.get('http://192.168.254.10:5000/api/recipe');
       
        
       dispatch({
@@ -74,7 +47,7 @@ export const getRecipes = () => async dispatch => {
 
     dispatch(setRecipeLoading());
     axios
-      .get(`http://10.0.0.85:5000/api/recipe/${id}`)
+      .get(`http://192.168.254.10:5000/api/recipe/${id}`)
       .then(res =>
         dispatch({
           type: GET_RECIPE,
@@ -82,7 +55,7 @@ export const getRecipes = () => async dispatch => {
         })
       )
       .catch(err =>
-        dispatch({
+        dispatch({ 
           type: GET_ERRORS,
           payload: null
         })

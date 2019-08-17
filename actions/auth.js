@@ -1,49 +1,31 @@
 import { REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT} from './types';
 import axios from 'axios';
 import { setAlert } from './alert';
-import {setAuthToken, setToken, deleteAsyncStorage} from '../utils/setAuthToken'
+import {setAuthToken, setToken, getAsyncStorage, deleteAsyncStorage} from '../utils/setAuthToken'
 import {AsyncStorage} from 'react-native';
 
 
-
-
-
-
-
-// export const removeToken = () => async dispatch => {
-
-//     console.log('ran removeToken Action')
-//     try {
-//         await AsyncStorage.removeItem('token');
-//         return true;
-//       }
-//       catch(exception) {
-//         return false;
-//       }
-
-// } 
+const MyToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWNlZDhmZDkwYzUwZWFmOTZjNzJjOTFlIn0sImlhdCI6MTU2NTgxNDcxOSwiZXhwIjoxNTY1ODUwNzE5fQ.xQD0aFEEG59b6KMcuTGDRgexxKBhXL_kTTyZkE_OInA'
 
 export const loadUser = (token) => async dispatch => {
-    console.log(`loaduser token: ${token}`)
-
+    console.log('loaduser fired here boy')
     if(token){
-        // setAuthToken(token)
+        console.log('loaduser token')
         setToken(token)
+    }else{
+        getAsyncStorage()
+
     }
+    
 
     try{
-        const res = await axios.get('http://10.0.0.85:5000/api/auth');
-        console.log(`USER DATA FROM LOADUSER ACTION: ${res.data}`)
+        const res = await axios.get('http://192.168.254.10:5000/api/auth');
         dispatch({
             type: USER_LOADED,
             payload: res.data
         })
 
-        const Data = JSON.stringify(res.data)
-        console.log(`LOADUSER ACTION USER DATA ${Data.username}`)
-
-              // await AsyncStorage.setItem('Usertoken', TheToken);
-
+     
   
     }catch(err){
         console.log('loaduser error')
@@ -65,7 +47,7 @@ export const register = ({username, email, password }) => async dispatch => {
     const body = JSON.stringify({ username, email, password});
 
     try{
-        const res = await axios.post('http://10.0.0.85:5000/api/users', body, config);
+        const res = await axios.post('http://192.168.254.10:5000/api/users', body, config);
         dispatch({
             type: REGISTER_SUCCESS,
             payload: res.data,
@@ -98,7 +80,7 @@ export const login = ({email, password}) => async dispatch => {
     const body = JSON.stringify({ email, password});
 
     try{
-        const res = await axios.post('http://10.0.0.85:5000/api/auth', body, config);
+        const res = await axios.post('http://192.168.254.10:5000/api/auth', body, config);
         //  AsyncStorage.setItem('token', res.data);
         // console.log(`LOGIN ACTION DATA: ${JSON.stringify(res.data)}`)
             let token = JSON.stringify(res.data);

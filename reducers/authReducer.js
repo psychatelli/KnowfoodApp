@@ -23,7 +23,9 @@ export default function(state = initialState, action) {
                 token: action.payload
             }
         case USER_LOADED:
-            console.log(`USER_LOADED REDUCER FIRED: ${JSON.stringify(action.payload)}`)
+            const Data = action.payload;
+            
+            console.log(`USER_LOADED REDUCER FIRED: ${Data._id}`)
         return({
             ...state,
             isAuthenticated: true,

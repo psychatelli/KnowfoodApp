@@ -1,27 +1,26 @@
 import { REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT} from './types';
 import axios from 'axios';
 import { setAlert } from './alert';
-import {setAuthToken, setToken, getAsyncStorage, deleteAsyncStorage} from '../utils/setAuthToken'
+import {setAuthToken, setToken, getAsyncStorage, deleteAsyncStorage} from './utils/setAuthToken'
 import {AsyncStorage} from 'react-native';
 
-
+ 
 const MyToken = {"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWNlZDhmZDkwYzUwZWFmOTZjNzJjOTFlIn0sImlhdCI6MTU2NjIzMDQ2MCwiZXhwIjoxNTY2MjY2NDYwfQ.irJnctH34aYFJXXK7Kt7gqRFzxPxlwY4kvCeHsBlp_U"}
  
 export const AuthorizedUser = () => async dispatch => {
-    console.log('authuser fired')
-    // if(token){  setToken(token)
-    // }else{ getAsyncStorage() }
-            
-    const config = {
-        headers: {
-            'Content-type': 'application/json'
-        }
-    }
+   
+    
  
     try{
 
         token = await AsyncStorage.getItem('Usertoken');
-        
+        console.log(`observing token: ${token}`)
+        const config = {
+            headers: { 
+                'Content-type': 'application/json',
+            }
+        }
+
         //  const Mytoken = JSON.stringify(token)
         // const Word = JSON.parse(Mytoken)
         console.log(`in AuthorizedUser, heres Usertoken ${token}`)
@@ -57,18 +56,12 @@ export const loadUser = (token) => async dispatch => {
 
 
     }else{
-        // deleteAsyncStorage()
          getAsyncStorage()
 
     }
          
-        
     try{
-        // const res = await axios.post('http://10.0.0.85:5000/api/auth/getuser', token);
         const res = await axios.get('http://10.0.0.85:5000/api/auth');
-
-        console.log(`your USER RES DATA: ${JSON.stringify(res.data)}`)
-        const User = res.data._id;
 
         dispatch({
             type: USER_LOADED,
@@ -130,14 +123,12 @@ export const login = ({email, password}) => async dispatch => {
 
     try{
         const res = await axios.post('http://10.0.0.85:5000/api/auth', body, config);
-        //  AsyncStorage.setItem('token', res.data);
-        // console.log(`LOGIN ACTION DATA: ${JSON.stringify(res.data)}`)
+       
             let token = JSON.stringify(res.data);
         dispatch({
             type: LOGIN_SUCCESS,
             payload: token,
         })
-
         dispatch(loadUser(token))
 
     }catch(err) {

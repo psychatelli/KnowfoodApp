@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
   render() {
     const {Navigation, RecipeObj } = this.props;
 
-
+ 
     getRecipeID = (id) => {
       this.props.getRecipe(id);
       this.props.Navigation('Recipe')

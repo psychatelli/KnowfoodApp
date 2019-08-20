@@ -1,19 +1,6 @@
 
 import axios from 'axios';
 import {AsyncStorage} from 'react-native';
-import { loadUser2 } from '../actions/auth';
-
-// export const setAuthToken = async (token) => {
-//     if(token){ 
-//       const value = await AsyncStorage.getItem('Usertoken');
-
-//         console.log(`YOUR SETAUTHTOKEN ACTION: ${value}`)
-//         axios.defaults.headers.common['x-auth-token'] = value;
-
-//     }else {
-//         delete axios.defaults.headers.common['x-auth-token'];
-//     }
-// }
 
  
 export  const setToken = async (token) => {
@@ -23,7 +10,7 @@ export  const setToken = async (token) => {
       const Mytoken = JSON.parse(token)
       const TheToken = Mytoken.token
       // const Stringed = JSON.stringify(Mytoken.token)
- 
+      
       // String(TheToken)
       
       axios.defaults.headers.common['x-auth-token'] = TheToken;
@@ -35,7 +22,7 @@ export  const setToken = async (token) => {
   }else {  
       delete axios.defaults.headers.common['x-auth-token'];
   } 
-           
+            
     try { 
       await AsyncStorage.setItem('Usertoken', token);
 
@@ -69,10 +56,6 @@ export  const setToken = async (token) => {
 
 
 
-
-
-
-   
   export  const deleteAsyncStorage = async () => {
     try {
         const value = await AsyncStorage.removeItem('Usertoken');
@@ -88,5 +71,3 @@ export  const setToken = async (token) => {
   };
 
 
-
-// export default setAuthToken; 

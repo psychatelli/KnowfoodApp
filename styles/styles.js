@@ -27,7 +27,24 @@ export let AccentColor2 = '#1D1D8D';
 
 
 const GlobalStyles = StyleSheet.create({
- 
+  AccentColor1Font: {
+    color: AccentColor1
+  },
+  FooterAndHeader: {
+    backgroundColor: '#41418a'
+  },
+  DarkOpacityBackground: {
+    backgroundColor: DarkOpacity,
+
+  },
+  MidOpacityBackground: {
+    backgroundColor: MidOpacity,
+
+  },
+  LightOpacityBackground: {
+    backgroundColor: LightOpacity,
+
+  },
   LoginInput: {
     // flex: 1,
     backgroundColor: 'white',

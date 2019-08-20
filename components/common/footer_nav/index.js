@@ -8,7 +8,7 @@ export default class Footer_Nav extends Component {
 
        render() {
         return (
-            <Container>
+            
             <Footer >
                 <FooterTab>
                     <Button>
@@ -29,7 +29,7 @@ export default class Footer_Nav extends Component {
                     </Button>
                 </FooterTab>
             </Footer>
-        </Container>
+      
         );
     }
 

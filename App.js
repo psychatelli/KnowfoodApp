@@ -8,7 +8,6 @@ import Login from './pages/auth/Login';
 import { AuthorizedUser, removeToken  } from './actions/auth';
 // import {setAuthToken, getToken, getAsyncStorage} from './utils/setAuthToken';
 // import  from './utils/setAuthToken';
-
 import {AsyncStorage, ActiveIndicator, StatusBar} from 'react-native';
 
  import NativeBase from './components/Component1/Nativebase1';
@@ -39,25 +38,22 @@ const RootStack = createStackNavigator(
         cardStyle: {backgroundColor: 'red'},
         headerTintColor: 'blue'
       }),
-    } 
+    },
+     
   },
   {
     
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: '#303451',
-      },
-      headerTintColor: '#2AE7AA',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-      
-     
-
-    },
-    containerStyle: {
-      backgroundColor: 'blue'
-    }
+    // defaultNavigationOptions: {
+    //   headerStyle: {
+    //     backgroundColor: '#303451',
+    //   },
+    //   headerTintColor: '#2AE7AA',
+    //   headerTitleStyle: {
+    //     fontWeight: 'bold',
+    //   }
+    // },
+   
+    
   },
  
   
@@ -66,11 +62,14 @@ const RootStack = createStackNavigator(
 const AuthStack = createStackNavigator({ 
   Recipes: Recipes,
   Recipe: Recipe,
+  
+  
 })
 
 
 
 class AuthLoadingScreen extends Component {
+  
   constructor(props){
     super(props);
     this._loadData()
@@ -149,6 +148,7 @@ const App = () => {
     <Container>
         <AppContainer/>
         <StatusBar barStyle='default'/>
+
     </Container>
     </Provider>
   )

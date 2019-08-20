@@ -2,42 +2,55 @@ import React, {Component} from 'react';
 
 import { connect } from 'react-redux';
 
-import { Container, View,  Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body,  } from 'native-base';
-import { Header } from 'react-native';
+import { Container, View,  Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Title, Right, Header  } from 'native-base';
+// import { Header } from 'react-native';
 import { getRecipes, myAccessToken } from '../actions/recipesAction';
 import { logout} from '../actions/auth';
  import { loadUser } from '../actions/auth';
 import RecipeComponent from '../components/RecipeComponent/recipeComponent';
-import stylesRC from '../styles/StylesRecipeComponent';
-// import styles from '../styles/styles';
-import {setToken, getAsyncStorage, deleteAsyncStorage} from '../utils/setAuthToken';
+import Footer_Nav from '../components/common/footer_nav/new_footer';
+
+ import styles from '../styles/styles';
+import {setToken, getAsyncStorage, deleteAsyncStorage} from '../actions/utils/setAuthToken';
 
 
+const FooterData = [
+  {
+   active: true,
+   link: '/recipes',
+   icon: 'home'
+  },
+  {
+      active: false,
+      link: '/recipes',
+      icon: 'list'
+  },
+  {
+      active: false,
+      link: '/recipes',
+      icon: 'add-circle'
+     },
+     {
+      active: false,
+      link: '/recipes',
+      icon: 'person'
+     },
+     {
+      active: false,
+      link: '/recipes',
+      icon: 'people'
+     },
+]
  
 
 class Recipes extends Component {
 
-   
- 
-  // static navigationOptions = {
-  //   title: 'Home',
-  //   headerStyle: {
-  //     backgroundColor: '#f4511e',
-  //   },
-  //   headerTintColor: '#fff',
-  //   headerTitleStyle: {
-  //     fontWeight: 'bold',
-  //   },
-  // };
-
-          // One example
-          // static navigationOptions = ({ navigation }) => ({
-          //   backgroundColor: 'rgba(40, 40, 40, 0.482)',
-          // })
-
-        //   static navigationOptions =  ({
-        //      backgroundColor: 'rgba(40, 40, 40, 0.482)',
-        // })
+  static navigationOptions = {
+    // header: null,
+    headerTitle:  'KnowFood',
+    headerStyle: styles.FooterAndHeader,
+    headerTitleStyle: { color: 'white'}    
+  }
 
     constructor(props){
         super(props);
@@ -46,26 +59,22 @@ class Recipes extends Component {
             showName: true,
             message: this.props.message
         }
+
     }
    
                      
     componentWillMount() {
-      
-    debugger;  
+          
       // deleteAsyncStorage()    
       this.props.getRecipes();
-      // this.props.myAccessToken()
-      // this.props.logout()
+    
       
       if(this.props.user){
         console.log(`YOU HAVE A USER`)
       }
     }
  
-  // componentDidUpdate() {
-  //   // store.dispatch(loadUser());  
-  // }
- 
+  
    Logout = () => {
      this.props.logout()
    }
@@ -91,18 +100,21 @@ class Recipes extends Component {
 		BodyContent = 	<Text>Loading...</Text>;
 		
 		} else {
-		
+		 
 		BodyContent = (
         <Container>
-         <Text style={{fontSize: 30}}>{user.username}</Text>
+
+         {/* <Text style={{fontSize: 30}}>{user.username}</Text> */}
           <RecipeComponent Navigation={navigate} RecipeObj={recipes} />
-          <Button onPress={() => Logout()}><Text style={{fontSize: 30}}>LOGOUT</Text></Button>
+          <Footer_Nav FooterData={FooterData} Navigation={navigate}/>
+
         </Container> 
     )}
     
     return (
       <Container> 
         {BodyContent}
+
         </Container>
     )
   }

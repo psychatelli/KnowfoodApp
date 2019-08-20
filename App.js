@@ -5,7 +5,7 @@ import store from './store';
 import styles from './styles/styles';
 import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
 import Login from './pages/auth/Login';
-import { loadUser, removeToken  } from './actions/auth';
+import { AuthorizedUser, removeToken  } from './actions/auth';
 // import {setAuthToken, getToken, getAsyncStorage} from './utils/setAuthToken';
 // import  from './utils/setAuthToken';
 
@@ -18,7 +18,7 @@ import {AsyncStorage, ActiveIndicator, StatusBar} from 'react-native';
   import RecipeComponent from './components/RecipeComponent/recipeComponent';
   import { Container, View, Text  } from 'native-base';
  
- 
+   
   
 
  
@@ -141,7 +141,7 @@ class AuthLoadingScreen extends Component {
 const App = () => {
 
   useEffect(() => {
-    storeInstance.dispatch(loadUser());
+    storeInstance.dispatch(AuthorizedUser());
     });
     
   return( 

@@ -13,9 +13,6 @@ export default (initialState) => {
   );
 } 
 
-
-
-
 // const middleware = [thunk];
 
 

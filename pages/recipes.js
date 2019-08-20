@@ -47,20 +47,21 @@ class Recipes extends Component {
             message: this.props.message
         }
     }
- 
-              
-    componentDidMount() {
+   
+                     
+    componentWillMount() {
       
-    // deleteAsyncStorage()  
+    debugger;  
+      // deleteAsyncStorage()    
       this.props.getRecipes();
       // this.props.myAccessToken()
       // this.props.logout()
-
+      
       if(this.props.user){
         console.log(`YOU HAVE A USER`)
       }
     }
-
+ 
   // componentDidUpdate() {
   //   // store.dispatch(loadUser());  
   // }
@@ -68,8 +69,8 @@ class Recipes extends Component {
    Logout = () => {
      this.props.logout()
    }
-
-
+  
+ 
     static defaultProps = {
         message: 'Hi There'
     }
@@ -78,16 +79,31 @@ class Recipes extends Component {
     
     let name = this.state.showName ? this.state.name : 'No Name';
     const { navigate } = this.props.navigation;
-    const { recipes, user } = this.props;
-
+    const { recipes, user, loading } = this.props;
+    console.log(`IN PAGE USER: ${JSON.stringify(user)}`)
  
-    return (
-       <Container>
+    let BodyContent;
+	
+	
+	
+		if (user === null || loading)  {
+		
+		BodyContent = 	<Text>Loading...</Text>;
+		
+		} else {
+		
+		BodyContent = (
+        <Container>
          <Text style={{fontSize: 30}}>{user.username}</Text>
-
           <RecipeComponent Navigation={navigate} RecipeObj={recipes} />
           <Button onPress={() => Logout()}><Text style={{fontSize: 30}}>LOGOUT</Text></Button>
         </Container> 
+    )}
+    
+    return (
+      <Container> 
+        {BodyContent}
+        </Container>
     )
   }
 }

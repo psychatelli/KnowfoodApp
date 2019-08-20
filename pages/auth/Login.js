@@ -28,12 +28,12 @@ class Login extends Component {
     componentDidMount() {
         // getAsyncStorage()
         }
-
-       
-     
+  
+                                
+               
     componentWillReceiveProps(nextProps) {
-
-
+     
+       
         if(nextProps.isAuthenticated) {
 
             console.log('IS AUTHETICATED')
@@ -54,7 +54,7 @@ class Login extends Component {
     //     console.log('App.js token in AsyncStorage')
     //   }
 
-    
+        
   
     onSubmit() {
     const userData = {
@@ -65,13 +65,13 @@ class Login extends Component {
    
         
         this.props.login(userData);
-       
+         
     }
     LogOut() {
         this.props.logout();  
         }
    
-   
+    
      render() {
         const { errors } = this.state;
         const { user, token } = this.props;

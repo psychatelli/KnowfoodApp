@@ -20,15 +20,13 @@ import {AsyncStorage} from 'react-native';
 //     })
 //   }
 // };
+  
 
-
-
-
+    
+  
 export const getRecipes = () => async dispatch => {
      try {
-      const res = await axios.get('http://192.168.254.10:5000/api/recipe');
-      
-       
+      const res = await axios.get('http://10.0.0.85:5000/api/recipe');
       dispatch({
         type: GET_RECIPES,
         payload: res.data
@@ -41,13 +39,11 @@ export const getRecipes = () => async dispatch => {
     }
   }
 
-
-
   export const getRecipe = id => dispatch => {
 
     dispatch(setRecipeLoading());
     axios
-      .get(`http://192.168.254.10:5000/api/recipe/${id}`)
+      .get(`http://10.0.0.85:5000/api/recipe/${id}`)
       .then(res =>
         dispatch({
           type: GET_RECIPE,

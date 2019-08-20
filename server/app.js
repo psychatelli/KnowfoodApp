@@ -7,6 +7,7 @@ const users = require('./routes/users');
 const recipes = require('./routes/recipe');
 const auth = require('./routes/auth');
 const profile = require('./routes/profile');
+const private = require('./routes/private');
 const fileUpload = require('express-fileupload');
 
 
@@ -42,6 +43,7 @@ app.use('/api/users', users);
 app.use('/api/recipe', recipes);
 app.use('/api/auth', auth);
 app.use('/api/profile', profile);
+app.use('/api/private', private)
 
 // config variables
 app.listen(global.gConfig.node_port, () => {

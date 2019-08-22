@@ -21,7 +21,7 @@ import { connect } from 'react-redux';
     return (
       <Container style={styles.CardBackground}>
         <Content>
-
+ 
           {
             RecipeObj.map(item=> (
             <View key={item._id} style={stylesRC.RecipeCardWrapper}>

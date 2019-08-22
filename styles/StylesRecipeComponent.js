@@ -93,10 +93,13 @@ StepNumber: {
 StepInstructions: {
   marginBottom: 10,
   color: PrimaryTextColor
+},
+
+EditRecipe_Container: {
+  marginTop: 30,
+  padding: 10,
+  backgroundColor: 'green'
 }
-
-
-
   
 
   });

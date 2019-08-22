@@ -9,8 +9,7 @@ import { logout} from '../actions/auth';
  import { loadUser } from '../actions/auth';
 import RecipeComponent from '../components/RecipeComponent/recipeComponent';
 import Footer_Nav from '../components/common/footer_nav/new_footer';
-
- import styles from '../styles/styles';
+import styles from '../styles/styles';
 import {setToken, getAsyncStorage, deleteAsyncStorage} from '../actions/utils/setAuthToken';
 
 
@@ -59,10 +58,9 @@ class Recipes extends Component {
             showName: true,
             message: this.props.message
         }
-
     }
    
-                     
+                      
     componentWillMount() {
           
       // deleteAsyncStorage()    
@@ -103,18 +101,15 @@ class Recipes extends Component {
 		 
 		BodyContent = (
         <Container>
-
          {/* <Text style={{fontSize: 30}}>{user.username}</Text> */}
           <RecipeComponent Navigation={navigate} RecipeObj={recipes} />
           <Footer_Nav FooterData={FooterData} Navigation={navigate}/>
-
         </Container> 
     )}
     
     return (
-      <Container> 
+       <Container> 
         {BodyContent}
-
         </Container>
     )
   }

@@ -91,7 +91,7 @@ try {
 
   
     
-      jwt.sign(payload, global.gConfig.jwtSecret, {expiresIn: 36000 }, (err, token) => {
+      jwt.sign(payload, global.gConfig.jwtSecret, {expiresIn: 136000 }, (err, token) => {
           if(err) throw err;
           res.json({ token });
           // res.status(201).header('x-auth', token).send()

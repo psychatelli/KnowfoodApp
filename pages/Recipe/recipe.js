@@ -7,37 +7,10 @@ import stylesRC from '../../styles/StylesRecipeComponent';
 import styles from '../../styles/styles';
 
 import Step from './step'
-const RecipeObj = {
-  
-    thumbnail: 'https://photos.smugmug.com/Test/i-W5SXVkM/0/1d663a9e/S/fettuccine-S.jpg',
-    title: 'Fettuccine',
-    username: 'Adam D',
-    avatar: 'https://www.gravatar.com/avatar/2675069ec8b9eb8c141e97cf92775f36?s=200&r=pg&d=mm',
-    date: 'Jan 3, 2019',
-  
-  step: [
-    {
-      thumbnail: 'https://photos.smugmug.com/Test/i-7fksTb3/0/cafb1120/M/Enchiladas-M.jpg',
-      text: 'Salad',
-     
-    },
-    {
-      thumbnail: 'https://photos.smugmug.com/Test/i-7fksTb3/0/cafb1120/M/Enchiladas-M.jpg',
-      title: 'this is a step',
-      
-    },
-  ]
-}
+
 
 
  class Recipe extends React.Component {
-  // static navigationOptions =  ({ navigation }) =>{
-  //   let headerTitle = 'Title in Component';
-  //   let headerRight = (<Button><Text>Yay</Text></Button>)
-  //   return { headerTitle, headerRight  }
-
-  // }
-
   constructor(props) {
     super(props);
     this.state = {
@@ -46,41 +19,53 @@ const RecipeObj = {
     // this.onSubmit = this.onSubmit.bind(this);
   }
 
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: 'title',
+      headerStyle: styles.FooterAndHeader,
+      headerTitleStyle: { color: 'white'},
+      headerRight: (
+        <Button onPress={navigation.getParam('gotoedit')} color="#fff"><Text>Edit</Text></Button>
+      ),
+    };
+  };
+
+
 
   componentDidMount(){
+    this.props.navigation.setParams({ gotoedit: this.gotoedit });
 
   }
+  gotoedit = () => {
+    console.log('You did it');
+    this.props.navigation.navigate('EditRecipe')
+  }
+
 
   render() {
       const { recipe, loading } = this.props;
 
       let RecipeContent;
      
-
-
       if (this.state.TheRecipe  === null) {
-        RecipeContent = <ActivityIndicator size='large' color='red'/>
+        RecipeContent = <ActivityIndicator size='large' color='purple'/>
       } else {
         RecipeContent = ( 
           <Content> 
-        
-
           <View style={stylesRC.RecipeCardWrapper}>
                 <View style={stylesRC.CardHeaderWrapper}>
                   <View>   
-          
                     <View style={stylesRC.HeaderInfo}>
                       <View style={stylesRC.ThumbnailWrapper}> 
-                        <Thumbnail style={stylesRC.ThumbnailImage}   source={{uri: `https:${recipe.avatar}`}} />
+                          <Thumbnail style={stylesRC.ThumbnailImage}   source={{uri: `https:${recipe.avatar}`}} />
                       </View>
           
                       <View style={stylesRC.UserNameWrapper}> 
-                      <Text style={stylesRC.Title}>{recipe.title}</Text>
-          
-                      <Text style={stylesRC.UserName}>{recipe.username}</Text>
+                        <Text style={stylesRC.Title}>{recipe.title}</Text>
+                        <Text style={stylesRC.UserName}>{recipe.username}</Text>
                       </View>
                     </View> 
-                          
+
                   </View>
           
                       <View style={stylesRC.MenuWrapper}> 
@@ -92,8 +77,7 @@ const RecipeObj = {
                       <View style={stylesRC.PostImageWrapper}>
                         <Image style={stylesRC.PostImage} source={{uri: recipe.thumbnail}}/>
                       </View>
-          
-                </View>
+          </View>
   
                 {recipe.step === undefined ?  <ActivityIndicator size='large' color='red'/>
                 :
@@ -118,11 +102,10 @@ const RecipeObj = {
     return (
       <Container style={styles.CardBackground}>
       {RecipeContent}
-
       </Container>
-    );
-  }
-}
+        );
+      }
+    }
  }
 
 

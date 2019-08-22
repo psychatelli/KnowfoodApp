@@ -1,19 +1,21 @@
 import React, { Component } from 'react'
 import { updateRecipe, getRecipe, addRecipeStep, deleteRecipeStep } from '../../../actions/recipesAction';
+import { Container, View, Header, Content, Card, CardRecipeItem, Thumbnail, Text, Button, Icon, Left, Body, Input, Form, Item  } from 'native-base';
+import { Image, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Button from '@material-ui/core/Button';
+import styles from '../../../styles/styles';
+import stylesRC from '../../../styles/StylesRecipeComponent';
 
-import RecipeStepEdit from './recipeStepEdit';
-import Comments from '../comments';
-
+// import RecipeStepEdit from './recipeStepEdit';
+// import Comments from '../comments';
+ 
 export class EditRecipe extends Component {
     constructor(props) {
         super(props);
         this.state = { 
           TheRecipe: this.props.recipe,        
-          title: this.props.recipe.title,
+          // title: this.props.recipe.title,
+          title: 'WHATS UP WITH THIS',
           thumbnaileEdited: '',
           indexEdited: 'ds',
           recipeText : '',
@@ -23,18 +25,18 @@ export class EditRecipe extends Component {
           StepId: '',
           recipeId: this.props.recipe._id,
           showStatus: ''
- 
         }
         this.handleChange = this.handleChange.bind(this);
         //  this.updateRecipe = this.updateRecipe.bind(this)
-
         this.onSubmit = this.onSubmit.bind(this)
- 
-
     }
 
 
-    handleChange = input => evt => {
+  
+
+
+
+     handleChange = input => evt => {
         this.setState({
           [input]: evt.target.value,
           // thumbnaileEdited: input.thumbnail,
@@ -45,7 +47,7 @@ export class EditRecipe extends Component {
         //   this.updateRecipe()
         } 
 
-
+        
 
         updateRecipe() {
         let newRecipe = {
@@ -97,7 +99,7 @@ export class EditRecipe extends Component {
           }
 
   
-
+ 
          
  
   render() {
@@ -105,40 +107,56 @@ export class EditRecipe extends Component {
     const { recipe, DeletePost, param ,Visibility, auth} = this.props;
     const {TheRecipe} = this.state
  
-
+ console.log(`EDIT RECIPES: ${JSON.stringify(recipe)}`)
 
     const Steps =  TheRecipe.step.map(function (item, index) {
       return (
-        <div  key={item._id} className='RecipeStepEdit'>
-          <div className='SpaceBetween'> 
-            <h6>STEP {index + 1}</h6>
-            <div size="small" onClick={() => { this.deleteStep(item._id, index)}} >
-            <i style={{color: 'gray', size: '5'}} className="material-icons Hand">close</i>
-            </div>
-          </div>
-            
-            <input name='text' value={item.text} col='50' row='50' onChange={this.handleStepChange(index)} onBlur={() => {this.updateRecipeStep()}}  />
+        <View  style={stylesRC.RecipeStep} key={item._id} className='RecipeStepEdit'>
+          <View style={styles.SpaceBetween}> 
+            <Text style={stylesRC.StepNumber}> EDIT STEP {index + 1}</Text>
+            <View  onClick={() => { this.deleteStep(item._id, index)}} >
+            <Icon name='close' style={{color: 'white'}} />
 
-            <img src={item.thumbnail}/>
-        </div>
+            </View>
+          </View>
+            
+          <Item regular style={styles.LoginInput}> 
+            <Input
+            name='text'
+            value={item.text}
+            autoCapitalize='none'
+            onChangeText={(email) => this.setState({email: email})}
+            onChange={this.handleStepChange(index)} onBlur={() => {this.updateRecipeStep()}}
+            />
+            </Item>
+
+            <View style={stylesRC.PostImageWrapper}>
+                 <Image style={stylesRC.PostImage} source={{uri: item.thumbnail}}/>
+             </View>
+
+        </View>
       )
     }.bind(this))
 
 
   
     return (
-      <div>
-        <form onSubmit={this.onSubmit}>
-            <label>TITLE</label> 
-            <input  value={this.state.title} onChange={this.handleChange('title')} onBlur={() => {this.updateRecipe()}} />
+      <Container style={styles.CardBackground}> 
+        <Content> 
+      <View>
+        <Form onSubmit={() => {this.onSubmit}}>
+            <View style={{margin: 10 }}> 
+            <Input  regular style={styles.LoginInput} placeholder='Title'  value={this.state.title} onChange={this.handleChange('title')} onBlur={() => {this.updateRecipe()}} />
+            </View>
             {Steps}
-            <br/>
             {/* <Comments Comment={recipe.comments}/> */}
-            <Comments param={recipe._id} Comment={recipe.comments} Visibility={Visibility}/>
-        </form>
-      </div>
+            {/* <Comments param={recipe._id} Comment={recipe.comments} Visibility={Visibility}/> */}
+        </Form>
+      </View>
+      </Content>
+      </Container>
     )
-  }
+  }  
 }
 
  

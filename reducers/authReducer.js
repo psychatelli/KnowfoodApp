@@ -24,7 +24,6 @@ export default function(state = initialState, action) {
             }
         case USER_LOADED:
             
-            console.log(`USER_LOADED REDUCER FIRED: ${action.payload}`)
         return({
             ...state,
             isAuthenticated: true,
@@ -33,7 +32,6 @@ export default function(state = initialState, action) {
         })
         case REGISTER_SUCCESS:
         case LOGIN_SUCCESS:  
-             console.log('LOGIN_SUCCESS RECUDER..WHATS NEXT?')
 
             return { 
                 ...state,

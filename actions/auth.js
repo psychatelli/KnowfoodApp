@@ -14,7 +14,7 @@ export const AuthorizedUser = () => async dispatch => {
     try{
 
         token = await AsyncStorage.getItem('Usertoken');
-        console.log(`observing token: ${token}`)
+        // console.log(`observing token: ${token}`)
         const config = {
             headers: { 
                 'Content-type': 'application/json',
@@ -23,10 +23,10 @@ export const AuthorizedUser = () => async dispatch => {
 
         //  const Mytoken = JSON.stringify(token)
         // const Word = JSON.parse(Mytoken)
-        console.log(`in AuthorizedUser, heres Usertoken ${token}`)
+        // console.log(`in AuthorizedUser, heres Usertoken ${token}`)
         const res = await axios.post('http://10.0.0.85:5000/api/auth/getuser', token, config);
     
-        console.log(`your USER RES DATA: ${JSON.stringify(res.data)}`)
+        // console.log(`your USER RES DATA: ${JSON.stringify(res.data)}`)
        
 
         dispatch({
@@ -36,7 +36,7 @@ export const AuthorizedUser = () => async dispatch => {
         
   
     }catch(err){
-        console.log('loaduser error')
+        // console.log('loaduser error')
 
         dispatch({ 
             type: AUTH_ERROR
@@ -50,7 +50,7 @@ export const AuthorizedUser = () => async dispatch => {
 
 export const loadUser = (token) => async dispatch => {
 
-    console.log(`loaduser fired here boy ${token}`)
+    // console.log(`loaduser fired here boy ${token}`)
     if(token){
         setToken(token)
 
@@ -70,7 +70,7 @@ export const loadUser = (token) => async dispatch => {
         
   
     }catch(err){
-        console.log('loaduser error')
+        // console.log('loaduser error')
 
         dispatch({ 
             type: AUTH_ERROR
@@ -112,7 +112,7 @@ export const register = ({username, email, password }) => async dispatch => {
 
 
 export const login = ({email, password}) => async dispatch => {
-    console.log(`LOGIN ACTION FIRED`)
+    // console.log(`LOGIN ACTION FIRED`)
     const config = {
         headers: {
             'Content-type': 'application/json'
@@ -146,6 +146,6 @@ export const login = ({email, password}) => async dispatch => {
 
 export const logout = () => dispatch => {
     deleteAsyncStorage()
-    console.log('logout action fired');
+    // console.log('logout action fired');
     dispatch({ type: LOGOUT })
 }

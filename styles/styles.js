@@ -166,7 +166,15 @@ const GlobalStyles = StyleSheet.create({
       margin: 5,
     },
 
-   
+    SpaceBetween: {
+      flex: 1,
+      flexDirection: 'row', 
+      width: '100%', 
+      justifyContent: 'space-between', 
+      marginBottom: 10,
+      alignItems: 'center',
+
+    }
 
   
 

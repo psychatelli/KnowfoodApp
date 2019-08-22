@@ -13,6 +13,7 @@ import {AsyncStorage, ActiveIndicator, StatusBar} from 'react-native';
  import NativeBase from './components/Component1/Nativebase1';
  import Recipes from './pages/recipes';
   import Recipe from './pages/Recipe/recipe';
+  import EditRecipe from './pages/Recipe/EditRecipe/editRecipe';
   import Shipment from './pages/Shipment/shipment';
   import RecipeComponent from './components/RecipeComponent/recipeComponent';
   import { Container, View, Text  } from 'native-base';
@@ -62,6 +63,7 @@ const RootStack = createStackNavigator(
 const AuthStack = createStackNavigator({ 
   Recipes: Recipes,
   Recipe: Recipe,
+  EditRecipe: EditRecipe
   
   
 })

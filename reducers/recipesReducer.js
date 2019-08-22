@@ -26,7 +26,6 @@ const initialState = {
 
         case GET_RECIPES:
         case GET_USERS_RECIPES: 
-        console.log(`RECIEPS CALLED`)
 
         return{
             ...state,

@@ -16,7 +16,7 @@ export let PrimaryTextColor = 'white';
 export let SecondaryTextColor = 'rgba(42, 231, 171, 0.564)';
 
 
-export let CardBackground = '#20204A';
+export let CardBackground = '#4a4a49';
 export let AccentColor1 = '#2AE7AA';
 export let AccentColor2 = '#1D1D8D';
 
@@ -91,6 +91,9 @@ const GlobalStyles = StyleSheet.create({
     },
 
     title_font: {
+      color: 'white',
+    },
+    white_font: {
       color: 'white',
     },
 

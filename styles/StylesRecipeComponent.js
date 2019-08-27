@@ -99,6 +99,10 @@ EditRecipe_Container: {
   marginTop: 30,
   padding: 10,
   backgroundColor: 'green'
+},
+Recipe_header: {
+  backgroundColor: DarkOpacity,
+  padding: 10,
 }
   
 

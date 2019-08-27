@@ -14,8 +14,8 @@ export class EditRecipe extends Component {
         super(props);
         this.state = { 
           TheRecipe: this.props.recipe,        
-          // title: this.props.recipe.title,
-          title: 'WHATS UP WITH THIS',
+          title: this.props.recipe.title,
+          // title: 'WHATS UP WITH THIS',
           thumbnaileEdited: '',
           indexEdited: 'ds',
           recipeText : '',

@@ -60,7 +60,7 @@ class Recipes extends Component {
         }
     }
    
-                      
+                            
     componentWillMount() {
           
       // deleteAsyncStorage()    
@@ -91,7 +91,7 @@ class Recipes extends Component {
  
     let BodyContent;
 	
-	
+	   
 	
 		if (user === null || loading)  {
 		

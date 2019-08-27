@@ -15,7 +15,7 @@ router.post('/getuser', AuthorizedUser,  async (req, res) => {
 
     try{
 
-      const user = await User.findById(req.user.id).select('-pssword');
+      const user = await User.findById(req.user.id).select('-password');
       res.json(user);
       console.log(res.json(user))
     }catch(err) {
@@ -38,7 +38,7 @@ router.get('/', auth,  async (req, res) => {
     try{
       console.log(`tried to get user. heres value: ${req.user.id}`)
 
-      const user = await User.findById(req.user.id).select('-pssword');
+      const user = await User.findById(req.user.id).select('-password');
       res.json(user);
 
     }catch(err) {

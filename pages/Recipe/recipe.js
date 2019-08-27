@@ -14,8 +14,13 @@ import Step from './step'
   constructor(props) {
     super(props);
     this.state = {
-
-    }
+      active: true,
+        right: false,
+      text: '',
+      comment: '',
+      thumbnail: 'https://photos.smugmug.com/Test/i-W5SXVkM/0/1d663a9e/S/fettuccine-S.jpg',
+      visibilityState: ''
+    }  
     // this.onSubmit = this.onSubmit.bind(this);
   }
 
@@ -25,7 +30,7 @@ import Step from './step'
       headerStyle: styles.FooterAndHeader,
       headerTitleStyle: { color: 'white'},
       headerRight: (
-        <Button onPress={navigation.getParam('gotoedit')} color="#fff"><Text>Edit</Text></Button>
+        <Icon onPress={navigation.getParam('gotoedit')}   ios='ios-create' android="md-create" style={{fontSize: 20, color: 'white', marginRight: 10, padding: 10}}/>
       ),
     };
   };
@@ -37,16 +42,19 @@ import Step from './step'
 
   }
   gotoedit = () => {
-    console.log('You did it');
     this.props.navigation.navigate('EditRecipe')
   }
 
 
   render() {
-      const { recipe, loading } = this.props;
+      const { recipe, loading, auth } = this.props;
 
       let RecipeContent;
      
+      // {!auth.loading && recipe.user === auth.user._id ? ( this.setState({  visibilityState : 'Show' })  ) : ( this.setState({ visibilityState : 'Hide'  }))}
+
+
+
       if (this.state.TheRecipe  === null) {
         RecipeContent = <ActivityIndicator size='large' color='purple'/>
       } else {
@@ -80,20 +88,43 @@ import Step from './step'
           </View>
   
                 {recipe.step === undefined ?  <ActivityIndicator size='large' color='red'/>
-                :
-                <Step Step={recipe.step} />
+                : <View>
 
+
+              <View style={stylesRC.Recipe_header}>  
+                  
+                    <View style={styles.FlexRow}>
+                      <Text style={styles.AccentColor1Font}>Date </Text>
+                      <Text style={styles.white_font}>{recipe.date}</Text>
+                    </View>
+
+                    <Text style={styles.AccentColor1Font}>Ingredients </Text> 
+                    <Text style={styles.white_font}>{recipe.ingredients}</Text>
+                  
+        
+                    <View style={styles.FlexRow}>
+                      <Text style={styles.AccentColor1Font}>Comments </Text>
+                      <Text style={styles.white_font}>{recipe.comments.length} </Text>
+                    </View>
+              </View>
+    
+    
+             <View className={this.state.visibilityState}>
+                    <Icon ios='ios-add' style={{fontSize: 50, color: 'red'}} Click={() => this.setState({active: !this.state.active})} /> 
+             </View>
+    
+    
+             {/* <NewStepPost name='text' handleChange={this.handleChange} text={this.state.text} onSubmit={this.onSubmit.bind(this)} param={this.props.match.params.id}   ClassName={ this.state.active ? "HideInput" : "ShowInput" } Close={() => this.setState({active: !this.state.active})} /> */}
+    
+      
+
+
+                <Step Step={recipe.step} />
+                </View> 
+                 
                   }
 
-             <Button style={styles.PrimaryButton} onPress={() => {
-                  /* 1. Navigate to the Details route with params */
-                  this.props.navigation.navigate('NativeBase', {
-                    otherParam: 'anything you want here',
-                  });
-                }}
-              >
-              <Text>Back to Recipes</Text>
-            </Button>
+            
   
            </Content>
 
@@ -112,7 +143,7 @@ import Step from './step'
 
 const mapStateToProps = state => ({
   recipe: state.recipes.item,
-  // auth: state.auth,
+   auth: state.auth,
 });
 
  export default connect(mapStateToProps, { })((Recipe));

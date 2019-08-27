@@ -3,7 +3,7 @@
   "scripts": {
     "start": "expo start",
     "debug": "open ‘rndebugger://set-debugger-loc?host=localhost&port=19001'",
-    "android": "expo start --android", 
+    "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
@@ -28,6 +28,7 @@
     "react-dom": "^16.8.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
     "react-native-debugger": "^1.1.0",
+    "react-native-vector-icons": "^6.6.0",
     "react-native-web": "^0.11.4",
     "react-navigation": "^3.11.0",
     "react-redux": "^7.1.0",

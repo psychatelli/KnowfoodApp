@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import styles from '../../../styles/styles';
 import stylesRC from '../../../styles/StylesRecipeComponent';
 
-// import RecipeStepEdit from './recipeStepEdit';
 // import Comments from '../comments';
  
 export class EditRecipe extends Component {
@@ -15,7 +14,6 @@ export class EditRecipe extends Component {
         this.state = { 
           TheRecipe: this.props.recipe,        
           title: this.props.recipe.title,
-          // title: 'WHATS UP WITH THIS',
           thumbnaileEdited: '',
           indexEdited: 'ds',
           recipeText : '',
@@ -26,26 +24,9 @@ export class EditRecipe extends Component {
           recipeId: this.props.recipe._id,
           showStatus: ''
         }
-        this.handleChange = this.handleChange.bind(this);
-        //  this.updateRecipe = this.updateRecipe.bind(this)
+      
         this.onSubmit = this.onSubmit.bind(this)
     }
-
-
-  
-
-
-
-     handleChange = input => evt => {
-        this.setState({
-          [input]: evt.target.value,
-          // thumbnaileEdited: input.thumbnail,
-        //   titleEdited: evt.target.value,
-        //   indexEdited: input._id
-          })
-
-        //   this.updateRecipe()
-        } 
 
         
 
@@ -62,7 +43,7 @@ export class EditRecipe extends Component {
           const newStateContent = this.state.TheRecipe;
           let array = newStateContent.step.slice() // create mutable copy of the array
     
-          array[index][evt.target.name] = evt.target.value;
+          array[index].text = evt;
           let newObj = {...this.state.TheRecipe}
     
         this.setState({
@@ -82,13 +63,7 @@ export class EditRecipe extends Component {
             this.props.deleteRecipeStep(this.props.recipe._id, selectedID)
           }
 
-          // componentWillReceiveProps(nextProps){
-          //   if(nextProps.recipe !== this.props.recipe){
-          //     this.props.getRecipe(this.props.param);
-
-          //   }
-          // }
-
+    
 
         onSubmit(e) {
             e.preventDefault();
@@ -107,7 +82,6 @@ export class EditRecipe extends Component {
     const { recipe, DeletePost, param ,Visibility, auth} = this.props;
     const {TheRecipe} = this.state
  
- console.log(`EDIT RECIPES: ${JSON.stringify(recipe)}`)
 
     const Steps =  TheRecipe.step.map(function (item, index) {
       return (
@@ -119,14 +93,14 @@ export class EditRecipe extends Component {
 
             </View>
           </View>
-            
+              
           <Item regular style={styles.LoginInput}> 
             <Input
             name='text'
             value={item.text}
             autoCapitalize='none'
-            onChangeText={(email) => this.setState({email: email})}
-            onChange={this.handleStepChange(index)} onBlur={() => {this.updateRecipeStep()}}
+            // onChangeText={(email) => this.setState({email: email})}
+            onChangeText={this.handleStepChange(index)} onEndEditing={() => {this.updateRecipeStep()}}
             />
             </Item>
 
@@ -146,7 +120,14 @@ export class EditRecipe extends Component {
       <View>
         <Form onSubmit={() => {this.onSubmit}}>
             <View style={{margin: 10 }}> 
-            <Input  regular style={styles.LoginInput} placeholder='Title'  value={this.state.title} onChange={this.handleChange('title')} onBlur={() => {this.updateRecipe()}} />
+            <Input regular style={styles.LoginInput} 
+            placeholder='Title'  value={this.state.title} 
+            onChangeText={(title) => this.setState({title: title})} 
+            onEndEditing={() => {this.updateRecipe()}} />
+
+                                        
+
+
             </View>
             {Steps}
             {/* <Comments Comment={recipe.comments}/> */}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import Comments from './comments';
 import { Container, View, Header, Content, Card, CardRecipeItem, Thumbnail, Text, Button, Icon, Left, Body,  } from 'native-base';
 import { Image, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
 import stylesRC from '../../styles/StylesRecipeComponent';
@@ -122,9 +122,15 @@ import Step from './step'
                 <Step Step={recipe.step} />
                 </View> 
                  
+                 
                   }
 
             
+{recipe.comments === undefined ?  <ActivityIndicator size='large' color='red'/>
+                :    <Comments param={recipe._id} Comment={recipe.comments} Visibility='Hide'/>
+
+                 
+            }
   
            </Content>
 

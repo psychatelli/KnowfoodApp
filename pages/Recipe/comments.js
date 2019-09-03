@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import Moment from 'react-moment';
 import { connect } from 'react-redux';
+import { Container, View, Header, Content, Form, Card, CardRecipeItem, Thumbnail, Input, Text, Button, Icon, Left, Body,  } from 'native-base';
+import stylesRC from '../../styles/StylesRecipeComponent';
+import styles from '../../styles/styles';
 
 import { addComment, deleteComment } from '../../actions/recipesAction';
 
@@ -43,7 +45,7 @@ handleChange (e) {
     [e.target.name]: e.target.value
     })
   }
-
+ 
 
 
   render() {
@@ -55,36 +57,39 @@ const { user } = this.props.auth;
  
 var CommentItems = Comment.map((item) => {
     return (
-        <div className='Comment'>
-                  <div className='SpaceBetween'>
-                      <div className='Info'>
-                        <div> <img className='Avatar' src={item.avatar} /> </div>
-                        <div>  {item.username} </div>
-                         <div className='Date'> <Moment format='MM/DD/YYYY'>{item.date}</Moment> </div> 
-                      </div>
-
-                      <div>
-                        <span className={Visibility}>
-                            <i onClick={() => { this.deleteComment(item._id)}} className="material-icons gray_font Hand">close</i>
-                        </span>
-                      </div>
-                  </div>
-            <p>{item.text} </p>
-        </div>
+            <View key={item._id} style={stylesRC.Comment}>
+                  <View style={styles.SpaceBetween}>
+                      <View style={stylesRC.HeaderInfo}>
+                          <View style={stylesRC.ThumbnailWrapper}> 
+                            <Thumbnail source={{uri: `https:${item.avatar}`}} />
+                          </View>
+              
+                          <View style={stylesRC.UserNameWrapper}> 
+                            <Text style={styles.AccentColor1Font}> {item.username}</Text>
+                            <View style={styles.white_font}><Text>{item.date} </Text></View> 
+                          </View>
+                      </View>
+              
+                        <View className={Visibility}>
+                            <Icon style={{fontSize: 20}} onClick={() => { this.deleteComment(item._id)}} ios='ios-create'/>
+                        </View>
+                  </View>
+        
+                  <View> 
+                     <Text style={styles.white_font}>{item.text}</Text>
+                  </View>
+          </View>
      );
     });
-
+ 
 
     return  (
-        <div>
-          <br/>
-        <h6>Comments</h6>
-          <form onSubmit={this.onSubmit.bind(this)}>
-                  <input name='text' value={text} placeholder='Add Comment...' onChange={this.handleChange} />
-          </form>
-          <br/>
+        <View style={{marginHorizontal: 5, marginVertical: 10}}>
+          <Form onSubmit={this.onSubmit.bind(this)}>
+                  <Input name='text' value={text} placeholder='Add Comment...' onChange={this.handleChange} />
+          </Form>
           {CommentItems}
-        </div>
+        </View>
       )
     
   }

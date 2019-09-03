@@ -103,6 +103,15 @@ EditRecipe_Container: {
 Recipe_header: {
   backgroundColor: DarkOpacity,
   padding: 10,
+},
+
+Comment: {
+  backgroundColor: LightOpacity,
+  padding: 10,
+  borderRadius: 10,
+  marginVertical: 5,
+
+
 }
   
 

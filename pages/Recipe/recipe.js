@@ -23,24 +23,37 @@ import Step from './step'
     }  
     // this.onSubmit = this.onSubmit.bind(this);
   }
+ 
+  
+
+  //navigation.state.visibilityState = Recipe.state.visiblityState.state
+  //this.state.visibilityState = Recipe.state.visibility
+
+  componentWillMount(){
+
+    {!this.props.auth.loading && this.props.recipe.user === this.props.auth.user._id ? ( this.setState({  visibilityState : 'Hide' })  ) : ( this.setState({ visibilityState : 'Show'  }))}
+    this.props.navigation.setParams({ gotoedit: this.gotoedit, ShowHide: this.state.visibilityState });
+
+
+  }
 
   static navigationOptions = ({ navigation }) => {
+    // const { params = {} } = navigation.state;
+    const { params } = navigation.state;
+  let Head;
+
+    {navigation.getParam('ShowHide') === 'Show' ? ( Head =  <Icon style={styles.Show} onPress={navigation.getParam('gotoedit')}  ios='ios-create' android="md-create"/> ) : ( Head = <Text>'HIII'</Text> ) }
+    console.log(`your navigation val : ${navigation.getParam('ShowHide')}`)
     return {
       headerTitle: 'title',
       headerStyle: styles.FooterAndHeader,
       headerTitleStyle: { color: 'white'},
-      headerRight: (
-        <Icon onPress={navigation.getParam('gotoedit')}   ios='ios-create' android="md-create" style={{fontSize: 20, color: 'white', marginRight: 10, padding: 10}}/>
-      ),
+      // headerRight: ( <Icon style={styles[navigation.getParam('ShowHide')]} onPress={navigation.getParam('gotoedit')}  ios='ios-create' android="md-create"/> )
+      headerRight:( <Text> {Head} </Text>)
     };
   };
 
 
-
-  componentDidMount(){
-    this.props.navigation.setParams({ gotoedit: this.gotoedit });
-
-  }
   gotoedit = () => {
     this.props.navigation.navigate('EditRecipe')
   }
@@ -48,15 +61,14 @@ import Step from './step'
 
   render() {
       const { recipe, loading, auth } = this.props;
-
+      const { visibilityState} = this.state;
       let RecipeContent;
      
-      // {!auth.loading && recipe.user === auth.user._id ? ( this.setState({  visibilityState : 'Show' })  ) : ( this.setState({ visibilityState : 'Hide'  }))}
 
-
+     
 
       if (this.state.TheRecipe  === null) {
-        RecipeContent = <ActivityIndicator size='large' color='purple'/>
+        RecipeContent = <ActivityIndicator size='large' color='gray'/>
       } else {
         RecipeContent = ( 
           <Content> 
@@ -87,7 +99,7 @@ import Step from './step'
                       </View>
           </View>
   
-                {recipe.step === undefined ?  <ActivityIndicator size='large' color='red'/>
+                {recipe.step === undefined ?  <ActivityIndicator size='large' color='gray'/>
                 : <View>
 
 
@@ -109,7 +121,7 @@ import Step from './step'
               </View>
     
     
-             <View className={this.state.visibilityState}>
+             <View style={styles[visibilityState]}>
                     <Icon ios='ios-add' style={{fontSize: 50, color: 'red'}} Click={() => this.setState({active: !this.state.active})} /> 
              </View>
     
@@ -138,6 +150,10 @@ import Step from './step'
 
     return (
       <Container style={styles.CardBackground}>
+       <Text style={styles[visibilityState]}> {visibilityState} </Text>
+       <Text>Recipe User: {this.props.recipe.user}</Text>
+       <Text>Auth User:   {this.props.auth.user._id}</Text>
+
       {RecipeContent}
       </Container>
         );

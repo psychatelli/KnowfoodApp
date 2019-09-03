@@ -27,11 +27,18 @@ export let AccentColor2 = '#1D1D8D';
 
 
 const GlobalStyles = StyleSheet.create({
+
+  Show: {
+    display: 'flex',
+  },
+  Hide: {
+    display: 'none',
+  },
   AccentColor1Font: {
     color: AccentColor1
   },
   FooterAndHeader: {
-    backgroundColor: '#41418a'
+    backgroundColor: '#5c5c58'
   },
   DarkOpacityBackground: {
     backgroundColor: DarkOpacity,

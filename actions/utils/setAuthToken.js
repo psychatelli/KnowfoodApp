@@ -46,7 +46,7 @@ export  const setToken = async (token) => {
      
        axios.defaults.headers.common['x-auth-token'] = TheToken;
         const HEADER = axios.defaults.headers
-          
+            
         console.log(`this is header getAsyncStorage: ${JSON.stringify(HEADER)}`) 
     } catch (error) {
       // Error retrieving data
@@ -54,7 +54,7 @@ export  const setToken = async (token) => {
     
   };  
 
-
+  
 
   export  const deleteAsyncStorage = async () => {
     try {

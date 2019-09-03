@@ -85,14 +85,13 @@ var CommentItems = Comment.map((item) => {
 
     return  (
         <View style={{marginHorizontal: 5, marginVertical: 10}}>
-          <Form onSubmit={this.onSubmit.bind(this)}>
+            <Form onSubmit={this.onSubmit.bind(this)}>
                   <Input name='text' value={text} placeholder='Add Comment...' onChange={this.handleChange} />
-          </Form>
-          {CommentItems}
+            </Form>
+            {CommentItems}
         </View>
       )
-    
-  }
+   }
 }
 
 const mapStateToProps = state => ({

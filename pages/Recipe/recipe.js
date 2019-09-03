@@ -48,8 +48,8 @@ import Step from './step'
       headerTitle: 'title',
       headerStyle: styles.FooterAndHeader,
       headerTitleStyle: { color: 'white'},
-      // headerRight: ( <Icon style={styles[navigation.getParam('ShowHide')]} onPress={navigation.getParam('gotoedit')}  ios='ios-create' android="md-create"/> )
-      headerRight:( <Text> {Head} </Text>)
+      headerRight: ( <Icon style={styles[navigation.getParam('ShowHide')]} onPress={navigation.getParam('gotoedit')}  ios='ios-create' android="md-create"/> )
+      // headerRight:( <Text> {Head} </Text>)
     };
   };
 

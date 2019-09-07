@@ -5,8 +5,7 @@ import { Image, TouchableWithoutFeedback, ActivityIndicator } from 'react-native
 import { connect } from 'react-redux';
 import styles from '../../../styles/styles';
 import stylesRC from '../../../styles/StylesRecipeComponent';
-
-// import Comments from '../comments';
+import Comments from '../comments';
  
 export class EditRecipe extends Component {
     constructor(props) {
@@ -130,7 +129,7 @@ export class EditRecipe extends Component {
 
             </View>
             {Steps}
-            {/* <Comments Comment={recipe.comments}/> */}
+            <Comments Comment={recipe.comments}/>
             {/* <Comments param={recipe._id} Comment={recipe.comments} Visibility={Visibility}/> */}
         </Form>
       </View>

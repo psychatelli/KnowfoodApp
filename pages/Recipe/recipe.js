@@ -5,6 +5,8 @@ import { Container, View, Header, Content, Card, CardRecipeItem, Thumbnail, Text
 import { Image, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
 import stylesRC from '../../styles/StylesRecipeComponent';
 import styles from '../../styles/styles';
+import { connectActionSheet } from '@expo/react-native-action-sheet'
+import { ActionSheetProvider } from '@expo/react-native-action-sheet'
 
 import Step from './step'
 
@@ -21,13 +23,33 @@ import Step from './step'
       thumbnail: 'https://photos.smugmug.com/Test/i-W5SXVkM/0/1d663a9e/S/fettuccine-S.jpg',
       visibilityState: ''
     }  
-    // this.onSubmit = this.onSubmit.bind(this);
+    // this.onSelection = this.onSelection.bind(this);
   }
  
   
+  _onOpenActionSheet = () => {
+    let options;
+    let destructiveButtonIndex;
+    let cancelButtonIndex;
+    { this.state.visibilityState == 'Hide' ? ( options = ['Copy Link', 'Share to..', 'Report', 'Cancel'], destructiveButtonIndex = 2, cancelButtonIndex=3 ) : ( options = ['Delete', 'Edit Recipe', 'Copy Link', 'Share to..', 'Cancel'], destructiveButtonIndex = 0, cancelButtonIndex=4 ) }
 
-  //navigation.state.visibilityState = Recipe.state.visiblityState.state
-  //this.state.visibilityState = Recipe.state.visibility
+    this.props.showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex,
+        destructiveButtonIndex,
+      },
+      buttonIndex => {
+        // Do something here depending on the button index selected
+        this.onSelection(buttonIndex)
+
+      },
+    );
+  };
+
+  onSelection = (index) =>{
+    console.log(`your index ${index}`)
+  }
 
   componentWillMount(){
 
@@ -89,7 +111,8 @@ import Step from './step'
                   </View>
           
                       <View style={stylesRC.MenuWrapper}> 
-                        <Text style={stylesRC.Menu}> ...</Text>
+                        <Text style={stylesRC.Menu} onPress={() => this._onOpenActionSheet(1)}> ...</Text>
+                        {/* <Icon style={stylesRC.Menu} ios='' android=''/> */}
                       </View>
           
                   </View>
@@ -125,47 +148,36 @@ import Step from './step'
                     <Icon ios='ios-add' style={{fontSize: 50, color: 'red'}} Click={() => this.setState({active: !this.state.active})} /> 
              </View>
     
-    
              {/* <NewStepPost name='text' handleChange={this.handleChange} text={this.state.text} onSubmit={this.onSubmit.bind(this)} param={this.props.match.params.id}   ClassName={ this.state.active ? "HideInput" : "ShowInput" } Close={() => this.setState({active: !this.state.active})} /> */}
-    
-      
-
-
                 <Step Step={recipe.step} />
                 </View> 
-                 
-                 
                   }
 
             
-{recipe.comments === undefined ?  <ActivityIndicator size='large' color='red'/>
+                {recipe.comments === undefined ?  <ActivityIndicator size='large' color='red'/>
                 :    <Comments param={recipe._id} Comment={recipe.comments} Visibility='Hide'/>
-
-                 
-            }
-  
+                }
            </Content>
 
         )
 
     return (
-      <Container style={styles.CardBackground}>
-       <Text style={styles[visibilityState]}> {visibilityState} </Text>
-       <Text>Recipe User: {this.props.recipe.user}</Text>
-       <Text>Auth User:   {this.props.auth.user._id}</Text>
 
-      {RecipeContent}
-      </Container>
+      <Container style={styles.CardBackground}>
+       
+          {RecipeContent}
+       </Container>
         );
       }
     }
  }
 
 
+ const ConnectedApp = connectActionSheet(Recipe)
 
 const mapStateToProps = state => ({
   recipe: state.recipes.item,
    auth: state.auth,
 });
 
- export default connect(mapStateToProps, { })((Recipe));
+ export default connect(mapStateToProps, { })((ConnectedApp));

@@ -63,7 +63,9 @@ MenuWrapper: {
 
 },
 Menu: {
-
+ color: 'white',
+ fontSize: 25,
+ padding: 10
 },
 PostImageWrapper: {
   flex: 1,

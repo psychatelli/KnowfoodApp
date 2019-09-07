@@ -18,7 +18,8 @@ import {AsyncStorage, ActiveIndicator, StatusBar} from 'react-native';
   import RecipeComponent from './components/RecipeComponent/recipeComponent';
   import { Container, View, Text  } from 'native-base';
  
-   
+  import { ActionSheetProvider } from '@expo/react-native-action-sheet'
+
   
 
  
@@ -44,15 +45,7 @@ const RootStack = createStackNavigator(
   },
   {
     
-    // defaultNavigationOptions: {
-    //   headerStyle: {
-    //     backgroundColor: '#303451',
-    //   },
-    //   headerTintColor: '#2AE7AA',
-    //   headerTitleStyle: {
-    //     fontWeight: 'bold',
-    //   }
-    // },
+  
    
     
   },
@@ -147,11 +140,14 @@ const App = () => {
     
   return( 
     <Provider store={storeInstance}>
+            <ActionSheetProvider>
+
     <Container>
         <AppContainer/>
         <StatusBar barStyle='default'/>
 
     </Container>
+    </ActionSheetProvider>
     </Provider>
   )
 

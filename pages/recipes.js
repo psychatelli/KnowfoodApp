@@ -65,11 +65,8 @@ class Recipes extends Component {
           
       // deleteAsyncStorage()    
       this.props.getRecipes();
-    
+  
       
-      if(this.props.user){
-        console.log(`YOU HAVE A USER`)
-      }
     }
  
   
@@ -87,7 +84,6 @@ class Recipes extends Component {
     let name = this.state.showName ? this.state.name : 'No Name';
     const { navigate } = this.props.navigation;
     const { recipes, user, loading } = this.props;
-    console.log(`IN PAGE USER: ${JSON.stringify(user)}`)
  
     let BodyContent;
 	

@@ -34,20 +34,15 @@ export  const setToken = async (token) => {
        
 
   export  const getAsyncStorage = async () => {
-    console.log(`getItem auth token fired:`)
       
     try {  
        Value = await AsyncStorage.getItem('Usertoken');
-        console.log(`THIS IS REAL TOKEN IN HEADER ${Value}`)
        const Mytoken = JSON.parse(Value)
-        // const TheToken = JSON.stringify(Mytoken.token)
          const TheToken = Mytoken.token
-      //  console.log(`what is vaue of header stripped down: ${Value}`)
      
        axios.defaults.headers.common['x-auth-token'] = TheToken;
         const HEADER = axios.defaults.headers
             
-        console.log(`this is header getAsyncStorage: ${JSON.stringify(HEADER)}`) 
     } catch (error) {
       // Error retrieving data
     }
@@ -63,7 +58,6 @@ export  const setToken = async (token) => {
 
         if (value !== null) {
           // We have data!!
-          console.log(`DELETE ASYNC FIRED - HERES VALUE ${value}`);
         }
       } catch (error) {
         // Error retrieving data

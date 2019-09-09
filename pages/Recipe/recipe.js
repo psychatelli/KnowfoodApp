@@ -11,7 +11,6 @@ import { ActionSheetProvider } from '@expo/react-native-action-sheet'
 import Step from './step'
 
 
-
  class Recipe extends React.Component {
   constructor(props) {
     super(props);
@@ -21,12 +20,48 @@ import Step from './step'
       text: '',
       comment: '',
       thumbnail: 'https://photos.smugmug.com/Test/i-W5SXVkM/0/1d663a9e/S/fettuccine-S.jpg',
-      visibilityState: ''
+      visibilityState: 'fuck',
     }  
     // this.onSelection = this.onSelection.bind(this);
   }
- 
+
+
+  componentDidMount(){
+   
+      {!this.props.auth.loading && this.props.recipe.user === this.props.auth.user._id ? ( this.setState({  visibilityState : 'Hide' })  ) : ( this.setState({ visibilityState : 'Show'  }))  }
+      this.props.navigation.setParams({ gotoedit: this.gotoedit });
+    
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // only update chart if the data has changed
+
+  }
+
+  componentWillUnmount(){
+    
+
+  }
+
   
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: 'title',
+      headerStyle: styles.FooterAndHeader,
+      headerTitleStyle: { color: 'white'},
+      headerRight: (
+        <Button
+          onPress={() => alert('This is a button!')}
+          title="Info"
+          color="#fff"
+      />     )
+    }   
+  };
+
+  
+
+  
+
   _onOpenActionSheet = () => {
     let options;
     let destructiveButtonIndex;
@@ -41,39 +76,30 @@ import Step from './step'
       },
       buttonIndex => {
         // Do something here depending on the button index selected
-        this.onSelection(buttonIndex)
-
+        { this.state.visibilityState == 'Hide' ? ( this.publicRecipeOptions(buttonIndex) ) : ( this.privateRecipeOptions(buttonIndex)) }
       },
     );
   };
 
-  onSelection = (index) =>{
-    console.log(`your index ${index}`)
+  publicRecipeOptions = (index) =>{
+    switch(index){
+      case 0:
+        console.log('publicRecipeOptions you 0')
+      case 1:
+        console.log('publicRecipeOptions you 1')
+    }
   }
 
-  componentWillMount(){
 
-    {!this.props.auth.loading && this.props.recipe.user === this.props.auth.user._id ? ( this.setState({  visibilityState : 'Hide' })  ) : ( this.setState({ visibilityState : 'Show'  }))}
-    this.props.navigation.setParams({ gotoedit: this.gotoedit, ShowHide: this.state.visibilityState });
+  privateRecipeOptions = (index) =>{
+     switch(index){
+      case 0:
+      case 1:
+        this.gotoedit()
+    }  }
 
-
-  }
-
-  static navigationOptions = ({ navigation }) => {
-    // const { params = {} } = navigation.state;
-    const { params } = navigation.state;
-  let Head;
-
-    {navigation.getParam('ShowHide') === 'Show' ? ( Head =  <Icon style={styles.Show} onPress={navigation.getParam('gotoedit')}  ios='ios-create' android="md-create"/> ) : ( Head = <Text>'HIII'</Text> ) }
-    console.log(`your navigation val : ${navigation.getParam('ShowHide')}`)
-    return {
-      headerTitle: 'title',
-      headerStyle: styles.FooterAndHeader,
-      headerTitleStyle: { color: 'white'},
-      headerRight: ( <Icon style={styles[navigation.getParam('ShowHide')]} onPress={navigation.getParam('gotoedit')}  ios='ios-create' android="md-create"/> )
-      // headerRight:( <Text> {Head} </Text>)
-    };
-  };
+  
+ 
 
 
   gotoedit = () => {
@@ -111,8 +137,8 @@ import Step from './step'
                   </View>
           
                       <View style={stylesRC.MenuWrapper}> 
-                        <Text style={stylesRC.Menu} onPress={() => this._onOpenActionSheet(1)}> ...</Text>
-                        {/* <Icon style={stylesRC.Menu} ios='' android=''/> */}
+                        <Text style={stylesRC.Menu} onPress={() => this._onOpenActionSheet()}> ...</Text>
+ 
                       </View>
           
                   </View>
@@ -161,10 +187,15 @@ import Step from './step'
 
         )
 
+
+       
     return (
 
       <Container style={styles.CardBackground}>
-       
+          <Text>{this.state.visibilityState}</Text>
+          <Text>{this.props.recipe.user}</Text>
+          <Text>{this.props.auth.user._id}</Text>
+          <Text>{this.props.auth.loading}</Text> 
           {RecipeContent}
        </Container>
         );

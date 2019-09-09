@@ -73,9 +73,7 @@ class AuthLoadingScreen extends Component {
 
      _loadData = async () => {
             try{
-                console.log('_retrieveAsyncStorage FIRED');
                 const StorageItem = await AsyncStorage.getItem('Usertoken');
-                console.log(StorageItem)
                   this.props.navigation.navigate(StorageItem ? 'AuthStack' : 'RootStack');
             }catch (error) {
              // Error retrieving data

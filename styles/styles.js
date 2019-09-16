@@ -37,6 +37,9 @@ const GlobalStyles = StyleSheet.create({
   AccentColor1Font: {
     color: AccentColor1
   },
+  AccentColor1Background: {
+    backgroundColor: AccentColor1
+  },
   FooterAndHeader: {
     backgroundColor: '#5c5c58'
   },
@@ -184,6 +187,19 @@ const GlobalStyles = StyleSheet.create({
       marginBottom: 10,
       alignItems: 'center',
 
+    },
+
+    AddRecipeBtn: {
+      borderRadius: 50,
+      width: 45,
+      marginHorizontal: 'auto'
+    },
+    Center: {
+      flex: 1,
+      width: '100%', 
+      padding: 5,
+      justifyContent: 'center',
+      backgroundColor: 'red'
     }
 
   

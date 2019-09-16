@@ -7,16 +7,46 @@ import stylesRC from '../../styles/StylesRecipeComponent';
 import styles from '../../styles/styles';
 import { connectActionSheet } from '@expo/react-native-action-sheet'
 import { ActionSheetProvider } from '@expo/react-native-action-sheet'
+import NewStepPost from '../../components/NewStepPost/newStepPost';
+import Footer_Nav from '../../components/common/footer_nav/new_footer';
 
 import Step from './step'
 
+
+const FooterData = [
+  {
+   active: false,
+   link: '/recipes',
+   icon: 'home'
+  },
+  {
+      active: false,
+      link: '/recipes',
+      icon: 'list'
+  },
+  {
+      active: false,
+      link: '/recipes',
+      icon: 'add-circle'
+     },
+     {
+      active: false,
+      link: '/recipes',
+      icon: 'person'
+     },
+     {
+      active: false,
+      link: '/recipes',
+      icon: 'people'
+     },
+]
 
  class Recipe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       active: true,
-        right: false,
+      right: false,
       text: '',
       comment: '',
       thumbnail: 'https://photos.smugmug.com/Test/i-W5SXVkM/0/1d663a9e/S/fettuccine-S.jpg',
@@ -58,7 +88,7 @@ import Step from './step'
     }   
   };
 
-  
+  t
 
   
 
@@ -100,7 +130,11 @@ import Step from './step'
 
   
  
+    submitStep(){
+      console.log('submitted step')
 
+      this.setState({active: !this.state.active})
+    }
 
   gotoedit = () => {
     this.props.navigation.navigate('EditRecipe')
@@ -111,7 +145,8 @@ import Step from './step'
       const { recipe, loading, auth } = this.props;
       const { visibilityState} = this.state;
       let RecipeContent;
-     
+      const { navigate } = this.props.navigation;
+
 
      
 
@@ -169,13 +204,27 @@ import Step from './step'
                     </View>
               </View>
     
-    
-             <View style={styles[visibilityState]}>
-                    <Icon ios='ios-add' style={{fontSize: 50, color: 'red'}} Click={() => this.setState({active: !this.state.active})} /> 
-             </View>
-    
-             {/* <NewStepPost name='text' handleChange={this.handleChange} text={this.state.text} onSubmit={this.onSubmit.bind(this)} param={this.props.match.params.id}   ClassName={ this.state.active ? "HideInput" : "ShowInput" } Close={() => this.setState({active: !this.state.active})} /> */}
+              
+
                 <Step Step={recipe.step} />
+
+               <Button style={styles.AccentColor1Background} block light 
+               onPress={() => this.setState({active: !this.state.active})}>
+                <Text>Add Step</Text>
+                {/* <Icon name='add' /> */}
+                </Button>
+
+                <NewStepPost 
+                name='text' 
+                onChangeText={(text) => this.setState({text: text})} 
+                text={this.state.text} 
+                // param={this.props.match.params.id} 
+                Submit={() => this.submitStep()}
+                // class={ this.state.active ? "HideInput" : "ShowInput" } 
+                Close={() => this.setState({active: !this.state.active})} 
+                />
+
+
                 </View> 
                   }
 
@@ -183,6 +232,8 @@ import Step from './step'
                 {recipe.comments === undefined ?  <ActivityIndicator size='large' color='red'/>
                 :    <Comments param={recipe._id} Comment={recipe.comments} Visibility='Hide'/>
                 }
+
+
            </Content>
 
         )
@@ -196,7 +247,11 @@ import Step from './step'
           <Text>{this.props.recipe.user}</Text>
           <Text>{this.props.auth.user._id}</Text>
           <Text>{this.props.auth.loading}</Text> 
+
           {RecipeContent}
+
+          <Footer_Nav FooterData={FooterData} Navigation={navigate}/>
+
        </Container>
         );
       }

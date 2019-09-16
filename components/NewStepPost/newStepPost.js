@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
  import {  addRecipeStep, getRecipe } from '../../actions/recipesAction';
- import Button from '@material-ui/core/Button';
+ import { Content, View, Item, Input, Thumbnail, Text, Textarea, Button, Icon, Form } from 'native-base';
+ import { Image, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
+ import stylesRC from '../../styles/StylesRecipeComponent';
+ import styles from '../../styles/styles';
+
+
 
 export class NewStepPost extends Component {
 
@@ -17,12 +22,7 @@ export class NewStepPost extends Component {
 
 }
 
-      // componentWillReceiveProps(nextProps){
-      //     console.log("NEXT PROPS:", nextProps)
-      //     if(this.props.recipe !==  nextProps.recipe ){
-      //       nextProps.getRecipe(this.props.param)
-      // }
-      //   }
+ 
 
     onSubmit(e) {
       e.preventDefault();
@@ -35,39 +35,37 @@ export class NewStepPost extends Component {
        
       }
 
-      fileHandler = e => {
-        let File = e.target.files[0]
-        this.setState({
-          selectedFile: File
-        })
+      
 
-        console.log(this.state.selectedFile)
-        console.log(this.state.selectedFile)
-
-      }
-
- 
+  
   render() {
-      const { recipeId, changedProp, recipe, param, onSubmit, text, handleChange, name } = this.props;
+      const { recipeId, changedProp, recipe, param, Submit, text, onChangeText, name, Close } = this.props;
 
     return (
-      <form onSubmit={onSubmit} className={this.props.ClassName}>
-        <div className='Card'>
-            <div className='NewRecipeInputs'>
-              <div> 
-                <input ref={fileInput => this.fileInput = fileInput} name={name} placeholder='Add Step Instructions' value={text} onChange={handleChange}  />
-                <button onClick={() => this.fileInput.click()}>Choose thumbnail</button>
-              </div>
-              <div> <input style={{display: 'none'}} type='file' onChange={this.fileHandler} /></div>
-            </div>
+      <View>
+          <Form>
 
-            <Button onClick={this.props.Close} type="submit" variant="contained">Add</Button>
-            <Button onClick={this.props.Close} variant="contained">Cancel </Button>
-            
-            
+      {/* <input name='Instructions' placeholder='Add Step Instructions' value={this.state.text} onChange={this.handleChange}  /> */}
 
-        </div>
-      </form>
+                            <Textarea
+                            rowSpan={5} 
+                            style={{width: '100%', backgroundColor: 'gray'}}
+                            bordered
+                            placeholder='Step instructions...'
+                            autoCapitalize='none'
+                            onChangeText={onChangeText}
+                            value={text}
+                            />
+
+                <View style={styles.FlexRow}>
+                  <Button transparent><Text>Choose thumbnail</Text></Button>
+                  <Button transparent onPress={Submit}><Text>Add</Text></Button>
+                  <Button transparent onPress={Close}><Text>Cancel</Text></Button>
+                </View>
+                
+            
+        </Form>
+      </View>
     )
   }
 }

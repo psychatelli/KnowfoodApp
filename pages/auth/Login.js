@@ -100,7 +100,7 @@ class Login extends Component {
                             {/* {errors.email && (<View> {errors.email} </View> )} */}
 
                             </Item>
-                        
+                         
                                                 
                         <Item regular style={styles.LoginInput}> 
                         <Input 

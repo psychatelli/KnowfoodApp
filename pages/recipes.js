@@ -97,7 +97,9 @@ class Recipes extends Component {
 		 
 		BodyContent = (
         <Container>
-         {/* <Text style={{fontSize: 30}}>{user.username}</Text> */}
+         {/* <Text style={{fontSize: 30}}>{user.username}</Text> */} 
+         
+           
           <RecipeComponent Navigation={navigate} RecipeObj={recipes} />
           <Footer_Nav FooterData={FooterData} Navigation={navigate}/>
         </Container> 

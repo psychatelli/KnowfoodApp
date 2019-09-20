@@ -116,7 +116,7 @@ const FooterData = [
       },
       buttonIndex => {
         // Do something here depending on the button index selected
-        {!this.props.auth.loading && this.props.recipe.user === this.props.auth.user._id   ? ( this.publicRecipeOptions(buttonIndex) ) : ( this.privateRecipeOptions(buttonIndex)) }
+        {!this.props.auth.loading && this.props.recipe.user === this.props.auth.user._id   ?  (this.privateRecipeOptions(buttonIndex)) :  (this.publicRecipeOptions(buttonIndex))}
       },
     );
   };
@@ -124,9 +124,7 @@ const FooterData = [
   publicRecipeOptions = (index) =>{
     switch(index){
       case 0:
-        console.log('publicRecipeOptions you 0')
       case 1:
-        console.log('publicRecipeOptions you 1')
     }
   }
 
@@ -159,6 +157,7 @@ const FooterData = [
 
   gotoedit = () => {
     this.props.navigation.navigate('EditRecipe')
+    console.log('you go edit boy')
   }
 
 
@@ -263,10 +262,7 @@ const FooterData = [
     return (
 
       <Container style={styles.CardBackground}>
-          <Text>{this.state.visibilityState}</Text>
-          <Text>{this.props.recipe.user}</Text>
-          <Text>{this.props.auth.user._id}</Text>
-          <Text>{this.props.auth.loading}</Text> 
+        
 
           {RecipeContent}
 

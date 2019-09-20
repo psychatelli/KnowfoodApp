@@ -56,7 +56,7 @@ export class NewStepPost extends Component {
                             onChangeText={onChangeText}
                             value={text}
                             />
-
+ 
                 <View style={styles.FlexRow}>
                   <Button transparent><Text>Choose thumbnail</Text></Button>
                   <Button transparent onPress={Submit}><Text>Add</Text></Button>

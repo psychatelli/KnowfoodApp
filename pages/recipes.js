@@ -61,12 +61,9 @@ class Recipes extends Component {
     }
    
                             
-    componentWillMount() {
-          
+    componentWillMount() {          
       // deleteAsyncStorage()    
-      this.props.getRecipes();
-  
-      
+      this.props.getRecipes();      
     }
  
   
@@ -78,7 +75,7 @@ class Recipes extends Component {
     static defaultProps = {
         message: 'Hi There'
     }
-
+   
   render(){
     
     let name = this.state.showName ? this.state.name : 'No Name';
@@ -87,7 +84,6 @@ class Recipes extends Component {
  
     let BodyContent;
 	
-	   
 	
 		if (user === null || loading)  {
 		

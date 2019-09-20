@@ -11,15 +11,12 @@ const config = require('../config/config');
  
 
 router.post('/getuser', AuthorizedUser,  async (req, res) => {
-  console.log(`fired api/auth route in server routes`)
 
     try{
 
       const user = await User.findById(req.user.id).select('-password');
       res.json(user);
-      console.log(res.json(user))
     }catch(err) {
-      console.error(err.message);
       res.status(500).send('Server Error 1')
     }
   })
@@ -33,23 +30,20 @@ router.post('/getuser', AuthorizedUser,  async (req, res) => {
 //@desc 
 //@access Public
 router.get('/', auth,  async (req, res) => {
-  console.log(`fired api/auth route in server routes`)
 
     try{
-      console.log(`tried to get user. heres value: ${req.user.id}`)
 
       const user = await User.findById(req.user.id).select('-password');
       res.json(user);
 
     }catch(err) {
-      console.error(err.message);
       res.status(500).send('Server Error 1')
     }
   })
 
 
 //@route POST api/auth
-//@desc Authenticate user and get token
+//@desc Login Authenticate user and get token
 //@access Public
 
 router.post('/', [
@@ -99,7 +93,6 @@ try {
         
 
       }catch(err) {
-        console.error(err.message)
         res.status(500).send('Server Error 2')
       }
 

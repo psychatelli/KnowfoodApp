@@ -9,8 +9,8 @@ import { connectActionSheet } from '@expo/react-native-action-sheet'
 import { ActionSheetProvider } from '@expo/react-native-action-sheet'
 import NewStepPost from '../../components/NewStepPost/newStepPost';
 import Footer_Nav from '../../components/common/footer_nav/new_footer';
-
-import Step from './step'
+import { addRecipeStep } from '../../actions/recipesAction';
+import Step from './step';
 
 
 const FooterData = [
@@ -19,7 +19,7 @@ const FooterData = [
    link: '/recipes',
    icon: 'home'
   },
-  {
+  {  
       active: false,
       link: '/recipes',
       icon: 'list'
@@ -50,17 +50,24 @@ const FooterData = [
       text: '',
       comment: '',
       thumbnail: 'https://photos.smugmug.com/Test/i-W5SXVkM/0/1d663a9e/S/fettuccine-S.jpg',
-      visibilityState: 'fuck',
+      visibilityState: false,
+      recipeUser: this.props.recipe.user,
+      authUser: this.props.auth.user._id
     }  
     // this.onSelection = this.onSelection.bind(this);
   }
 
 
-  componentDidMount(){
-   
-      {!this.props.auth.loading && this.props.recipe.user === this.props.auth.user._id ? ( this.setState({  visibilityState : 'Hide' })  ) : ( this.setState({ visibilityState : 'Show'  }))  }
-      this.props.navigation.setParams({ gotoedit: this.gotoedit });
+  componentWillMount(){
     
+      {'5ced8fd90c50eaf96c72c91' == '5ced8fd90c50eaf96c72c91e'  ? ( this.setState({  visibilityState : false })  ) : ( this.setState({ visibilityState : true  }))  }
+      this.props.navigation.setParams({ gotoedit: this.gotoedit });
+    console.log(`state of visibility: ${this.state.visibilityState}`)
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log(`nextSTate ${nextState.recipeUser}`); //will show the new state
+    console.log(`this.state ${this.state.recipeUser}`); //will show the previous state
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -69,9 +76,12 @@ const FooterData = [
   }
 
   componentWillUnmount(){
-    
-
+    this.setState({
+      recipeUser: '',
+      authUser: ''
+    })
   }
+
 
   
   static navigationOptions = ({ navigation }) => {
@@ -96,7 +106,7 @@ const FooterData = [
     let options;
     let destructiveButtonIndex;
     let cancelButtonIndex;
-    { this.state.visibilityState == 'Hide' ? ( options = ['Copy Link', 'Share to..', 'Report', 'Cancel'], destructiveButtonIndex = 2, cancelButtonIndex=3 ) : ( options = ['Delete', 'Edit Recipe', 'Copy Link', 'Share to..', 'Cancel'], destructiveButtonIndex = 0, cancelButtonIndex=4 ) }
+    {!this.props.auth.loading && this.props.recipe.user === this.props.auth.user._id   ? ( options = ['Delete', 'Edit Recipe', 'Copy Link', 'Share to..', 'Cancel'], destructiveButtonIndex = 0, cancelButtonIndex=4 ) :  ( options = ['Copy Link', 'Share to..', 'Report', 'Cancel'], destructiveButtonIndex = 2, cancelButtonIndex=3 ) }
 
     this.props.showActionSheetWithOptions(
       {
@@ -106,11 +116,11 @@ const FooterData = [
       },
       buttonIndex => {
         // Do something here depending on the button index selected
-        { this.state.visibilityState == 'Hide' ? ( this.publicRecipeOptions(buttonIndex) ) : ( this.privateRecipeOptions(buttonIndex)) }
+        {!this.props.auth.loading && this.props.recipe.user === this.props.auth.user._id   ? ( this.publicRecipeOptions(buttonIndex) ) : ( this.privateRecipeOptions(buttonIndex)) }
       },
     );
   };
-
+  
   publicRecipeOptions = (index) =>{
     switch(index){
       case 0:
@@ -132,8 +142,19 @@ const FooterData = [
  
     submitStep(){
       console.log('submitted step')
+      const newStep= {
+        text: this.state.text,
+        thumbnail: this.state.thumbnail
+      }
+        this.props.addRecipeStep(this.props.recipe._id, newStep);
 
-      this.setState({active: !this.state.active})
+
+        this.setState({ 
+          text : '',
+          // thumbnail : '',
+        });
+
+      // this.setState({active: !this.state.active})
     }
 
   gotoedit = () => {
@@ -143,13 +164,13 @@ const FooterData = [
 
   render() {
       const { recipe, loading, auth } = this.props;
+
+
       const { visibilityState} = this.state;
       let RecipeContent;
       const { navigate } = this.props.navigation;
 
-
      
-
       if (this.state.TheRecipe  === null) {
         RecipeContent = <ActivityIndicator size='large' color='gray'/>
       } else {
@@ -186,9 +207,8 @@ const FooterData = [
                 {recipe.step === undefined ?  <ActivityIndicator size='large' color='gray'/>
                 : <View>
 
-
               <View style={stylesRC.Recipe_header}>  
-                  
+                   
                     <View style={styles.FlexRow}>
                       <Text style={styles.AccentColor1Font}>Date </Text>
                       <Text style={styles.white_font}>{recipe.date}</Text>
@@ -204,15 +224,16 @@ const FooterData = [
                     </View>
               </View>
     
-              
 
                 <Step Step={recipe.step} />
 
-               <Button style={styles.AccentColor1Background} block light 
-               onPress={() => this.setState({active: !this.state.active})}>
-                <Text>Add Step</Text>
-                {/* <Icon name='add' /> */}
-                </Button>
+                { this.props.recipe.user === this.props.auth.user._id ? <Button style={styles.AccentColor1Background} block light onPress={() => this.setState({active: !this.state.active})}>
+                <Text>Add Step</Text></Button>   :  <Text></Text>}
+                
+              
+
+                
+                
 
                 <NewStepPost 
                 name='text' 
@@ -220,14 +241,13 @@ const FooterData = [
                 text={this.state.text} 
                 // param={this.props.match.params.id} 
                 Submit={() => this.submitStep()}
-                // class={ this.state.active ? "HideInput" : "ShowInput" } 
                 Close={() => this.setState({active: !this.state.active})} 
                 />
 
 
                 </View> 
-                  }
-
+              }
+              
             
                 {recipe.comments === undefined ?  <ActivityIndicator size='large' color='red'/>
                 :    <Comments param={recipe._id} Comment={recipe.comments} Visibility='Hide'/>
@@ -266,4 +286,4 @@ const mapStateToProps = state => ({
    auth: state.auth,
 });
 
- export default connect(mapStateToProps, { })((ConnectedApp));
+ export default connect(mapStateToProps, { addRecipeStep })((ConnectedApp));

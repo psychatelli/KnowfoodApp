@@ -33,11 +33,13 @@ const initialState = {
         };
        
         case GET_RECIPE:
+           
         return{
             ...state,
             item: action.payload,
+            
         };
-
+ 
         case ADD_RECIPE:
         return {
            ...state,

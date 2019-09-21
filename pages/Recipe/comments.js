@@ -90,13 +90,24 @@ var CommentItems = Comment.map((item) => {
     return  (
         <View style={{marginHorizontal: 5, marginVertical: 10}}>
             <Form onSubmit={this.onSubmit.bind(this)}>
+            <View style={{flexDirection:'row', margin: 10, padding:4, alignItems:'center', justifyContent:'space-between', borderWidth:1}}>
+          
+                  <View> 
                   <Input
                     placeholder='add comment...'
                     value={text}
                     onChangeText={(text) => this.setState({text: text})}
                     />
-                    <Button full style={styles.PrimaryButton} onPress={() => this.onSubmit()} ><Text>Submit</Text></Button>
+                    </View>
 
+                    <View>
+                    <Button transparent onPress={() => this.onSubmit()} >
+                    <Icon name='send' style={styles.AccentColor1Font} />
+                    </Button>
+                    </View>
+
+              </View>
+           
             </Form>
             {CommentItems}
         </View>

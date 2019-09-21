@@ -136,6 +136,12 @@ const FooterData = [
   }
 
 
+  toggleView() {
+    this.setState({
+      visibilityState: !this.state.visibilityState
+    });
+}
+
   render() {
       const { recipe, loading, auth } = this.props;
 
@@ -200,18 +206,20 @@ const FooterData = [
 
                 <Step Step={recipe.step} />
 
-                { this.props.recipe.user === this.props.auth.user._id ? <Button style={styles.AccentColor1Background} block light onPress={() => this.setState({active: !this.state.active})}>
+                { this.props.recipe.user === this.props.auth.user._id ? <Button style={styles.AccentColor1Background} block light onPress={() => this.setState({visibilityState: !this.state.visibilityState})}>
                 <Text>Add Step</Text></Button>   :  <Text></Text>}
                 
-              
-                <NewStepPost 
+                
+                { this.state.visibilityState ? <NewStepPost 
                 name='text' 
                 onChangeText={(text) => this.setState({text: text})} 
                 text={this.state.text} 
                 // param={this.props.match.params.id} 
                 Submit={() => this.submitStep()}
                 Close={() => this.setState({active: !this.state.active})} 
-                />
+                />  :  <Text></Text>}
+
+                
 
  
                 </View> 

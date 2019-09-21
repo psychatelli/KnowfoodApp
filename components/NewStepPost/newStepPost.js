@@ -58,12 +58,12 @@ export class NewStepPost extends Component {
                             />
  
                 <View style={styles.FlexRow}>
-                  <Button transparent><Text>Choose thumbnail</Text></Button>
-                  <Button transparent onPress={Submit}><Text>Add</Text></Button>
-                  <Button transparent onPress={Close}><Text>Cancel</Text></Button>
+                  <Button transparent onPress={Close}><Text style={styles.AccentColor1Font}>Cancel</Text></Button>
+                  <Button transparent><Text style={styles.AccentColor1Font}>Choose thumbnail</Text></Button>
+                  <Button transparent onPress={Submit}><Text style={styles.AccentColor1Font}>Add Step</Text></Button>
                 </View>
                 
-            
+             
         </Form>
       </View>
     )

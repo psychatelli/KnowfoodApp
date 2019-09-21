@@ -186,7 +186,7 @@ export const setRecipeLoading = () => {
 
 //Add Comment 
  export const addComment = (recipeId, commentData) => async dispatch => {
-
+console.log(`your recipeID ${recipeId}`)
   try {
     const res = await axios.post(`http://192.168.254.10:5000/api/recipe/comment/${recipeId}`, commentData);
     dispatch({

@@ -344,12 +344,12 @@ Recipe.findOneAndUpdate(
 
 
 // @route POST api/recipe/comment/:recipe_id
-// @route post a step
+// @route post a Comment
 // @route Public
  
 
 router.post('/comment/:recipe_id', async (req, res) => {
-  
+  console.log('you hit new comment route')
     try {
       const recipe = await Recipe.findById(req.params.recipe_id)
 
@@ -357,7 +357,7 @@ router.post('/comment/:recipe_id', async (req, res) => {
         text: req.body.text,
         username: req.body.username,
         avatar: req.body.avatar,
-        user: req.user.id
+        user: req.body._id
     } 
 
     //Add to comments array
@@ -368,6 +368,7 @@ router.post('/comment/:recipe_id', async (req, res) => {
 
       
     }catch(err) {
+      console.log('you errored out boy')
       console.error(err.message)
       res.status(500).send('Server Error - Post Recipe')
     }

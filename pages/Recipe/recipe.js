@@ -58,29 +58,6 @@ const FooterData = [
   }
 
 
-  componentWillMount(){
-    
-      {'5ced8fd90c50eaf96c72c91' == '5ced8fd90c50eaf96c72c91e'  ? ( this.setState({  visibilityState : false })  ) : ( this.setState({ visibilityState : true  }))  }
-      this.props.navigation.setParams({ gotoedit: this.gotoedit });
-    console.log(`state of visibility: ${this.state.visibilityState}`)
-  }
-
-  componentWillUpdate(nextProps, nextState) {
-    console.log(`nextSTate ${nextState.recipeUser}`); //will show the new state
-    console.log(`this.state ${this.state.recipeUser}`); //will show the previous state
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    // only update chart if the data has changed
-
-  }
-
-  componentWillUnmount(){
-    this.setState({
-      recipeUser: '',
-      authUser: ''
-    })
-  }
 
 
   
@@ -240,7 +217,7 @@ const FooterData = [
                 </View> 
               }
                 {recipe.comments === undefined ?  <ActivityIndicator size='large' color='red'/>
-                :    <Comments param={recipe._id} Comment={recipe.comments} />
+                :    <Comments recipeId={recipe._id} Comment={recipe.comments} />
                 }
 
 

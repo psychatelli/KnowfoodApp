@@ -20,20 +20,22 @@ class Comments extends Component {
 
 
 
-  onSubmit = (e) => {
-    e.preventDefault();
+  onSubmit = () => {
 
     const { user } = this.props.auth;
-    const { param } = this.props;
-    
+    const { recipeId } = this.props;
+    console.log(`your user: ${JSON.stringify(user)}`)
+    console.log(`your user id: ${user._id}`)
+
     const newComment = {
       text: this.state.text,
       username: user.username,
-      avatar: user.avatar
+      avatar: user.avatar,
+      user: user._id
     }
 
-    this.props.addComment(param, newComment);
-    this.setState({ text: ''});
+    this.props.addComment(recipeId, newComment);
+    this.setState({ text: ' '});
 }
 
 deleteComment(commentId) {
@@ -88,7 +90,13 @@ var CommentItems = Comment.map((item) => {
     return  (
         <View style={{marginHorizontal: 5, marginVertical: 10}}>
             <Form onSubmit={this.onSubmit.bind(this)}>
-                  <Input name='text' value={text} placeholder='Add Comment...' onChange={this.handleChange} />
+                  <Input
+                    placeholder='add comment...'
+                    value={text}
+                    onChangeText={(text) => this.setState({text: text})}
+                    />
+                    <Button full style={styles.PrimaryButton} onPress={() => this.onSubmit()} ><Text>Submit</Text></Button>
+
             </Form>
             {CommentItems}
         </View>

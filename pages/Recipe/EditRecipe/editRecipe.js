@@ -21,7 +21,8 @@ export class EditRecipe extends Component {
           stepThumbnail: '',
           StepId: '',
           recipeId: this.props.recipe._id,
-          showStatus: ''
+          showStatus: '',
+          Visibility: true,
         }
       
         this.onSubmit = this.onSubmit.bind(this)
@@ -64,6 +65,9 @@ export class EditRecipe extends Component {
           }
 
     
+          deleteComment(commentId) {
+            this.props.deleteComment(this.props.recipe._id ,commentId)
+        }
 
         onSubmit(e) {
             e.preventDefault();
@@ -79,8 +83,8 @@ export class EditRecipe extends Component {
  
   render() {
  
-    const { recipe, DeletePost, param ,Visibility, auth} = this.props;
-    const {TheRecipe} = this.state
+    const { recipe, DeletePost, param , auth} = this.props;
+    const {TheRecipe, Visibility} = this.state
  
 
     const Steps =  TheRecipe.step.map(function (item, index) {
@@ -90,9 +94,7 @@ export class EditRecipe extends Component {
             <Text style={stylesRC.StepNumber}> EDIT STEP {index + 1}</Text>
             <Button   bordered success small onPress={() => { this.deleteStep(item._id, index)}} >
             <Icon name='close' style={{color: 'white'}} />
-
             </Button>
-
           </View>
               
           <Item regular style={styles.LoginInput}> 
@@ -118,23 +120,19 @@ export class EditRecipe extends Component {
     return (
       <Container style={styles.CardBackground}> 
         <Content> 
-      <View>
-        <Form onSubmit={() => {this.onSubmit}}>
-            <View style={{margin: 10 }}> 
-            <Input regular style={styles.LoginInput} 
-            placeholder='Title'  value={this.state.title} 
-            onChangeText={(title) => this.setState({title: title})} 
-            onEndEditing={() => {this.updateRecipe()}} />
-
-                                        
-
-
-            </View>
-            {Steps}
-            <Comments Comment={recipe.comments}/>
-            {/* <Comments param={recipe._id} Comment={recipe.comments} Visibility={Visibility}/> */}
-        </Form>
-      </View>
+          <View>
+            <Form onSubmit={() => {this.onSubmit}}>
+                <View style={{margin: 10 }}> 
+                <Input regular style={styles.LoginInput} 
+                placeholder='Title'  value={this.state.title} 
+                onChangeText={(title) => this.setState({title: title})} 
+                onEndEditing={() => {this.updateRecipe()}} />
+                </View>
+                {Steps}
+                <Comments recipeId={recipe._id} Comment={recipe.comments} Visibility={Visibility}/>
+                {/* <Comments param={recipe._id} Comment={recipe.comments} Visibility={Visibility}/> */}
+            </Form>
+          </View>
       </Content>
       </Container>
     )

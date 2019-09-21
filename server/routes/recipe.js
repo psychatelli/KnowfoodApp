@@ -276,8 +276,8 @@ router.post('/step/:recipe_id', (req, res) => {
 // @route DELETE api/step/recipe/:id
 // @route Delete single recipe step
 // @route private
-router.delete('/step/:recipe_id/:step_id',
-  (req, res) => {
+router.delete('/step/:recipe_id/:step_id', (req, res) => {
+
     Recipe.findById(req.params.recipe_id)
       .then(recipe => {
         // Check to see if comment exists
@@ -348,7 +348,7 @@ Recipe.findOneAndUpdate(
 // @route Public
  
 
-router.post('/comment/:recipe_id', auth, async (req, res) => {
+router.post('/comment/:recipe_id', async (req, res) => {
   
     try {
       const recipe = await Recipe.findById(req.params.recipe_id)
@@ -375,44 +375,42 @@ router.post('/comment/:recipe_id', auth, async (req, res) => {
 
   });
 
-
+ 
 // @route POST api/recipe/comment/:recipe_id/:comment_id
 // @route delete comment
 // @route Public
- 
-    router.delete('/comment/:recipe_id/:comment_id', auth, async (req, res) => { 
-        try{
-          const recipe = await  Recipe.findById(req.params.recipe_id);
+router.delete('/comment/:recipe_id/:comment_id', async (req, res) => { 
+  try{
+    const recipe = await  Recipe.findById(req.params.recipe_id);
 
+    if (
+      recipe.comments.filter(
+        comment => comment._id.toString() === req.params.comment_id
+      ).length === 0
+    ) {
+      return res
+        .status(404)
+        .json({ Commentnotexists: 'Step does not exist' });
+    }
 
-          if (
-            recipe.comments.filter(
-              comment => comment._id.toString() === req.params.comment_id
-            ).length === 0
-          ) {
-            return res
-              .status(404)
-              .json({ Commentnotexists: 'Step does not exist' });
-          }
-  
-          // Get remove index
-          const removeIndex = recipe.comments
-            .map(item => item._id.toString())
-            .indexOf(req.params.comment_id);
-  
-          // Splice comment out of array
-          recipe.comments.splice(removeIndex, 1);
-  
-           recipe.save()
-           res.json(recipe)
+    // Get remove index
+    const removeIndex = recipe.comments
+      .map(item => item._id.toString())
+      .indexOf(req.params.comment_id);
+
+    // Splice comment out of array
+    recipe.comments.splice(removeIndex, 1);
+
+     recipe.save()
+     res.json(recipe)
 
 
 
-        }catch(err) {
-          console.error(err.message)
-          res.status(500).send('Server Error - Recipe Comment Not Deleted')
-        }
-    })
+  }catch(err) {
+    console.error(err.message)
+    res.status(500).send('Server Error - Recipe Comment Not Deleted')
+  }
+})
 
 
 

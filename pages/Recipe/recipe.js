@@ -214,7 +214,6 @@ const FooterData = [
                     <Text style={styles.AccentColor1Font}>Ingredients </Text> 
                     <Text style={styles.white_font}>{recipe.ingredients}</Text>
                   
-        
                     <View style={styles.FlexRow}>
                       <Text style={styles.AccentColor1Font}>Comments </Text>
                       <Text style={styles.white_font}>{recipe.comments.length} </Text>
@@ -228,10 +227,6 @@ const FooterData = [
                 <Text>Add Step</Text></Button>   :  <Text></Text>}
                 
               
-
-                
-                
-
                 <NewStepPost 
                 name='text' 
                 onChangeText={(text) => this.setState({text: text})} 
@@ -241,13 +236,11 @@ const FooterData = [
                 Close={() => this.setState({active: !this.state.active})} 
                 />
 
-
+ 
                 </View> 
               }
-              
-            
                 {recipe.comments === undefined ?  <ActivityIndicator size='large' color='red'/>
-                :    <Comments param={recipe._id} Comment={recipe.comments} Visibility='Hide'/>
+                :    <Comments param={recipe._id} Comment={recipe.comments} />
                 }
 
 

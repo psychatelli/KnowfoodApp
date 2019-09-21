@@ -37,7 +37,7 @@ class Comments extends Component {
 }
 
 deleteComment(commentId) {
-    this.props.deleteComment(this.props.param,commentId)
+    this.props.deleteComment(this.props.recipeId ,commentId)
 }
 
 handleChange (e) {
@@ -50,7 +50,7 @@ handleChange (e) {
 
   render() {
 
-const { Comment, param, Visibility} = this.props;
+const { Comment, recipeId, Visibility} = this.props;
 const {text } = this.state;
 const { user } = this.props.auth;
 
@@ -69,10 +69,12 @@ var CommentItems = Comment.map((item) => {
                             <View style={styles.white_font}><Text>{item.date} </Text></View> 
                           </View>
                       </View>
-              
-                      <Button   bordered success small onPress={() => { this.deleteComment(item._id, index)}} >
+                      
+                      {Visibility ?  <Button  bordered success small onPress={() => { this.deleteComment(item._id)}} >
                         <Icon name='close' style={{color: 'white'}} />
                       </Button>
+                :<Text></Text> }
+                      
                   </View>
         
                   <View> 
@@ -95,7 +97,8 @@ var CommentItems = Comment.map((item) => {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+
 });
 
  export default connect(mapStateToProps, {addComment, deleteComment})(Comments);

@@ -119,24 +119,7 @@ export const addRecipe = recipeData => dispatch => {
       );
   };
 
-  //Delete Recipe Step /step/:recipe_id/:step_id
-  // export const deleteRecipeStep = (recipe_id, step_id) => dispatch => {
-  //   console.log(`deleteRecipeStep: ${recipe_id} ${step_id}`)
-  //   axios
-  //     .delete(`/api/recipe/step/${recipe_id}/${step_id}`)
-  //     .then(res =>
-  //       dispatch({
-  //         type: GET_RECIPE,
-  //         payload: res.data
-  //       }),
-  //     )
-  //     .catch(err =>
-  //       dispatch({
-  //         type: GET_ERRORS,
-  //         payload: err.response.data
-  //       })
-  //     );
-  // };
+  
 
   export const deleteRecipeStep = (recipe_id, step_id) => async dispatch => {
     try {
@@ -222,6 +205,11 @@ export const setRecipeLoading = () => {
 
 //Delete Comment 
 export const deleteComment = (recipeId, commentId) => async dispatch => {
+  console.log(recipeId)
+  console.log(commentId)
+
+  const comment = '5d86465afb4c5e14092e627a';
+  const recipe = '5cfc22e34e64db8be5832267';
 
   try {
     const res = await axios.delete(`http://192.168.254.10:5000/api/recipe/comment/${recipeId}/${commentId}`);

@@ -58,6 +58,7 @@ export class EditRecipe extends Component {
 
  
           deleteStep(selectedID, index) {
+            console.log(selectedID)
             this.state.TheRecipe.step.splice(index, 1)
             this.props.deleteRecipeStep(this.props.recipe._id, selectedID)
           }
@@ -87,10 +88,11 @@ export class EditRecipe extends Component {
         <View  style={stylesRC.RecipeStep} key={item._id} className='RecipeStepEdit'>
           <View style={styles.SpaceBetween}> 
             <Text style={stylesRC.StepNumber}> EDIT STEP {index + 1}</Text>
-            <View  onClick={() => { this.deleteStep(item._id, index)}} >
+            <Button   bordered success small onPress={() => { this.deleteStep(item._id, index)}} >
             <Icon name='close' style={{color: 'white'}} />
 
-            </View>
+            </Button>
+
           </View>
               
           <Item regular style={styles.LoginInput}> 

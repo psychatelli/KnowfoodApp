@@ -70,9 +70,9 @@ var CommentItems = Comment.map((item) => {
                           </View>
                       </View>
               
-                        <View className={Visibility}>
-                            <Icon style={{fontSize: 20}} onClick={() => { this.deleteComment(item._id)}} ios='ios-create'/>
-                        </View>
+                      <Button   bordered success small onPress={() => { this.deleteComment(item._id, index)}} >
+                        <Icon name='close' style={{color: 'white'}} />
+                      </Button>
                   </View>
         
                   <View> 

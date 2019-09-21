@@ -139,7 +139,6 @@ const FooterData = [
   
  
     submitStep(){
-      console.log('submitted step')
       const newStep= {
         text: this.state.text,
         thumbnail: this.state.thumbnail
@@ -157,7 +156,6 @@ const FooterData = [
 
   gotoedit = () => {
     this.props.navigation.navigate('EditRecipe')
-    console.log('you go edit boy')
   }
 
 

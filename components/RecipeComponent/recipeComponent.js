@@ -17,7 +17,7 @@ import { connect } from 'react-redux';
       this.props.Navigation('Recipe')
       
     }
-
+ 
     return (
       <Container style={styles.CardBackground}>
         <Content>

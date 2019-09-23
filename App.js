@@ -14,7 +14,7 @@ import {AsyncStorage, ActiveIndicator, StatusBar} from 'react-native';
  import Recipes from './pages/recipes';
   import Recipe from './pages/Recipe/recipe';
   import EditRecipe from './pages/Recipe/EditRecipe/editRecipe';
-  import Shipment from './pages/Shipment/shipment';
+  import NewRecipePost from './components/NewRecipePost/newRecipePost';
   import RecipeComponent from './components/RecipeComponent/recipeComponent';
   import { Container, View, Text  } from 'native-base';
  
@@ -32,7 +32,6 @@ const RootStack = createStackNavigator(
   {
     Login: Login,
     RecipeComponent: RecipeComponent,
-    Shipment: Shipment,
     NativeBase: {
       screen: NativeBase,
       navigationOptions: ({ navigation}) => ({
@@ -56,9 +55,8 @@ const RootStack = createStackNavigator(
 const AuthStack = createStackNavigator({ 
   Recipes: Recipes,
   Recipe: Recipe,
-  EditRecipe: EditRecipe
-  
-  
+  EditRecipe: EditRecipe,
+  NewRecipePost: NewRecipePost 
 })
 
 
@@ -109,26 +107,7 @@ class AuthLoadingScreen extends Component {
     }
   ));
 
-//  export default class App extends React.Component {
-//   constructor(props) {
-//     super(props);
-//   }
 
-
-
-//     render(){
-//       return(
-//         <Provider store={storeInstance}>
-//         <Container>
-//             <AppContainer/>
-//             <StatusBar barStyle='default'/>
-//         </Container>
-//         </Provider>
-//       )
-//     }
-   
-    
-// }
 
 const App = () => {
 

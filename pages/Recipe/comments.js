@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, View, Header, Content, Form, Card, CardRecipeItem, Thumbnail, Input, Text, Button, Icon, Left, Body,  } from 'native-base';
+import { Container, View, Content, Form, CardRecipeItem, Thumbnail, Input,Textarea, Text, Button, Icon  } from 'native-base';
 import stylesRC from '../../styles/StylesRecipeComponent';
 import styles from '../../styles/styles';
 
@@ -90,10 +90,11 @@ var CommentItems = Comment.map((item) => {
     return  (
         <View style={{marginHorizontal: 5, marginVertical: 10}}>
             <Form onSubmit={this.onSubmit.bind(this)}>
-            <View style={{flexDirection:'row', margin: 10, padding:4, alignItems:'center', justifyContent:'space-between', borderWidth:1}}>
+            <View style={{flexDirection:'row', alignItems:'center', height: 'auto', justifyContent:'space-between', borderWidth:1}}>
           
                   <View> 
-                  <Input
+                  <Textarea 
+                    style={{marginLeft: 10, height: 'auto', width: 350 }}
                     placeholder='add comment...'
                     value={text}
                     onChangeText={(text) => this.setState({text: text})}

@@ -9,24 +9,24 @@ import { connectActionSheet } from '@expo/react-native-action-sheet'
 import { ActionSheetProvider } from '@expo/react-native-action-sheet'
 import NewStepPost from '../../components/NewStepPost/newStepPost';
 import Footer_Nav from '../../components/common/footer_nav/new_footer';
-import { addRecipeStep } from '../../actions/recipesAction';
+import { addRecipeStep, deleteRecipe } from '../../actions/recipesAction';
 import Step from './step';
 
 
 const FooterData = [
   {
    active: false,
-   link: '/recipes',
+   link: 'Recipes',
    icon: 'home'
   },
   {  
       active: false,
-      link: '/recipes',
+      link: 'Recipes',
       icon: 'list'
   },
   {
       active: false,
-      link: '/recipes',
+      link: 'NewRecipePost',
       icon: 'add-circle'
      },
      {
@@ -109,6 +109,7 @@ const FooterData = [
   privateRecipeOptions = (index) =>{
      switch(index){
       case 0:
+          this.deleteRecipe()
       case 1:
         this.gotoedit()
     }  }
@@ -134,7 +135,11 @@ const FooterData = [
   gotoedit = () => {
     this.props.navigation.navigate('EditRecipe')
   }
-
+ 
+  deleteRecipe = () => {
+    this.props.deleteRecipe(this.props.recipe._id)
+    this.props.navigation.navigate('Recipes')
+  }
 
   toggleView() {
     this.setState({
@@ -144,13 +149,11 @@ const FooterData = [
 
   render() {
       const { recipe, loading, auth } = this.props;
-
-
       const { visibilityState} = this.state;
       let RecipeContent;
       const { navigate } = this.props.navigation;
-
-     
+    console.log(JSON.stringify(recipe));
+      
       if (this.state.TheRecipe  === null) {
         RecipeContent = <ActivityIndicator size='large' color='gray'/>
       } else {
@@ -188,7 +191,6 @@ const FooterData = [
                 : <View>
 
               <View style={stylesRC.Recipe_header}>  
-                   
                     <View style={styles.FlexRow}>
                       <Text style={styles.AccentColor1Font}>Date </Text>
                       <Text style={styles.white_font}>{recipe.date}</Text>
@@ -207,7 +209,7 @@ const FooterData = [
                 <Step Step={recipe.step} />
 
                 { this.props.recipe.user === this.props.auth.user._id ? <Button style={styles.AccentColor1Background} block light onPress={() => this.setState({visibilityState: !this.state.visibilityState})}>
-                <Text>Add Step</Text></Button>   :  <Text></Text>}
+                <Text>Add Step</Text></Button>:  <Text></Text>}
                 
                 
                 { this.state.visibilityState ? <NewStepPost 
@@ -258,4 +260,4 @@ const mapStateToProps = state => ({
    auth: state.auth,
 });
 
- export default connect(mapStateToProps, { addRecipeStep })((ConnectedApp));
+ export default connect(mapStateToProps, { addRecipeStep, deleteRecipe })((ConnectedApp));

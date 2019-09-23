@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
- import {  addRecipe, getRecipes } from '../../actions/recipesAction';
- import Button from '@material-ui/core/Button';
+ import {  addRecipe } from '../../actions/recipesAction';
+ import { Container, View, Header, Content, Card, CardRecipeItem, Thumbnail, Text, Button, Icon, Left, Body, Input, Form, Item  } from 'native-base';
+ import { Image, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
+ import stylesRC from '../../styles/StylesRecipeComponent';
+ import styles from '../../styles/styles';
 
 export class NewRecipePost extends Component {
 
@@ -10,48 +13,62 @@ export class NewRecipePost extends Component {
     this.state = {
       title: '',
       thumbnail: 'https://photos.smugmug.com/Test/i-W5SXVkM/0/1d663a9e/S/fettuccine-S.jpg',
+      ingredients: 'sald, pepper, onion'
      
     }
-    this.handleChange = this.handleChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this)
 }
 
+// thumbnail: req.body.thumbnail,
+// title: req.body.title,
+// username: req.body.username,
+// avatar: req.body.avatar,
+// user: req.body.id,
+// ingredients: req.body.ingredients,
 
-    onSubmit(e) {
-      e.preventDefault();
+    onSubmit() {
+      // e.preventDefault();
       const AddedRecipe = {
         title: this.state.title,
+        username: this.props.auth.username,
         thumbnail: this.state.thumbnail,
-      }
+        avatar: this.props.auth.user.avatar,
+        user: this.props.auth.user._id,
+        ingredients: this.state.ingredients
+      }   
         this.props.addRecipe(AddedRecipe);
-
+      console.log(AddedRecipe)
         this.setState({ 
           title : '',
           // thumbnail : '',
         });
-      }
 
-    handleChange = e => {
-      this.setState({
-        title: e.target.value
-        })
+        this.props.navigation.navigate('EditRecipe')
       }
-      
-     
 
 
 
   render() {
-    return (
-      <form onSubmit={this.onSubmit} className={this.props.ClassName}>
-      <div className='Card'>
-        <input name='newTitle' placeholder='Add Title' value={this.state.title} onChange={this.handleChange}  />
-        {/* <button type="submit">Add </button>  */}
-        <Button onClick={this.props.Close} type="submit" variant="contained">Add </Button>
+    const { navigate } = this.props.navigation;
 
-        <Button onClick={this.props.Close} variant="contained">Cancel </Button>
-      </div>
-      </form>
+
+    return (
+      <Container style={styles.CardBackground}> 
+      <Content> 
+        <View>
+              <View style={{margin: 10 }}> 
+              <Input regular style={styles.LoginInput} 
+              placeholder='Recipe Title'  value={this.state.title} 
+              onChangeText={(title) => this.setState({title: title})} 
+              />
+              </View>
+              <Button full style={styles.PrimaryButton} onPress={() => this.onSubmit()} ><Text>Submit</Text></Button>
+              <Button full style={styles.PrimaryButton} onPress={() => navigate('Recipes')} ><Text>Cancel</Text></Button>
+              
+
+        </View>
+    </Content>
+    </Container>
     )
   }
 }
@@ -60,6 +77,8 @@ export class NewRecipePost extends Component {
 
 
 const mapStateToProps = state => ({
+  auth: state.auth
+
 })
 
 export default connect(mapStateToProps, { addRecipe})(NewRecipePost)

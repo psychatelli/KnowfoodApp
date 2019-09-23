@@ -26,7 +26,7 @@ import {AsyncStorage} from 'react-native';
   
 export const getRecipes = () => async dispatch => {
      try {
-      const res = await axios.get('http://192.168.254.10:5000/api/recipe');
+      const res = await axios.get('http://10.0.0.85:5000/api/recipe');
       dispatch({
         type: GET_RECIPES,
         payload: res.data
@@ -43,8 +43,9 @@ export const getRecipes = () => async dispatch => {
 
     dispatch(setRecipeLoading());
     axios
-      .get(`http://192.168.254.10:5000/api/recipe/${id}`)
+      .get(`http://10.0.0.85:5000/api/recipe/${id}`)
       .then(res =>
+
         dispatch({
           type: GET_RECIPE,
           payload: res.data,
@@ -63,7 +64,7 @@ export const getRecipes = () => async dispatch => {
 export const getUsersRecipes = id => dispatch => {
     dispatch(setRecipeLoading());
     axios
-      .get(`http://192.168.254.10:5000/api/recipe/user/${id}`)
+      .get(`http://10.0.0.85:5000/api/recipe/user/${id}`)
       .then(res =>
         dispatch({
           type: GET_USERS_RECIPES,
@@ -84,7 +85,7 @@ export const addRecipe = recipeData => dispatch => {
   // dispatch(clearErrors());
   // console.log(`AddREcipe: ${JSON.stringify(recipeData)}`)
   axios
-    .post('http://192.168.254.10:5000/api/recipe', recipeData)
+    .post('http://10.0.0.85:5000/api/recipe', recipeData)
     .then(res =>
       dispatch({
         type: ADD_RECIPE,
@@ -104,7 +105,7 @@ export const addRecipe = recipeData => dispatch => {
   export const addRecipeStep = (id, recipeData) => dispatch => {
     // dispatch(clearErrors());
     axios
-      .post(`http://192.168.254.10:5000/api/recipe/step/${id}`, recipeData)
+      .post(`http://10.0.0.85:5000/api/recipe/step/${id}`, recipeData)
       .then(res =>
         dispatch({
           type: GET_RECIPE,
@@ -123,7 +124,7 @@ export const addRecipe = recipeData => dispatch => {
 
   export const deleteRecipeStep = (recipe_id, step_id) => async dispatch => {
     try {
-      const res = await axios.delete(`http://192.168.254.10:5000/api/recipe/step/${recipe_id}/${step_id}`);
+      const res = await axios.delete(`http://10.0.0.85:5000/api/recipe/step/${recipe_id}/${step_id}`);
       dispatch({
         type: GET_RECIPE,
         payload: res.data
@@ -142,7 +143,7 @@ export const addRecipe = recipeData => dispatch => {
 export const deleteRecipe = (id) => async dispatch => {
 
   try{
-    const res = await axios.delete(`http://192.168.254.10:5000/api/recipe/${id}`);
+    const res = await axios.delete(`http://10.0.0.85:5000/api/recipe/${id}`);
     dispatch({
       type: DELETE_RECIPE,
       payload: res.data
@@ -162,7 +163,7 @@ export const deleteRecipe = (id) => async dispatch => {
 // Update Recipe
 export const updateRecipe = (recipeId, recipeData) => dispatch => {
   axios
-    .put(`http://192.168.254.10:5000/api/recipe/${recipeId}`, recipeData)
+    .put(`http://10.0.0.85:5000/api/recipe/${recipeId}`, recipeData)
     .then(res =>
       dispatch({
         type: UPDATE_RECIPE,
@@ -188,7 +189,7 @@ export const setRecipeLoading = () => {
  export const addComment = (recipeId, commentData) => async dispatch => {
 console.log(`your recipeID ${recipeId}`)
   try {
-    const res = await axios.post(`http://192.168.254.10:5000/api/recipe/comment/${recipeId}`, commentData);
+    const res = await axios.post(`http://10.0.0.85:5000/api/recipe/comment/${recipeId}`, commentData);
     dispatch({
       type: GET_RECIPE,
       payload: res.data
@@ -212,7 +213,7 @@ export const deleteComment = (recipeId, commentId) => async dispatch => {
   const recipe = '5cfc22e34e64db8be5832267';
 
   try {
-    const res = await axios.delete(`http://192.168.254.10:5000/api/recipe/comment/${recipeId}/${commentId}`);
+    const res = await axios.delete(`http://10.0.0.85:5000/api/recipe/comment/${recipeId}/${commentId}`);
     dispatch({
       type: GET_RECIPE,
       payload: res.data
@@ -232,7 +233,7 @@ export const deleteComment = (recipeId, commentId) => async dispatch => {
 //ADD like 
 export const addLike = (recipeId) => async dispatch => {
   try {
-    const res = await axios.put(`http://192.168.254.10:5000/api/recipe/like/${recipeId}`);
+    const res = await axios.put(`http://10.0.0.85:5000/api/recipe/like/${recipeId}`);
     dispatch({
       type: UPDATE_LIKES,
       payload: { recipeId, likes: res.data}
@@ -250,7 +251,7 @@ export const addLike = (recipeId) => async dispatch => {
 //Remove like 
 export const removeLike = (recipeId) => async dispatch => {
   try {
-    const res = await axios.put(`http://192.168.254.10:5000/api/recipe/unlike/${recipeId}`);
+    const res = await axios.put(`http://10.0.0.85:5000/api/recipe/unlike/${recipeId}`);
     dispatch({
       type: UPDATE_LIKES,
       payload: { recipeId, likes: res.data}

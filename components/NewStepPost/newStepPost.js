@@ -62,8 +62,6 @@ export class NewStepPost extends Component {
                   <Button transparent><Text style={styles.AccentColor1Font}>Choose thumbnail</Text></Button>
                   <Button transparent onPress={Submit}><Text style={styles.AccentColor1Font}>Add Step</Text></Button>
                 </View>
-                
-             
         </Form>
       </View>
     )
@@ -71,11 +69,8 @@ export class NewStepPost extends Component {
 }
 
 
-
-
 const mapStateToProps = state => ({
      recipe: state.recipes.item,
-
 })
 
 export default connect(mapStateToProps, { addRecipeStep, getRecipe})(NewStepPost) 

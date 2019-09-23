@@ -89,7 +89,47 @@ router.get('/user/:userId', async (req, res) => {
 // @route Post a recipe
 // @route Public
 
-          // router.post('/', (req, res) => {
+          router.post('/', [  [ check('title', 'title is required').not().isEmpty() ]
+          ], async (req, res) => {
+              
+            const errors = validationResult(req);
+              if(!errors.isEmpty()) {
+                return res.status(400).json({errors: errors.array() })
+              }
+
+              try {
+                const user = await User.findById(req.body.user).select('-password');
+                
+                
+                if (typeof req.body.skills !== 'undefined') {
+                  req.body.ingredients.split(',')
+                }
+
+
+                const newRecipe = new Recipe({
+                  thumbnail: req.body.thumbnail,
+                  title: req.body.title,
+                  // username: user.username,
+                  // avatar: user.avatar,
+                  username: req.body.username,
+                  avatar: req.body.avatar,
+                  user: req.body.user,
+                  ingredients: req.body.ingredients,
+                })
+ 
+
+            const recipe = await newRecipe.save();
+            res.json(recipe)
+
+
+              }catch(err) {
+                console.log('NEW RECIPE ERROR')
+                console.error(err.message)
+                res.status(500).send('Server Error - Post Recipe')
+              }
+          });
+
+   // router.post('/', (req, res) => {
               
           //     const newRecipe = new Recipe({
           //         thumbnail: req.body.thumbnail,
@@ -124,38 +164,6 @@ router.get('/user/:userId', async (req, res) => {
           //       res.status(500).send('Could not add recipe')
           //       }  
           //   })
-
-
-          router.post('/', [ auth, [ check('title', 'title is required').not().isEmpty() ]
-          ], async (req, res) => {
-              
-            const errors = validationResult(req);
-              if(!errors.isEmpty()) {
-                return res.status(400).json({errors: errors.array() })
-              }
-
-              try {
-                const user = await User.findById(req.user.id).select('-password');
-                    
-                const newRecipe = new Recipe({
-                  thumbnail: req.body.thumbnail,
-                  title: req.body.title,
-                  username: user.username,
-                  avatar: user.avatar,
-                  user: req.user.id,
-                  ingredients: req.body.ingredients,
-                })
-
-
-            const recipe = await newRecipe.save();
-            res.json(recipe)
-
-
-              }catch(err) {
-                console.error(err.message)
-                res.status(500).send('Server Error - Post Recipe')
-              }
-          });
 
 
 

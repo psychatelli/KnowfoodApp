@@ -22,7 +22,7 @@ export const AuthorizedUser = () => async dispatch => {
         }
 
         
-        const res = await axios.post('http://192.168.254.10:5000/api/auth/getuser', token, config);
+        const res = await axios.post('http://10.0.0.85:5000/api/auth/getuser', token, config);
     
        
 
@@ -58,7 +58,7 @@ export const loadUser = (token) => async dispatch => {
     }
          
     try{
-        const res = await axios.get('http://192.168.254.10:5000/api/auth');
+        const res = await axios.get('http://10.0.0.85:5000/api/auth');
 
         dispatch({
             type: USER_LOADED,
@@ -86,7 +86,7 @@ export const register = ({username, email, password }) => async dispatch => {
     const body = JSON.stringify({ username, email, password});
 
     try{
-        const res = await axios.post('http://192.168.254.10:5000/api/users', body, config);
+        const res = await axios.post('http://10.0.0.85:5000/api/users', body, config);
         dispatch({
             type: REGISTER_SUCCESS,
             payload: res.data,
@@ -119,7 +119,7 @@ export const login = ({email, password}) => async dispatch => {
     const body = JSON.stringify({ email, password});
 
     try{
-        const res = await axios.post('http://192.168.254.10:5000/api/auth', body, config);
+        const res = await axios.post('http://10.0.0.85:5000/api/auth', body, config);
        
             let token = JSON.stringify(res.data);
         dispatch({

@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import { updateRecipe, getRecipe, addRecipeStep, deleteRecipeStep } from '../../../actions/recipesAction';
+import { updateRecipe, getRecipe, addRecipeStep, deleteRecipeStep } from '../../actions/recipesAction';
 import { Container, View, Header, Content, Card, CardRecipeItem, Thumbnail, Text, Button, Icon, Left, Body, Input, Form, Item  } from 'native-base';
 import { Image, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
-import styles from '../../../styles/styles';
-import stylesRC from '../../../styles/StylesRecipeComponent';
-import Comments from '../comments';
- 
-export class EditRecipe extends Component {
+import styles from '../../styles/styles';
+import stylesRC from '../../styles/StylesRecipeComponent';
+import NewStepPost from '../../components/NewStepPost/newStepPost';
+
+export class AddRecipe extends Component {
     constructor(props) {
         super(props);
         this.state = { 
@@ -65,9 +65,9 @@ export class EditRecipe extends Component {
           }
 
     
-          deleteComment(commentId) {
-            this.props.deleteComment(this.props.recipe._id ,commentId)
-        }
+        //   deleteComment(commentId) {
+        //     this.props.deleteComment(this.props.recipe._id ,commentId)
+        // }
 
         onSubmit(e) {
             e.preventDefault();
@@ -79,8 +79,8 @@ export class EditRecipe extends Component {
 
   
  
-          
-  
+         
+ 
   render() {
  
     const { recipe, DeletePost, param , auth} = this.props;
@@ -123,14 +123,28 @@ export class EditRecipe extends Component {
           <View>
             <Form onSubmit={() => {this.onSubmit}}>
                 <View style={{margin: 10 }}> 
-                <Input regular style={styles.LoginInput} 
-                placeholder='Title'  value={this.state.title} 
-                onChangeText={(title) => this.setState({title: title})} 
-                onEndEditing={() => {this.updateRecipe()}} />
+                    <Input regular style={styles.LoginInput} 
+                    placeholder='Title'  value={this.state.title} 
+                    onChangeText={(title) => this.setState({title: title})} 
+                    onEndEditing={() => {this.updateRecipe()}} />
+            
+                
+                    <Input regular style={styles.LoginInput} 
+                    placeholder='Title'  value={this.state.title} 
+                    onChangeText={(ingredients) => this.setState({ingredients: ingredients})} 
+                    onEndEditing={() => {this.updateRecipe()}} />
                 </View>
+
+                <NewStepPost 
+                name='text' 
+                onChangeText={(text) => this.setState({text: text})} 
+                text={this.state.text} 
+                // param={this.props.match.params.id} 
+                Submit={() => this.submitStep()}
+                Close={() => this.setState({active: !this.state.active})} 
+                />
+
                 {Steps}
-                <Comments recipeId={recipe._id} Comment={recipe.comments} Visibility={Visibility}/>
-                {/* <Comments param={recipe._id} Comment={recipe.comments} Visibility={Visibility}/> */}
             </Form>
           </View>
       </Content>
@@ -145,6 +159,6 @@ const mapStateToProps = state => ({
     auth: state.auth
   })
   
-  export default connect(mapStateToProps, {updateRecipe, addRecipeStep, deleteRecipeStep, getRecipe})(EditRecipe)
+  export default connect(mapStateToProps, {updateRecipe, addRecipeStep, deleteRecipeStep, getRecipe})(AddRecipe)
   
  

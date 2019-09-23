@@ -16,17 +16,17 @@ import {setToken, getAsyncStorage, deleteAsyncStorage} from '../actions/utils/se
 const FooterData = [
   {
    active: true,
-   link: '/recipes',
+   link: 'Recipes',
    icon: 'home'
   },
   {
       active: false,
-      link: '/recipes',
+      link: 'Recipes',
       icon: 'list'
   },
   {
       active: false,
-      link: '/recipes',
+      link: 'NewRecipePost',
       icon: 'add-circle'
      },
      {
@@ -86,9 +86,7 @@ class Recipes extends Component {
 	
 	
 		if (user === null || loading)  {
-		
 		BodyContent = 	<Text>Loading...</Text>;
-		
 		} else {
 		 
 		BodyContent = (

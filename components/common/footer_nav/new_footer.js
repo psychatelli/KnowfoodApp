@@ -9,16 +9,13 @@ import { bindActionCreators } from 'redux';
 export default class Footer_Nav extends Component {
 
     renderList() {
-      
-       
- 
-        
         return this.props.FooterData.map((item) => {
             const { Navigation } = this.props;
 
             return (
                 // <Button key={item.id}  onPress={() => this.props.navigation.navigate("LCL_Active_Tabs")}> 
-                <Button style={{backgroundColor: 'none'}} active={item.active} key={item.icon}  onPress={() => Navigation(item.link)}> 
+                <Button style={{backgroundColor: 'none'}} active={item.active} key={item.icon}  
+                onPress={() => Navigation(item.link)}> 
                 <Icon style={{ color: item.active === true ? "#FFF" : "#2AE7AA" }} name={item.icon}/>
                 </Button>
            

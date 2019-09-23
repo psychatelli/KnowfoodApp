@@ -33,7 +33,7 @@ const initialState = {
         };
        
         case GET_RECIPE:
-           
+        case ADD_RECIPE:   
         return{
             ...state,
             item: action.payload,

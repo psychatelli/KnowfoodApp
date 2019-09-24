@@ -5,8 +5,36 @@ import { Container, View,  Content, Card, CardItem, Thumbnail, Text, Button, Ico
 import styles from '../styles/styles';
 import stylesRC from '../styles/StylesRecipeComponent';
 import AdjustableInput from '../components/common/adjustableInput';
+import Footer_Nav from '../components/common/footer_nav/new_footer';
 
  
+const FooterData = [
+  {
+   active: false,
+   link: 'Recipes',
+   icon: 'home'
+  },
+  {
+      active: false,
+      link: 'Recipes',
+      icon: 'list'
+  },
+  {
+      active: false,
+      link: 'AddRecipe',
+      icon: 'add-circle'
+     },
+     {
+      active: true,
+      link: 'Profiles',
+      icon: 'search'
+     },
+     {
+      active: false,
+      link: '/recipes',
+      icon: 'person'
+     },
+]
 
 export class Profiles extends Component {
 
@@ -23,7 +51,8 @@ export class Profiles extends Component {
 
       render() {
       const { profiles, classes } = this.props;
-      
+      const { navigate } = this.props.navigation;
+
 
     const Profiles = profiles.map((item) => (
           <ListItem key={item._id} style={styles.FlexRow}>
@@ -72,7 +101,8 @@ export class Profiles extends Component {
          
           </Content>
 
-         
+          <Footer_Nav FooterData={FooterData} Navigation={navigate}/>
+  
       </Container>
 
      

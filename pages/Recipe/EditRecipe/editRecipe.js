@@ -7,7 +7,36 @@ import styles from '../../../styles/styles';
 import stylesRC from '../../../styles/StylesRecipeComponent';
 import Comments from '../comments';
 import NewStepPost from '../../../components/NewStepPost/newStepPost';
+import Footer_Nav from '../../../components/common/footer_nav/new_footer';
 
+ 
+const FooterData = [
+  {
+   active: false,
+   link: 'Recipes',
+   icon: 'home'
+  },
+  {
+      active: false,
+      link: 'Recipes',
+      icon: 'list'
+  },
+  {
+      active: false,
+      link: 'AddRecipe',
+      icon: 'add-circle'
+     },
+     {
+      active: false,
+      link: 'Profiles',
+      icon: 'search'
+     },
+     {
+      active: false,
+      link: '/recipes',
+      icon: 'person'
+     },
+]
 export class EditRecipe extends Component {
 
   static navigationOptions = ({ navigation }) => {
@@ -244,6 +273,9 @@ export class EditRecipe extends Component {
             {/* </Form> */}
           </View>
       </Content>
+
+      <Footer_Nav FooterData={FooterData} Navigation={navigate}/>
+
       </Container>
     )
   }  

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, View, Content, Form, CardRecipeItem, Thumbnail, Input,Textarea, Text, Button, Icon  } from 'native-base';
+import AdjustableInput from '../../components/common/adjustableInput';
+
 import stylesRC from '../../styles/StylesRecipeComponent';
 import styles from '../../styles/styles';
 
@@ -90,30 +92,16 @@ var CommentItems = Comment.map((item) => {
     return  (
         <View style={{marginHorizontal: 5, marginVertical: 10}}>
             <Text style={{marginBottom: 10, color: 'white'}}>comments:</Text>
-            <Form onSubmit={this.onSubmit.bind(this)}>
+         
+              <AdjustableInput 
+              placeholder='add comment...'
+              value={text}
+              onChangeText={(text) => this.setState({text: text})}
+              onPress={() => this.onSubmit()}
+              onSubmit={this.onSubmit.bind(this)}
+              icon='send'
+              />
 
-            <View style={{flexDirection:'row', alignItems:'center', height: 'auto', justifyContent:'space-between', borderWidth:1, borderColor: 'white'}}>
-           
-                  <View> 
-                  <Textarea 
-                    style={{marginLeft: 10, height: 'auto', width: 350 }}
-                    placeholder='add comment...'
-                    value={text}
-                    onChangeText={(text) => this.setState({text: text})}
-                    />
-                    </View>
-
-                    <View>
-                    <Button transparent onPress={() => this.onSubmit()} >
-                    <Icon name='send' style={styles.AccentColor1Font} />
-                    </Button>
-                    </View>
-
-              </View>
-
-              
-           
-            </Form>
             {CommentItems}
         </View>
       )

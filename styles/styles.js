@@ -68,7 +68,7 @@ const GlobalStyles = StyleSheet.create({
 
 // START STYLING INFORMATION SECTIONS 
     CardBackground: {
-      backgroundColor: CardBackground
+      backgroundColor: CardBackground,
     },
     loginWrapper: {
       // backgroundColor: '#202649',

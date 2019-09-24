@@ -187,7 +187,7 @@ export class EditRecipe extends Component {
 
   
     return (
-      <Content disableKBDismissScroll={true} style={styles.CardBackground}> 
+      <Container disableKBDismissScroll={true} style={styles.CardBackground} style={styles.CardBackground}> 
 
           <Header style={styles.DarkOpacityBackground}>
           <Left>
@@ -244,7 +244,7 @@ export class EditRecipe extends Component {
             {/* </Form> */}
           </View>
       </Content>
-      </Content>
+      </Container>
     )
   }  
 }

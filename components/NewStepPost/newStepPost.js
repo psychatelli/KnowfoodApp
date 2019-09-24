@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
  import styles from '../../styles/styles';
 
 
-
+ 
 export class NewStepPost extends Component {
 
   constructor(props) {

@@ -89,7 +89,7 @@ RecipeStep: {
   backgroundColor: LightOpacity
 },
 StepNumber: {
- fontSize: 15,
+ fontSize: 18,
  color: SecondaryTextColor
 },
 StepInstructions: {
@@ -104,7 +104,9 @@ EditRecipe_Container: {
 },
 Recipe_header: {
   backgroundColor: DarkOpacity,
-  padding: 10,
+  paddingHorizontal: 10,
+  paddingVertical: 20,
+  marginVertical: 10
 },
 
 Comment: {

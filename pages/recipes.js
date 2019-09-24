@@ -26,7 +26,7 @@ const FooterData = [
   },
   {
       active: false,
-      link: 'NewRecipePost',
+      link: 'AddRecipe',
       icon: 'add-circle'
      },
      {
@@ -101,7 +101,22 @@ class Recipes extends Component {
     )}
     
     return (
-       <Container style={{marginTop: 30}}> 
+      <Container style={styles.CardBackground}>
+
+          <Header style={styles.DarkOpacityBackground}>
+          <Left>
+           
+          </Left>
+          <Body>
+            <Title style={styles.AccentColor1Font}>Recipes</Title>
+          </Body>
+          <Right>
+            <Button transparent>
+              <Text></Text>
+            </Button>
+          </Right>
+        </Header> 
+
         {BodyContent}
         </Container>
     )

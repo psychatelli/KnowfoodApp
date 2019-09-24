@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Comments from './comments';
-import { Container, View, Header, Content, Card, CardRecipeItem, Thumbnail, Text, Button, Icon, Left, Body,  } from 'native-base';
+import { Container, View, Header, Content, Card, CardRecipeItem, Thumbnail, Title,Right, Text, Button, Icon, Left, Body,  } from 'native-base';
 import { Image, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
 import stylesRC from '../../styles/StylesRecipeComponent';
 import styles from '../../styles/styles';
@@ -26,7 +26,7 @@ const FooterData = [
   },
   {
       active: false,
-      link: 'NewRecipePost',
+      link: 'AddRecipe',
       icon: 'add-circle'
      },
      {
@@ -203,7 +203,7 @@ const FooterData = [
                     
                     {/* {Ingredients} */}
                     {/* <Text style={styles.white_font}>{recipe.ingredients[0]}</Text> */}
-                    {recipe.ingredients.map(item=> (<View key={item}><Text style={styles.white_font}> {item}</Text></View> )) }
+                    {recipe.ingredients.map(item=> (<View key={item}><Text style={styles.white_font}>{item}</Text></View> )) }
 
                     <View style={styles.FlexRow}>
                       <Text style={styles.AccentColor1Font}>Comments </Text>
@@ -246,7 +246,19 @@ const FooterData = [
     return (
 
       <Container style={styles.CardBackground}>
-        
+         <Header style={styles.DarkOpacityBackground}>
+          <Left>
+           
+          </Left>
+          <Body>
+            <Title style={styles.AccentColor1Font}>{recipe.title}</Title>
+          </Body>
+          <Right>
+            <Button transparent>
+              <Text></Text>
+            </Button>
+          </Right>
+        </Header>
 
           {RecipeContent}
 

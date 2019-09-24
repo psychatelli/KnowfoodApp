@@ -201,17 +201,9 @@ router.put('/:id',  (req, res) => {
 // @route DELETE api/recipe/:id
 // @route Delete single recipe
 // @route private
-          // router.delete('/:id', (req, res) => {
-          //         Recipe.findById(req.params.id)
-          //         .then(recipe => {
-          //             //Delete
-          //             recipe.remove().then(() => res.json({ success: true}));
-          //         })
-          //         .catch(err => res.status(404).json( {RecipeNotFound: 'No recipe found'}));
-          // });
+        
 
-
-router.delete('/:id', auth, async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     let recipe = await Recipe.findById(req.params.id);
 
@@ -220,15 +212,17 @@ router.delete('/:id', auth, async (req, res) => {
     }
 
     //Check user
-    if(recipe.user.toString() !== req.user.id ){
-      return res.status(401).json({ msg: 'User not authorized'})
-    }
+    // if(recipe.user.toString() !== req.user.id ){
+    //   return res.status(401).json({ msg: 'User not authorized'})
+    // }
     await recipe.remove();
 
     res.json({msg: 'Recipe Removed'})
 
 
   }catch(err) {
+    console.error('ERROR IN DELETE RECIPE')
+
     console.error(err.message)
     if(err.kind === 'ObjectId') {
       return res.status(404).json({ msg: 'Recipe not found'})

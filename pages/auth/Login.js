@@ -91,7 +91,7 @@ class Login extends Component {
                     <Alert />
                   
 
-                            <Item regular style={styles.LoginInput}> 
+                            <Item regular style={styles.InputStyle}> 
                             <Input
                             placeholder='Email'
                             autoCapitalize='none'
@@ -102,7 +102,7 @@ class Login extends Component {
                             </Item>
                           
                                                 
-                        <Item regular style={styles.LoginInput}> 
+                        <Item regular style={styles.InputStyle}> 
                         <Input 
                             placeholder='password'
                             onChangeText={(password) => this.setState({password})}

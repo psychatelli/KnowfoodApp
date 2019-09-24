@@ -10,7 +10,7 @@ import { whileStatement } from '@babel/types';
 export let DarkOpacity =  'rgba(40, 40, 40, 0.482)';
 export let MidOpacity =  'rgba(87, 86, 86, 0.482)';
 export let LightOpacity =  'rgba(188, 186, 186, 0.222)';
-
+export let veryLightOpacity = 'rgba(205, 203, 203, 0.859)'
 
 export let PrimaryTextColor = 'white';
 export let SecondaryTextColor = 'rgba(42, 231, 171, 0.564)';
@@ -45,7 +45,7 @@ const GlobalStyles = StyleSheet.create({
   },
   DarkOpacityBackground: {
     backgroundColor: DarkOpacity,
-
+ 
   },
   MidOpacityBackground: {
     backgroundColor: MidOpacity,
@@ -55,10 +55,8 @@ const GlobalStyles = StyleSheet.create({
     backgroundColor: LightOpacity,
 
   },
-  LoginInput: {
-    // flex: 1,
+  InputStyle: {
     backgroundColor: 'white',
-    // height: 40,
     marginBottom: 10,
   },
 

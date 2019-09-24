@@ -61,9 +61,10 @@ class Recipes extends Component {
     }
    
                             
-    componentWillMount() {          
+    componentDidMount() {          
       // deleteAsyncStorage()    
-      this.props.getRecipes();      
+      this.props.getRecipes(); 
+      console.log('you hit recipes!!!!')     
     }
  
   
@@ -100,7 +101,7 @@ class Recipes extends Component {
     )}
     
     return (
-       <Container> 
+       <Container style={{marginTop: 30}}> 
         {BodyContent}
         </Container>
     )

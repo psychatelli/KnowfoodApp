@@ -43,16 +43,13 @@ const RootStack = createStackNavigator(
      
   },
   {
-    
-  
-   
-    
+ 
   },
  
   
 )
-
-const AuthStack = createStackNavigator({ 
+   
+const AuthStack = createSwitchNavigator({ 
   Recipes: Recipes,
   Recipe: Recipe,
   EditRecipe: EditRecipe,
@@ -79,6 +76,7 @@ class AuthLoadingScreen extends Component {
         };
  
  componentDidMount(){
+
  }
 
 

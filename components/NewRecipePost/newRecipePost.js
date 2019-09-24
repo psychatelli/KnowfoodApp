@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
- import {  addRecipe } from '../../actions/recipesAction';
+ import {  addRecipe, getRecipes } from '../../actions/recipesAction';
  import { Container, View, Header, Content, Card, CardRecipeItem, Thumbnail, Text, Button, Icon, Left, Body, Input, Form, Item  } from 'native-base';
  import { Image, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
  import stylesRC from '../../styles/StylesRecipeComponent';
@@ -42,6 +42,7 @@ export class NewRecipePost extends Component {
           title : '',
           // thumbnail : '',
         });
+        this.props.getRecipes()
 
         this.props.navigation.navigate('EditRecipe')
       }
@@ -81,4 +82,4 @@ const mapStateToProps = state => ({
 
 })
 
-export default connect(mapStateToProps, { addRecipe})(NewRecipePost)
+export default connect(mapStateToProps, { addRecipe, getRecipes})(NewRecipePost)

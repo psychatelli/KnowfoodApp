@@ -68,12 +68,12 @@ var CommentItems = Comment.map((item) => {
               
                           <View style={stylesRC.UserNameWrapper}> 
                             <Text style={styles.AccentColor1Font}> {item.username}</Text>
-                            <View style={styles.white_font}><Text>{item.date} </Text></View> 
+                            <View><Text>{item.date} </Text></View> 
                           </View>
                       </View>
-                      
-                      {Visibility ?  <Button  bordered success small onPress={() => { this.deleteComment(item._id)}} >
-                        <Icon name='close' style={{color: 'white'}} />
+                       
+                      {Visibility ?  <Button transparent style={{borderColor: 'aquamarine',borderWidth: 1, borderRadius: 5, }} small onPress={() => { this.deleteComment(item._id)}} >
+                        <Icon name='close' style={styles.AccentColor1Font} />
                       </Button>
                 :<Text></Text> }
                       
@@ -89,9 +89,11 @@ var CommentItems = Comment.map((item) => {
 
     return  (
         <View style={{marginHorizontal: 5, marginVertical: 10}}>
+            <Text style={{marginBottom: 10, color: 'white'}}>comments:</Text>
             <Form onSubmit={this.onSubmit.bind(this)}>
-            <View style={{flexDirection:'row', alignItems:'center', height: 'auto', justifyContent:'space-between', borderWidth:1}}>
-          
+
+            <View style={{flexDirection:'row', alignItems:'center', height: 'auto', justifyContent:'space-between', borderWidth:1, borderColor: 'white'}}>
+           
                   <View> 
                   <Textarea 
                     style={{marginLeft: 10, height: 'auto', width: 350 }}
@@ -108,6 +110,8 @@ var CommentItems = Comment.map((item) => {
                     </View>
 
               </View>
+
+              
            
             </Form>
             {CommentItems}

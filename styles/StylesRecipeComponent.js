@@ -3,7 +3,7 @@
 //import { primaryColor } from “../styles/common.js”;
 
 import { StyleSheet, Platform } from 'react-native';
-import {MidOpacity, CardBackground, DarkOpacity, LightOpacity, PrimaryTextColor, SecondaryTextColor, AccentColor1, AccentColor2} from './styles';
+import {MidOpacity, CardBackground, DarkOpacity, LightOpacity, veryLightOpacity, PrimaryTextColor, SecondaryTextColor, AccentColor1, AccentColor2} from './styles';
 let opacityBackground = 'rgba(40,44,42,0.5)'; 
 let borderGray = '#d6d7da';
 let lightGray = '#F1F1F3';
@@ -108,12 +108,17 @@ Recipe_header: {
 },
 
 Comment: {
-  backgroundColor: LightOpacity,
+  // backgroundColor: veryLightOpacity,
   padding: 10,
-  borderRadius: 10,
+  // borderRadius: 10,
   marginVertical: 5,
+  borderLeftColor: AccentColor1,
+  borderBottomColor: MidOpacity,
+  borderRightColor: MidOpacity,
+  borderTopColor: MidOpacity,
+  borderWidth: 2,
 
-
+ 
 }
   
 

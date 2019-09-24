@@ -50,7 +50,7 @@ export class EditRecipe extends Component {
     }
 
         componentWillMount(){
-          const Ingredients = this.props.recipe.ingredients.join(',');
+          let Ingredients = this.props.recipe.ingredients.join(',');
           this.setState({
             ingredients: Ingredients
           })

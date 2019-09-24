@@ -31,8 +31,8 @@ const FooterData = [
      },
      {
       active: false,
-      link: '/recipes',
-      icon: 'person'
+      link: 'Profiles',
+      icon: 'search'
      },
      {
       active: false,

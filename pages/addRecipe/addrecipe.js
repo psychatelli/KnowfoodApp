@@ -13,8 +13,7 @@ export class AddRecipe extends Component {
     this.state = {
       title: '',
       thumbnail: 'https://photos.smugmug.com/Test/i-W5SXVkM/0/1d663a9e/S/fettuccine-S.jpg',
-      ingredients: 'sald, pepper, onion'
-     
+      ingredients: 'sald, pepper, onion, popcorn'
     }
     this.onSubmit = this.onSubmit.bind(this)
 }
@@ -42,7 +41,6 @@ export class AddRecipe extends Component {
           title : '',
           // thumbnail : '',
         });
-        this.props.getRecipes()
 
         this.props.navigation.navigate('EditRecipe')
       }

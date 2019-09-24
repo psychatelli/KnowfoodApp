@@ -1,25 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { getProfiles } from '../actions/profileActions';
-import { withStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
-import CircleButton from '../components/common/circleButton';
-import Button from '@material-ui/core/Button';
+import { Container, View,  Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Title, Right, Header, List, ListItem  } from 'native-base';
+import styles from '../styles/styles';
+import stylesRC from '../styles/StylesRecipeComponent';
+import AdjustableInput from '../components/common/adjustableInput';
 
-
-  const styles = {
-    list: {
-      width: 250,
-    },
-    fullList: {
-      width: 'auto',
-    },
-    DrawerContainer: {
-      width: 400,
-      padding: 20
-    }
-    
-  };
+ 
 
 export class Profiles extends Component {
 
@@ -37,36 +24,56 @@ export class Profiles extends Component {
       render() {
       const { profiles, classes } = this.props;
       
-  
 
-    const Profiles = profiles.map((profile) => (
-      <div className='Card RecipeCard'>
-          <div className='SpaceBetween'>
-              <div>    
-                <Link to={`/profiles/${profile._id}`}> 
-                <div className='Info'>
-                  <div> <img className='Avatar' src={profile.avatar} /> </div>
-                  <div>  {profile.username} </div>
-               </div> 
-                </Link>     
-              </div>
-
-              <div> 
+    const Profiles = profiles.map((item) => (
+          <ListItem key={item._id} style={styles.FlexRow}>
                 
-              </div>
-          </div>
-      </div>
+                    <View style={stylesRC.ThumbnailWrapper}> 
+                      <Thumbnail style={stylesRC.ThumbnailImage}   source={{uri: `https:${item.avatar}`}} />
+                    </View>
+        
+                    <View> 
+                      <Text style={stylesRC.UserName}>{item.username}</Text>
+                    </View>
+   
+          </ListItem>
+      
     ))
 
     
     return (
-      <div className='Grid_wrapper'>
+      <Container style={styles.CardBackground}>
        
+       <Header style={styles.DarkOpacityBackground}>
+          <Left>
+           
+          </Left>
+          <Body>
+            <Title style={styles.AccentColor1Font}>Profiles</Title>
+          </Body>
+          <Right>
+            <Button transparent>
+              <Text></Text>
+            </Button>
+          </Right>
+        </Header> 
  
-          {Profiles}
+        <Content>
+        
+          <View style={{marginVertical: 10}}>  
+          <AdjustableInput 
+          placeholder='search'
+          value=''
+          icon='search'
+          />
+          </View>
+
+           {Profiles}
+         
+          </Content>
 
          
-      </div>
+      </Container>
 
      
     )
@@ -81,5 +88,5 @@ const mapStateToProps = state => ({
 })
 
 
-export default connect(mapStateToProps, {getProfiles})(withStyles(styles)(Profiles));
+export default connect(mapStateToProps, {getProfiles})(Profiles);
  

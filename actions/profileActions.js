@@ -7,7 +7,7 @@ import {GET_PROFILES, GET_PROFILE, PROFILE_LOADING, PROFILE_ERROR } from './type
 export const getProfiles = () => async dispatch => {
   //  dispatch(setProfileLoading());
     try {
-      const res = await axios.get('/api/profile/all');
+      const res = await axios.get('http://10.0.0.85:5000/api/profile/all');
       console.log(res.data)
 
       dispatch({
@@ -27,7 +27,7 @@ export const getProfiles = () => async dispatch => {
   export const getProfile = id => dispatch => {
     dispatch(setProfileLoading());
     axios
-      .get(`/api/profile/${id}`)
+      .get(`http://10.0.0.85:5000/api/profile/${id}`)
       .then(res =>
         dispatch({
           type: GET_PROFILE,

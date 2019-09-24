@@ -15,6 +15,7 @@ import {AsyncStorage, ActiveIndicator, StatusBar} from 'react-native';
   import Recipe from './pages/Recipe/recipe';
   import EditRecipe from './pages/Recipe/EditRecipe/editRecipe';
   import AddRecipe from './pages/addRecipe/addrecipe';
+  import Profiles from './pages/profiles';
   import RecipeComponent from './components/RecipeComponent/recipeComponent';
   import { Container, View, Text  } from 'native-base';
  
@@ -53,7 +54,8 @@ const AuthStack = createSwitchNavigator({
   Recipes: Recipes,
   Recipe: Recipe,
   EditRecipe: EditRecipe,
-  AddRecipe: AddRecipe 
+  AddRecipe: AddRecipe,
+  Profiles: Profiles 
 })
 
 

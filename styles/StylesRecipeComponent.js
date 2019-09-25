@@ -25,6 +25,7 @@ const stylesRC = StyleSheet.create({
   },
 
   CardHeaderWrapper: {
+    
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',

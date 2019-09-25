@@ -5,18 +5,46 @@ import styles from "../../../styles/styles";
 import { bindActionCreators } from 'redux';
 
 
+const FooterData = [
+    {
+     active: 0,
+     link: 'Recipes',
+     icon: 'home'
+    },
+    {
+        active: 1,
+        link: 'Recipes',
+        icon: 'list'
+    },
+    {
+        active: 2,
+        link: 'AddRecipe',
+        icon: 'add-circle'
+       },
+       {
+        active: 3,
+        link: 'Profiles',
+        icon: 'search'
+       },
+       {
+        active: 4,
+        link: 'Profile',
+        icon: 'person'
+       },
+  ]
+   
 
 export default class Footer_Nav extends Component {
 
     renderList() {
-        return this.props.FooterData.map((item) => {
-            const { Navigation } = this.props;
+        return FooterData.map((item) => {
+            const { Navigation,  pageIndicator} = this.props;
 
             return (
                 // <Button key={item.id}  onPress={() => this.props.navigation.navigate("LCL_Active_Tabs")}> 
-                <Button style={{backgroundColor: 'none'}} active={item.active} key={item.icon}  
+                <Button style={{backgroundColor: 'none'}}  key={item.icon}  
                 onPress={() => Navigation(item.link)}> 
-                <Icon style={{ color: item.active === true ? "#FFF" : "#2AE7AA" }} name={item.icon}/>
+                <Icon style={{ color: item.active == pageIndicator ? "#FFF" : "#2AE7AA" }} name={item.icon}/>
                 </Button>
            
          );
@@ -24,6 +52,8 @@ export default class Footer_Nav extends Component {
     }
 
     render() {
+        const { pageIndicator } = this.props;
+
         return (
             <Footer style={styles.FooterAndHeader}>
             <FooterTab > 

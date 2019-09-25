@@ -19,8 +19,7 @@ import { connect } from 'react-redux';
     }
  
     return (
-      <Container style={styles.CardBackground}>
-        <Content>
+        <Content style={styles.CardBackground}>
  
           {
             RecipeObj.map(item=> (
@@ -39,9 +38,7 @@ import { connect } from 'react-redux';
                   </View> 
                 </View>
         
-                    <View style={stylesRC.MenuWrapper}> 
-                      <Text style={stylesRC.Menu}> ...</Text>
-                    </View>
+                    
         
               </View>
         
@@ -55,7 +52,6 @@ import { connect } from 'react-redux';
           }
   
         </Content>
-      </Container>
     );
   }
 }

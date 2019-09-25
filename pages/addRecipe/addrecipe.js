@@ -5,36 +5,10 @@ import { connect } from 'react-redux';
  import { Image, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
  import stylesRC from '../../styles/StylesRecipeComponent';
  import styles from '../../styles/styles';
- import Footer_Nav from '../../components/common/footer_nav/new_footer';
+ import Footer_Nav from '../../components/common/footer_nav/footer_nav';
 
  
- const FooterData = [
-   {
-    active: false,
-    link: 'Recipes',
-    icon: 'home'
-   },
-   {
-       active: false,
-       link: 'Recipes',
-       icon: 'list'
-   },
-   {
-       active: true,
-       link: 'AddRecipe',
-       icon: 'add-circle'
-      },
-      {
-       active: false,
-       link: 'Profiles',
-       icon: 'search'
-      },
-      {
-       active: false,
-       link: '/recipes',
-       icon: 'person'
-      },
- ]
+ 
 export class AddRecipe extends Component {
 
   constructor(props) {
@@ -112,7 +86,7 @@ export class AddRecipe extends Component {
         </View>
     </Content>
 
-    <Footer_Nav FooterData={FooterData} Navigation={navigate}/>
+    <Footer_Nav pageIndicator='2' Navigation={navigate}/>
 
     </Container>
     )

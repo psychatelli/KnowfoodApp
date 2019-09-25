@@ -5,36 +5,10 @@ import { Container, View,  Content, Card, CardItem, Thumbnail, Text, Button, Ico
 import styles from '../styles/styles';
 import stylesRC from '../styles/StylesRecipeComponent';
 import AdjustableInput from '../components/common/adjustableInput';
-import Footer_Nav from '../components/common/footer_nav/new_footer';
+import Footer_Nav from '../components/common/footer_nav/footer_nav';
 
  
-const FooterData = [
-  {
-   active: false,
-   link: 'Recipes',
-   icon: 'home'
-  },
-  {
-      active: false,
-      link: 'Recipes',
-      icon: 'list'
-  },
-  {
-      active: false,
-      link: 'AddRecipe',
-      icon: 'add-circle'
-     },
-     {
-      active: true,
-      link: 'Profiles',
-      icon: 'search'
-     },
-     {
-      active: false,
-      link: '/recipes',
-      icon: 'person'
-     },
-]
+
 
 export class Profiles extends Component {
 
@@ -101,7 +75,7 @@ export class Profiles extends Component {
          
           </Content>
 
-          <Footer_Nav FooterData={FooterData} Navigation={navigate}/>
+          <Footer_Nav pageIndicator='3' Navigation={navigate}/>
   
       </Container>
 

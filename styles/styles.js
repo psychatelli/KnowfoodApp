@@ -133,7 +133,8 @@ const GlobalStyles = StyleSheet.create({
 
     FlexRow: {
       flex: 1,
-      flexDirection: 'row', 
+      flexDirection: 'row',
+      alignItems: 'center' 
     },
   
     custom_row: {

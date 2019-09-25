@@ -8,38 +8,12 @@ import styles from '../../styles/styles';
 import { connectActionSheet } from '@expo/react-native-action-sheet'
 import { ActionSheetProvider } from '@expo/react-native-action-sheet'
 import NewStepPost from '../../components/NewStepPost/newStepPost';
-import Footer_Nav from '../../components/common/footer_nav/new_footer';
+import Footer_Nav from '../../components/common/footer_nav/footer_nav';
 import { addRecipeStep, deleteRecipe, getRecipe } from '../../actions/recipesAction';
 import Step from './step';
 
 
-const FooterData = [
-  {
-   active: false,
-   link: 'Recipes',
-   icon: 'home'
-  },
-  {  
-      active: false,
-      link: 'Recipes',
-      icon: 'list'
-  },
-  {
-      active: false,
-      link: 'AddRecipe',
-      icon: 'add-circle'
-     },
-     {
-      active: false,
-      link: 'Profiles',
-      icon: 'search'
-     },
-     {
-      active: false,
-      link: '/recipes',
-      icon: 'person'
-     },
-]
+
 
  class Recipe extends React.Component {
   constructor(props) {
@@ -57,26 +31,6 @@ const FooterData = [
     // this.onSelection = this.onSelection.bind(this);
   }
 
-
-
-
-  
-  static navigationOptions = ({ navigation }) => {
-    return {
-      headerTitle: 'title',
-      headerStyle: styles.FooterAndHeader,
-      headerTitleStyle: { color: 'white'},
-      headerRight: (
-        <Button
-          onPress={() => alert('This is a button!')}
-          title="Info"
-          color="#fff"
-      />     )
-    }   
-  };
-
-
-  
 
   _onOpenActionSheet = () => {
     let options;
@@ -262,7 +216,7 @@ const FooterData = [
 
           {RecipeContent}
 
-          <Footer_Nav FooterData={FooterData} Navigation={navigate}/>
+          <Footer_Nav Navigation={navigate}/>
 
        </Container>
         );

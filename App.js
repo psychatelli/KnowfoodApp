@@ -10,12 +10,13 @@ import { AuthorizedUser, removeToken  } from './actions/auth';
 // import  from './utils/setAuthToken';
 import {AsyncStorage, ActiveIndicator, StatusBar} from 'react-native';
 
- import NativeBase from './components/Component1/Nativebase1';
  import Recipes from './pages/recipes';
   import Recipe from './pages/Recipe/recipe';
   import EditRecipe from './pages/Recipe/EditRecipe/editRecipe';
   import AddRecipe from './pages/addRecipe/addrecipe';
   import Profiles from './pages/profiles';
+  import Profile from './pages/profile';
+
   import RecipeComponent from './components/RecipeComponent/recipeComponent';
   import { Container, View, Text  } from 'native-base';
  
@@ -31,17 +32,7 @@ const storeInstance = store()
 const RootStack = createStackNavigator(
 
   {
-    Login: Login,
-    RecipeComponent: RecipeComponent,
-    NativeBase: {
-      screen: NativeBase,
-      navigationOptions: ({ navigation}) => ({
-        title: 'Profile For' + navigation.getParam('name'),
-        cardStyle: {backgroundColor: 'red'},
-        headerTintColor: 'blue'
-      }),
-    },
-     
+    Login: Login,     
   },
   {
  
@@ -55,7 +46,8 @@ const AuthStack = createSwitchNavigator({
   Recipe: Recipe,
   EditRecipe: EditRecipe,
   AddRecipe: AddRecipe,
-  Profiles: Profiles 
+  Profiles: Profiles,
+  Profile: Profile
 })
 
 

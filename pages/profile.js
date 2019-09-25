@@ -2,28 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { getProfile } from '../actions/profileActions';
 import { getUsersRecipes } from '../actions/recipesAction';
-import { withStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
-import CircleButton from '../components/common/circleButton';
-import Moment from 'react-moment'
-import Menu_dropdown from '../components/common/menu_dropdown';
+import { Container, View, Header, Content, Card, CardRecipeItem, Thumbnail, Title,Right, Text, Button, Icon, Left, Body,  } from 'native-base';
+import Footer_Nav from '../components/common/footer_nav/footer_nav';
+import styles from '../styles/styles';
+import stylesRC from '../styles/StylesRecipeComponent';
+import RecipeComponent from '../components/RecipeComponent/recipeComponent';
 
-import Button from '@material-ui/core/Button';
- 
 
-const styles = {
-  list: {
-    width: 250,
-  },
-  fullList: {
-    width: 'auto',
-  },
-  DrawerContainer: {
-    width: 400,
-    padding: 20
-  }
-  
-};
 
 export class Profile extends Component {
 
@@ -38,58 +23,53 @@ export class Profile extends Component {
     }
 
       componentWillMount() {
-         this.props.getProfile(this.props.match.params.id);
-         this.props.getUsersRecipes(this.props.match.params.id)
+         this.props.getProfile(this.props.auth.user._id);
+         this.props.getUsersRecipes(this.props.auth.user._id)
       }
 
       render() {
       const { profile, recipes, classes } = this.props;
-      
-  
+      const { navigate } = this.props.navigation;
 
-      const Recipes = recipes.map((item) => (
-        <div className='Card RecipeCard'>
-            <div className='SpaceBetween'>
-                <div>         
-                <h5> {item.title} </h5>
-                <div className='Info'>
-                  <div> <img className='Avatar' src={item.avatar} /> </div>
-                  <div>  {item.username} </div>
-                  {/* <div> <Moment format='YYY/MM/DD'>{item.date}</Moment> </div>  */}
-                </div> 
-  
-                </div>
-  
-                <div> 
-                {/* <i className="material-icons">favorite_border</i>  */}
-
-                </div>
-            </div>
-            <Link to={`/recipe/${item._id}`}>  
-            <img src={item.thumbnail} /> 
-            </Link>
-        </div>
-      ))
-
- 
-
-    
     return (
-      <div className='Grid_wrapper'>
-        <div className="ProfileHeader">
-          <div className='Info'>
-            <div>  <img src={profile.avatar} style={{width: '50px', borderRadius: '50%'}} /> </div> 
-            <p> <label>RECIPES</label> {recipes.length}</p> 
-            <p> <label>FOLLOWERS</label>  {recipes.length}</p>
-          </div>
-          <div> {profile.username}  </div>
+      <Container style={styles.CardBackground}>
+        <Header style={styles.DarkOpacityBackground}>
+          <Left>
+           
+          </Left>
+          <Body>
+            <Title style={styles.AccentColor1Font}>{profile.username}</Title>
+          </Body>
+          <Right>
+            <Button transparent>
+              <Text></Text>
+            </Button>
+          </Right>
+        </Header>
+
+        <Content> 
+
+        <View style={{marginVertical: 20, padding: 10, backgroundColor: 'gray'}}>
+          
+             <View style={styles.FlexRow}>
+              <Thumbnail style={stylesRC.ThumbnailImage}  source={{uri: `https:${profile.avatar}`}} />
+              <Text style={styles.white_font}>     <Text style={styles.custom_text}>recipes:</Text> {recipes.length}</Text> 
+              <Text style={styles.white_font}>     <Text style={styles.custom_text}>followers:</Text> {recipes.length}</Text>
+            </View>
+
+         
+          <View><Text style={styles.white_font}>{profile.username}</Text></View>
 
           
-        </div>
-          {Recipes}
+        </View>
 
+          <RecipeComponent Navigation={navigate} RecipeObj={recipes} />
 
-      </div>
+          </Content>
+
+          <Footer_Nav  pageIndicator='4' Navigation={navigate}/>
+
+      </Container>
 
      
     )
@@ -101,9 +81,11 @@ export class Profile extends Component {
 
 const mapStateToProps = state => ({
   profile: state.profiles.item,
-  recipes: state.recipes.items
+  recipes: state.recipes.items,
+  auth: state.auth,
+
 })
 
 
-export default connect(mapStateToProps, {getProfile, getUsersRecipes})(withStyles(styles)(Profile));
+export default connect(mapStateToProps, {getProfile, getUsersRecipes})(Profile);
   

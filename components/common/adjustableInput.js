@@ -4,20 +4,22 @@ import { Container, View, Content, Form, CardRecipeItem, Thumbnail, Input,Textar
 
 export default class AdjustableInput extends Component {
     render() {
-        const { placeholder, value, onChangeText, onPress, icon,onSubmit } = this.props;
+        const { placeholder, value, onChangeText, onPress, icon,onSubmit,onEndEditing } = this.props;
         return (
             <Form onSubmit={onSubmit}> 
 
-        <View style={{flexDirection:'row', alignItems:'center', height: 'auto', justifyContent:'space-between', borderWidth:1, borderColor: 'white'}}>
+         <View style={{flexDirection:'row', alignItems:'center', height: 'auto', justifyContent:'space-between', borderWidth:1, borderColor: 'white', marginBottom: 5,}}>
             <View> 
-            <Textarea 
-              style={{marginLeft: 10, height: 'auto', width: 350 }}
+            <Textarea placeholderTextColor='aqua'
+              
+              style={{marginLeft: 10, height: 'auto' }}
               placeholder={placeholder}
               value={value}
               onChangeText={onChangeText}
+              onEndEditing={onEndEditing}
               />
               </View>
-
+              
               <View>
               <Button transparent onPress={onPress} >
               <Icon name={icon} style={styles.AccentColor1Font} />

@@ -8,39 +8,11 @@ import { getRecipes, myAccessToken } from '../actions/recipesAction';
 import { logout} from '../actions/auth';
  import { loadUser } from '../actions/auth';
 import RecipeComponent from '../components/RecipeComponent/recipeComponent';
-import Footer_Nav from '../components/common/footer_nav/new_footer';
+import Footer_Nav from '../components/common/footer_nav/footer_nav';
 import styles from '../styles/styles';
 import {setToken, getAsyncStorage, deleteAsyncStorage} from '../actions/utils/setAuthToken';
 
 
-const FooterData = [
-  {
-   active: true,
-   link: 'Recipes',
-   icon: 'home'
-  },
-  {
-      active: false,
-      link: 'Recipes',
-      icon: 'list'
-  },
-  {
-      active: false,
-      link: 'AddRecipe',
-      icon: 'add-circle'
-     },
-     {
-      active: false,
-      link: 'Profiles',
-      icon: 'search'
-     },
-     {
-      active: false,
-      link: '/recipes',
-      icon: 'person'
-     },
-]
- 
 
 class Recipes extends Component {
 
@@ -96,7 +68,7 @@ class Recipes extends Component {
          
            
           <RecipeComponent Navigation={navigate} RecipeObj={recipes} />
-          <Footer_Nav FooterData={FooterData} Navigation={navigate}/>
+          <Footer_Nav pageIndicator='0' Navigation={navigate}/>
         </Container> 
     )}
     

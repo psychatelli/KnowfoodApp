@@ -7,36 +7,10 @@ import styles from '../../../styles/styles';
 import stylesRC from '../../../styles/StylesRecipeComponent';
 import Comments from '../comments';
 import NewStepPost from '../../../components/NewStepPost/newStepPost';
-import Footer_Nav from '../../../components/common/footer_nav/new_footer';
-
+import Footer_Nav from '../../../components/common/footer_nav/footer_nav';
+import AdjustableInput from '../../../components/common/adjustableInput';
  
-const FooterData = [
-  {
-   active: false,
-   link: 'Recipes',
-   icon: 'home'
-  },
-  {
-      active: false,
-      link: 'Recipes',
-      icon: 'list'
-  },
-  {
-      active: false,
-      link: 'AddRecipe',
-      icon: 'add-circle'
-     },
-     {
-      active: false,
-      link: 'Profiles',
-      icon: 'search'
-     },
-     {
-      active: false,
-      link: '/recipes',
-      icon: 'person'
-     },
-]
+
 export class EditRecipe extends Component {
 
   static navigationOptions = ({ navigation }) => {
@@ -74,7 +48,6 @@ export class EditRecipe extends Component {
           newStepThumbnail: 'https://photos.smugmug.com/Test/i-W5SXVkM/0/1d663a9e/S/fettuccine-S.jpg'
 
         }
-      
         this.onSubmit = this.onSubmit.bind(this)
     }
 
@@ -240,15 +213,24 @@ export class EditRecipe extends Component {
           <View>
             {/* <Form onSubmit={() => {this.onSubmit}}> */}
                 <View style={{margin: 10 }}> 
-                <Input regular style={styles.InputStyle} 
+                
+                <AdjustableInput 
+                placeholder='Title'  
+                value={this.state.title} 
+                onChangeText={(title) => this.setState({title: title})} 
+                onEndEditing={() => {this.updateRecipe()}} 
+                />
+                {/* <Input regular style={styles.InputStyle} 
                 placeholder='Title'  value={this.state.title} 
                 onChangeText={(title) => this.setState({title: title})} 
-                onEndEditing={() => {this.updateRecipe()}} />
+                onEndEditing={() => {this.updateRecipe()}} /> */}
 
-                <Textarea rowSpan={2} regular style={styles.InputStyle} 
-                placeholder='Ingredients. Must seperate with comma'  value={this.state.ingredients} 
+                <AdjustableInput  
+                placeholder='Ingredients. Must seperate with comma'  
+                value={this.state.ingredients} 
                 onChangeText={(ingredients) => this.setState({ingredients: ingredients})} 
-                onEndEditing={() => {this.updateRecipe()}} />
+                onEndEditing={() => {this.updateRecipe()}} 
+                />
 
 
                 </View>
@@ -274,7 +256,7 @@ export class EditRecipe extends Component {
           </View>
       </Content>
 
-      <Footer_Nav FooterData={FooterData} Navigation={navigate}/>
+      <Footer_Nav Navigation={navigate}/>
 
       </Container>
     )

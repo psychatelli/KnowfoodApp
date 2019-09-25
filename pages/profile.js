@@ -49,7 +49,7 @@ export class Profile extends Component {
 
         <Content> 
 
-        <View style={{marginVertical: 20, padding: 10, backgroundColor: 'gray'}}>
+        <View style={stylesRC.Header_two}>
           
              <View style={styles.FlexRow}>
               <Thumbnail style={stylesRC.ThumbnailImage}  source={{uri: `https:${profile.avatar}`}} />

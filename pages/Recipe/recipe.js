@@ -146,7 +146,7 @@ import Step from './step';
                 {recipe.step === undefined ?  <ActivityIndicator size='large' color='gray'/>
                 : <View>
 
-              <View style={stylesRC.Recipe_header}>  
+              <View style={stylesRC.Header_two}>  
                     <View style={styles.FlexRow}>
                       <Text style={styles.AccentColor1Font}>Date </Text>
                       <Text style={styles.white_font}>{recipe.date}</Text>

@@ -10,9 +10,9 @@ export default class AdjustableInput extends Component {
 
          <View style={{flexDirection:'row', alignItems:'center', height: 'auto', justifyContent:'space-between', borderWidth:1, borderColor: 'white', marginBottom: 5,}}>
             <View> 
-            <Textarea placeholderTextColor='aqua'
+            <Textarea placeholderTextColor='aqua' 
               
-              style={{marginLeft: 10, height: 'auto' }}
+              style={{marginLeft: 10, height: 'auto', width:340, padding: 10, color: 'white' }}
               placeholder={placeholder}
               value={value}
               onChangeText={onChangeText}
@@ -21,6 +21,7 @@ export default class AdjustableInput extends Component {
               </View>
               
               <View>
+
               <Button transparent onPress={onPress} >
               <Icon name={icon} style={styles.AccentColor1Font} />
               </Button>

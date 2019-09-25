@@ -103,8 +103,8 @@ EditRecipe_Container: {
   padding: 10,
   backgroundColor: 'green'
 },
-Recipe_header: {
-  backgroundColor: DarkOpacity,
+Header_two: {
+  backgroundColor: 'gray',
   paddingHorizontal: 10,
   paddingVertical: 20,
   marginVertical: 10

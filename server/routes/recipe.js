@@ -105,7 +105,7 @@ router.get('/user/:userId', async (req, res) => {
                   req.body.ingredients.split(',')
                 }
 
-
+  
                 const newRecipe = new Recipe({
                   thumbnail: req.body.thumbnail,
                   title: req.body.title,
@@ -116,7 +116,7 @@ router.get('/user/:userId', async (req, res) => {
                   user: req.body.user,
                   ingredients: req.body.ingredients,
                 })
- 
+                
 
             const recipe = await newRecipe.save();
             res.json(recipe)

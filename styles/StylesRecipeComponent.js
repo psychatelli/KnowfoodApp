@@ -104,6 +104,18 @@ EditRecipe_Container: {
   backgroundColor: 'green'
 },
 Header_two: {
+  flex: 1,
+  flexDirection: 'row',
+  alignItems: 'center',
+  backgroundColor: 'gray',
+  paddingHorizontal: 10,
+  paddingVertical: 20,
+  marginVertical: 10
+},
+
+Header_one: {
+  flex: 1,
+  
   backgroundColor: 'gray',
   paddingHorizontal: 10,
   paddingVertical: 20,

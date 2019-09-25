@@ -7,6 +7,7 @@ const initialState = {
     items: [],
     steps: [],
     item: {},
+    profileRecipes: [],
     itemSelected: {},
     loading: true,
     errors: {},
@@ -25,13 +26,15 @@ const initialState = {
         };
 
         case GET_RECIPES:
-        case GET_USERS_RECIPES: 
-
         return{
             ...state,
             items: action.payload,
         };
-       
+        case GET_USERS_RECIPES: 
+        return{
+            ...state,
+            profileRecipes: action.payload
+        };
         case GET_RECIPE:
         case ADD_RECIPE:   
         return{

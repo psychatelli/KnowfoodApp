@@ -163,15 +163,15 @@ export class EditRecipe extends Component {
               </Button>
             </View>
                  
-            <Item regular style={styles.InputStyle}> 
-              <Input
-              name='text'
-              value={item.text}
-              autoCapitalize='none'
-              // onChangeText={(email) => this.setState({email: email})}
-              onChangeText={this.handleStepChange(index)} onEndEditing={() => {this.updateRecipeStep()}}
-              />
-              </Item>
+            
+            <AdjustableInput  
+                value={item.text}
+                autoCapitalize='none'
+                onChangeText={this.handleStepChange(index)} onEndEditing={() => {this.updateRecipeStep()}}
+                />
+
+             
+             
   
               <View style={stylesRC.PostImageWrapper}>
                    <Image style={stylesRC.PostImage} source={{uri: item.thumbnail}}/>

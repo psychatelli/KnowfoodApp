@@ -3,20 +3,33 @@ import { Image, TouchableWithoutFeedback } from 'react-native';
 import { Container, Header, Content, View, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body,  } from 'native-base';
 import stylesRC from '../../styles/StylesRecipeComponent';
 import styles from '../../styles/styles';
-import { getRecipe } from '../../actions/recipesAction';
+import { getRecipe, getUsersRecipes } from '../../actions/recipesAction';
+import { getProfile } from '../../actions/profileActions';
 import { connect } from 'react-redux';
 // import console = require('console');
 
  class RecipeComponent extends Component {
+
+
+  getRecipeID = (id) => {
+    this.props.getRecipe(id);
+    this.props.Navigation('Recipe')
+    
+  }
+
+
+  getProfile = (profileID) =>{
+    this.props.getProfile(profileID)
+    this.props.getUsersRecipes(profileID)
+    this.props.Navigation('Profile')
+  }
+
+
   render() {
     const {Navigation, RecipeObj } = this.props;
 
  
-    getRecipeID = (id) => {
-      this.props.getRecipe(id);
-      this.props.Navigation('Recipe')
-      
-    }
+    
  
     return (
         <Content style={styles.CardBackground}>
@@ -25,11 +38,11 @@ import { connect } from 'react-redux';
             RecipeObj.map(item=> (
             <View key={item._id} style={stylesRC.RecipeCardWrapper}>
               <View style={stylesRC.CardHeaderWrapper}>
-                <View>  
+                <View>
                    <View style={stylesRC.HeaderInfo}>
-                    <View style={stylesRC.ThumbnailWrapper}> 
+                    <Button transparent onPress={() => this.getProfile(item.user)}  style={stylesRC.ThumbnailWrapper}> 
                       <Thumbnail style={stylesRC.ThumbnailImage}   source={{uri: `https:${item.avatar}`}} />
-                    </View>
+                    </Button>
         
                     <View style={stylesRC.UserNameWrapper}> 
                       <Text style={stylesRC.Title}>{item.title}</Text>
@@ -43,7 +56,7 @@ import { connect } from 'react-redux';
               </View>
         
                     <View style={stylesRC.PostImageWrapper}>
-                      <TouchableWithoutFeedback onPress={() => getRecipeID(item._id)}> 
+                      <TouchableWithoutFeedback onPress={() => this.getRecipeID(item._id)}> 
                       <Image style={stylesRC.PostImage} source={{uri: item.thumbnail}}/>
                     </TouchableWithoutFeedback>
                     </View>
@@ -58,9 +71,9 @@ import { connect } from 'react-redux';
 
 
 const mapStateToProps = state => ({
-  // auth: state.auth
+   auth: state.auth
   
 })
 
 
-export default connect(mapStateToProps, {getRecipe })(RecipeComponent);
+export default connect(mapStateToProps, {getRecipe, getProfile, getUsersRecipes })(RecipeComponent);

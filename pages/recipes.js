@@ -17,7 +17,6 @@ import {setToken, getAsyncStorage, deleteAsyncStorage} from '../actions/utils/se
 class Recipes extends Component {
 
   static navigationOptions = {
-    // header: null,
     headerTitle:  'KnowFood',
     headerStyle: styles.FooterAndHeader,
     headerTitleStyle: { color: 'white'}    
@@ -33,10 +32,8 @@ class Recipes extends Component {
     }
    
                             
-    componentDidMount() {          
-      // deleteAsyncStorage()    
+    componentWillMount() {          
       this.props.getRecipes(); 
-      console.log('you hit recipes!!!!')     
     }
  
   

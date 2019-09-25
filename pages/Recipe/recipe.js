@@ -9,7 +9,9 @@ import { connectActionSheet } from '@expo/react-native-action-sheet'
 import { ActionSheetProvider } from '@expo/react-native-action-sheet'
 import NewStepPost from '../../components/NewStepPost/newStepPost';
 import Footer_Nav from '../../components/common/footer_nav/footer_nav';
-import { addRecipeStep, deleteRecipe, getRecipe } from '../../actions/recipesAction';
+import { addRecipeStep, deleteRecipe, getRecipe, getUsersRecipes } from '../../actions/recipesAction';
+import { getProfile } from '../../actions/profileActions';
+
 import Step from './step';
 
 
@@ -63,22 +65,22 @@ import Step from './step';
      switch(index){
       case 0:
           this.deleteRecipe()
+          break;
+
       case 1:
         this.gotoedit()
+        break;
+
     }  }
 
-  
+    getProfile = (profileID) =>{
+      this.props.getProfile(profileID)
+      this.props.getUsersRecipes(profileID)
+      this.props.navigation.navigate('Profile')
  
-    // submitStep(){
-    //   const newStep= {
-    //     text: this.state.text,
-    //     thumbnail: this.state.thumbnail
-    //   }
-    //     this.props.addRecipeStep(this.props.recipe._id, newStep);
-    //     this.setState({ 
-    //       text : '',
-    //     });
-    //  }
+    }
+ 
+
 
   gotoedit = () => {
     this.props.navigation.navigate('EditRecipe')
@@ -86,7 +88,7 @@ import Step from './step';
   
   deleteRecipe = () => {
     this.props.deleteRecipe(this.props.recipe._id)
-    this.props.navigation.navigate('Recipes')
+    this.getProfile(this.props.auth.user._id)
   }
 
   toggleView() {
@@ -101,7 +103,7 @@ import Step from './step';
       let RecipeContent;
       const { navigate } = this.props.navigation;
 
-
+console.log(`RECIPE: ${JSON.stringify(recipe)}`)
    
 
     // const Ingredients = recipe.ingredients.map((item, index) => (
@@ -119,9 +121,9 @@ import Step from './step';
                 <View style={stylesRC.CardHeaderWrapper}>
                   <View>   
                     <View style={stylesRC.HeaderInfo}>
-                      <View style={stylesRC.ThumbnailWrapper}> 
+                      <Button transparent onPress={() => this.getProfile(recipe.user)}  style={stylesRC.ThumbnailWrapper}> 
                           <Thumbnail style={stylesRC.ThumbnailImage}   source={{uri: `https:${recipe.avatar}`}} />
-                      </View>
+                      </Button>
           
                       <View style={stylesRC.UserNameWrapper}> 
                         <Text style={stylesRC.Title}>{recipe.title}</Text>
@@ -146,19 +148,14 @@ import Step from './step';
                 {recipe.step === undefined ?  <ActivityIndicator size='large' color='gray'/>
                 : <View>
 
-              <View style={stylesRC.Header_two}>  
+              <View style={stylesRC.Header_one}>  
                     <View style={styles.FlexRow}>
                       <Text style={styles.AccentColor1Font}>Date </Text>
                       <Text style={styles.white_font}>{recipe.date}</Text>
                     </View>
 
-                  
                     <Text style={styles.AccentColor1Font}>Ingredients </Text> 
-                    
-                    {/* {Ingredients} */}
-                    {/* <Text style={styles.white_font}>{recipe.ingredients[0]}</Text> */}
                     {recipe.ingredients.map(item=> (<View key={item}><Text style={styles.white_font}>{item}</Text></View> )) }
-
                     <View style={styles.FlexRow}>
                       <Text style={styles.AccentColor1Font}>Comments </Text>
                       <Text style={styles.white_font}>{recipe.comments.length} </Text>
@@ -168,22 +165,7 @@ import Step from './step';
 
                 <Step Step={recipe.step} />
 
-                {/* { this.props.recipe.user === this.props.auth.user._id ? <Button style={styles.AccentColor1Background} block light onPress={() => this.setState({visibilityState: !this.state.visibilityState})}>
-                <Text>Add Step</Text></Button>:  <Text></Text>}
-                
-              
-                { this.state.visibilityState ? <NewStepPost 
-                name='text' 
-                onChangeText={(text) => this.setState({text: text})} 
-                text={this.state.text} 
-                // param={this.props.match.params.id} 
-                Submit={() => this.submitStep()}
-                Close={() => this.setState({active: !this.state.active})} 
-                />  :  <Text></Text>} */}
 
-                
-
- 
                 </View> 
               }
                 {recipe.comments === undefined ?  <ActivityIndicator size='large' color='gray'/>
@@ -232,4 +214,4 @@ const mapStateToProps = state => ({
    auth: state.auth,
 });
 
- export default connect(mapStateToProps, { addRecipeStep, deleteRecipe, getRecipe })((ConnectedApp));
+ export default connect(mapStateToProps, { addRecipeStep, deleteRecipe, getRecipe, getProfile, getUsersRecipes })((ConnectedApp));

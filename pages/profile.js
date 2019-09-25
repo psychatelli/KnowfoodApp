@@ -23,14 +23,15 @@ export class Profile extends Component {
     }
 
       componentWillMount() {
-         this.props.getProfile(this.props.auth.user._id);
-         this.props.getUsersRecipes(this.props.auth.user._id)
+        //  this.props.getProfile(this.props.auth.user._id);
+        //  this.props.getUsersRecipes(this.props.auth.user._id)
       }
 
       render() {
       const { profile, recipes, classes } = this.props;
       const { navigate } = this.props.navigation;
 
+      console.log(`user : ${JSON.stringify(this.props.auth.user)}`)
     return (
       <Container style={styles.CardBackground}>
         <Header style={styles.DarkOpacityBackground}>
@@ -47,21 +48,27 @@ export class Profile extends Component {
           </Right>
         </Header>
 
-        <Content> 
+       <Content> 
 
         <View style={stylesRC.Header_two}>
-          
-             <View style={styles.FlexRow}>
-              <Thumbnail style={stylesRC.ThumbnailImage}  source={{uri: `https:${profile.avatar}`}} />
-              <Text style={styles.white_font}>     <Text style={styles.custom_text}>recipes:</Text> {recipes.length}</Text> 
-              <Text style={styles.white_font}>     <Text style={styles.custom_text}>followers:</Text> {recipes.length}</Text>
+       
+
+            <View>
+           <Thumbnail style={stylesRC.ThumbnailImage}  source={{uri: `https:${profile.avatar}`}} />
+           <Text style={styles.white_font}>{profile.username}</Text>
+
+           </View>
+
+           <View>
+
+              <View style={styles.FlexRow}>
+                <Text style={styles.white_font}>  <Text style={styles.custom_text}>recipes:</Text> {recipes.length}</Text> 
+                <Text style={styles.white_font}>     <Text style={styles.custom_text}>followers:</Text> {recipes.length}</Text>
+              </View>
+
             </View>
 
-         
-          <View><Text style={styles.white_font}>{profile.username}</Text></View>
-
-          
-        </View>
+         </View>
 
           <RecipeComponent Navigation={navigate} RecipeObj={recipes} />
 
@@ -81,7 +88,7 @@ export class Profile extends Component {
 
 const mapStateToProps = state => ({
   profile: state.profiles.item,
-  recipes: state.recipes.items,
+  recipes: state.recipes.profileRecipes,
   auth: state.auth,
 
 })

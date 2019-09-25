@@ -6,9 +6,10 @@ import { connect } from 'react-redux';
  import stylesRC from '../../styles/StylesRecipeComponent';
  import styles from '../../styles/styles';
  import Footer_Nav from '../../components/common/footer_nav/footer_nav';
+ import AdjustableInput from '../../components/common/adjustableInput';
 
  
- 
+    
 export class AddRecipe extends Component {
 
   constructor(props) {
@@ -27,12 +28,12 @@ export class AddRecipe extends Component {
 // avatar: req.body.avatar,
 // user: req.body.id,
 // ingredients: req.body.ingredients,
-
+ 
     onSubmit() {
       // e.preventDefault();
       const AddedRecipe = {
         title: this.state.title,
-        username: this.props.auth.username,
+        username: this.props.auth.user.username,
         thumbnail: this.state.thumbnail,
         avatar: this.props.auth.user.avatar,
         user: this.props.auth.user._id,
@@ -52,7 +53,6 @@ export class AddRecipe extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
-
 
     return (
       <Container style={styles.CardBackground}> 
@@ -74,8 +74,9 @@ export class AddRecipe extends Component {
       <Content> 
         <View>
               <View style={{margin: 10 }}> 
-              <Input regular style={styles.LoginInput} 
-              placeholder='Recipe Title'  value={this.state.title} 
+              <AdjustableInput regular 
+              placeholder='Recipe Title'  
+              value={this.state.title} 
               onChangeText={(title) => this.setState({title: title})} 
               />
               </View>
